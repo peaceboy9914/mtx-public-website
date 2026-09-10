@@ -39,14 +39,20 @@ export function pageMetadata({ title, description, path, image, type = "website"
 }
 
 export function organizationJsonLd() {
+  const logo = `${siteConfig.url}/images/brand/mtx-logo.png`;
+
   return {
     "@context": "https://schema.org",
-    "@type": "Organization",
+    // Organization + ProfessionalService: a services business at a real, physical Addis Ababa
+    // address — the combined typing is what makes the site eligible for local search / map
+    // features on top of the general org knowledge-panel signals.
+    "@type": ["Organization", "ProfessionalService"],
     name: siteConfig.name,
     legalName: siteConfig.legalName,
     alternateName: siteConfig.shortName,
     url: siteConfig.url,
-    logo: `${siteConfig.url}/images/brand/mtx-logo.png`,
+    logo,
+    image: logo,
     description: siteConfig.description,
     email: siteConfig.email,
     telephone: siteConfig.phoneHref,
