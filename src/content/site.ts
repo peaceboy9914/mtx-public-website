@@ -6,7 +6,7 @@ export const siteConfig = {
   description:
     "MTX Digital Technologies builds financial systems, school and manufacturing ERP, hospital platforms, shareholder registries, marketplaces and mobile apps for Ethiopian institutions — designed, built and maintained by one senior team in Addis Ababa.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://mtxdigitaltechnologies.com",
-  email: "hello@mtxdigitaltechnologies.com",
+  email: "info@mtxdigitaltechnologies.com",
   phone: "+251 991 329 914",
   phoneHref: "+251991329914",
   location: "Addis Ababa, Ethiopia",
@@ -41,25 +41,18 @@ export const directionsUrl = `https://www.google.com/maps/search/?api=1&query=${
   `${siteConfig.legalName}, ${formattedAddress}`
 )}`;
 
-export const navLinks = [
-  { label: "Home", href: "/" },
+export type NavLink = { label: string; href: string };
+
+export const navLinks: NavLink[] = [
   { label: "Services", href: "/services" },
-  { label: "Work", href: "/work" },
   { label: "Platforms", href: "/platforms" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
-];
-
-export const footerPlatformLinks = [
-  { label: "Financial systems", href: "/platforms#finance" },
-  { label: "Healthcare", href: "/platforms#healthcare" },
-  { label: "Manufacturing ERP", href: "/platforms#manufacturing" },
-  { label: "Shareholder management", href: "/platforms#shareholder" },
-];
-
-export const footerCompanyLinks = [
-  { label: "Services", href: "/services" },
   { label: "Work", href: "/work" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
+];
+
+export const companyStats = [
+  { value: "40+", label: "Systems delivered" },
+  { value: "50K+", label: "App downloads" },
+  { value: "7", label: "Industries served" },
 ];

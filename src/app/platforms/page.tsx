@@ -1,10 +1,12 @@
-import Link from "next/link";
-import { Badge } from "@/components/badge";
-import { Button } from "@/components/button";
-import { BrowserFrame } from "@/components/browser-frame";
-import { PhoneFrame } from "@/components/phone-frame";
-import { Reveal } from "@/components/reveal";
-import { getWorkProject } from "@/data/work";
+import clsx from "clsx";
+import { Screenshot } from "@/components/media/screenshot";
+import { ArrowLink } from "@/components/ui/button";
+import { CtaBand } from "@/components/ui/cta-band";
+import { JsonLd } from "@/components/ui/json-ld";
+import { PageHero } from "@/components/ui/page-hero";
+import { Section, SectionHeader } from "@/components/ui/section";
+import { alsoDelivered, platforms, type Platform } from "@/content/platforms";
+import { requireWorkProject } from "@/content/work";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
 const title = "Platforms";
@@ -13,228 +15,150 @@ const description =
 
 export const metadata = pageMetadata({ title, description, path: "/platforms" });
 
-type PanelSection = {
-  id: string;
-  category: string;
-  tint: { bg: string; text: string };
-  title: string;
-  description: string;
-  bullets: string[];
-  workLink?: { label: string; href: string };
-} & (
-  | { kind: "image"; frame: "browser" | "phone"; src: string; alt: string }
-  | { kind: "panel"; swatch: string }
-);
-
 export default function PlatformsPage() {
-  const grandbirr = getWorkProject("grandbirr-market")!;
-  const hospital = getWorkProject("grand-valley-hospital")!;
-  const schoolErp = getWorkProject("school-erp")!;
-  const mrpo = getWorkProject("mrpo")!;
-
-  const sections: PanelSection[] = [
-    {
-      id: "ecommerce",
-      category: "E-COMMERCE",
-      tint: { bg: "rgba(11,92,255,.1)", text: "#0B5CFF" },
-      title: "Multi-vendor commerce",
-      description:
-        "Retail, wholesale and neighbourhood-storefront shopping modes in one marketplace, with category browsing built for local sellers.",
-      bullets: ["Retail, Jimla wholesale and Gebeya storefronts", "Vendor payouts and live order tracking", "Wishlists and category browsing"],
-      workLink: { label: "See the Grandbirr Market case study", href: `/work/${grandbirr.slug}` },
-      kind: "image",
-      frame: "phone",
-      src: grandbirr.image.src,
-      alt: grandbirr.image.alt,
-    },
-    {
-      id: "healthcare",
-      category: "HEALTHCARE",
-      tint: { bg: "rgba(15,58,56,.08)", text: "#0F3A38" },
-      title: "Hospital information systems",
-      description:
-        "Triage queues, bed occupancy, lab turnaround, pharmacy stock and patient records across departments — plus the public-facing booking site patients actually use.",
-      bullets: ["Department directory & appointment booking", "Triage queue and bed occupancy", "Lab orders and pharmacy stock"],
-      workLink: { label: "See the Grand Valley Hospital case study", href: `/work/${hospital.slug}` },
-      kind: "image",
-      frame: "browser",
-      src: hospital.image.src,
-      alt: hospital.image.alt,
-    },
-    {
-      id: "finance",
-      category: "FINANCE",
-      tint: { bg: "rgba(11,92,255,.1)", text: "#0B5CFF" },
-      title: "Multi-company finance system",
-      description:
-        "General ledger, receivables, loan portfolio and ETB cash position across multiple companies, with a signed audit trail on every posting.",
-      bullets: ["Multi-company consolidation", "ETB reporting with month-end close", "Signed audit trail on every posting"],
-      workLink: { label: "Talk through a finance build", href: "/contact" },
-      kind: "panel",
-      swatch: "linear-gradient(135deg,#0B5CFF,#2F9BFF)",
-    },
-    {
-      id: "school-erp",
-      category: "EDUCATION · ERP",
-      tint: { bg: "rgba(11,92,255,.1)", text: "#0B4ED6" },
-      title: "School ERP",
-      description:
-        "A full academic and finance platform with separate super admin, academic admin, finance admin, teacher and parent roles.",
-      bullets: ["Enrolment, grade books and timetables", "Fee collection in ETB", "Parent and teacher portals"],
-      workLink: { label: "See the SchoolERP case study", href: `/work/${schoolErp.slug}` },
-      kind: "image",
-      frame: "browser",
-      src: schoolErp.image.src,
-      alt: schoolErp.image.alt,
-    },
-    {
-      id: "manufacturing",
-      category: "MANUFACTURING",
-      tint: { bg: "rgba(90,63,192,.12)", text: "#5A3FC0" },
-      title: "Manufacturing & operations ERP",
-      description: "Production orders, bill of materials, warehouse movement, integration health and exception review.",
-      bullets: ["Production orders & bill of materials", "Warehouse movement tracking", "Machine downtime tracking"],
-      workLink: { label: "Talk through a manufacturing build", href: "/contact" },
-      kind: "panel",
-      swatch: "linear-gradient(135deg,#5A3FC0,#8B7BF0)",
-    },
-    {
-      id: "shareholder",
-      category: "CAPITAL",
-      tint: { bg: "rgba(184,121,31,.12)", text: "#8A5A12" },
-      title: "Shareholder management",
-      description: "Share registry, subscription tracking, dividend runs, transfers and AGM voting records.",
-      bullets: ["Share registries and capital calls", "Dividend runs and transfers", "AGM voting with a paper trail"],
-      workLink: { label: "See the Nur Bus case study", href: "/work/nur-bus" },
-      kind: "panel",
-      swatch: "linear-gradient(135deg,#B8791F,#E8B34D)",
-    },
-    {
-      id: "civil-society",
-      category: "CIVIL SOCIETY",
-      tint: { bg: "rgba(181,84,28,.14)", text: "#8A3F14" },
-      title: "Case handling & rights protection",
-      description:
-        "A public advocacy and awareness site paired with migrant registration, case intake and partner or donor workflows behind the scenes.",
-      bullets: ["Migrant registration & case intake", "Partner and donor portals", "Bilingual public advocacy site"],
-      workLink: { label: "See the MRPO case study", href: `/work/${mrpo.slug}` },
-      kind: "image",
-      frame: "browser",
-      src: mrpo.image.src,
-      alt: mrpo.image.alt,
-    },
-  ];
-
-  const breadcrumb = breadcrumbJsonLd([
-    { name: "Home", path: "/" },
-    { name: "Platforms", path: "/platforms" },
-  ]);
-
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Platforms", path: "/platforms" },
+        ])}
+      />
 
-      <section className="relative overflow-hidden bg-navy-950 text-white">
-        <div
-          className="pointer-events-none absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(900px 500px at 78% 0%, rgba(47,155,255,.28), transparent 62%), radial-gradient(700px 500px at 4% 100%, rgba(11,92,255,.22), transparent 64%)",
-          }}
-        />
-        <div className="wrap relative py-20 pb-[76px]">
-          <Reveal>
-            <Badge>Platforms we build and operate</Badge>
-            <h1 className="mt-[22px] max-w-2xl text-balance font-display text-[clamp(34px,4.4vw,52px)] font-bold leading-[1.08] tracking-[-.03em]">
-              The systems running behind our clients&apos; front doors
-            </h1>
-            <p className="mt-5 max-w-xl text-pretty text-[17px] leading-[1.66] text-white/72">
-              One shared foundation across every category: role-based access, full audit trails, ETB-native
-              reporting and bilingual interfaces.
-            </p>
-          </Reveal>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Platforms we build and operate"
+        title={
+          <>
+            The systems running behind our clients&apos; <span className="accent text-brand">front doors.</span>
+          </>
+        }
+        description="One shared foundation across every category: role-based access, full audit trails, ETB-native reporting and bilingual interfaces."
+      >
+        <nav aria-label="Platforms on this page" className="flex flex-wrap gap-2">
+          {platforms.map((platform) => (
+            <a
+              key={platform.id}
+              href={`#${platform.id}`}
+              className="rounded-full border border-ink/15 bg-paper px-4 py-2 text-[14px] transition-colors hover:border-ink"
+            >
+              {platform.shortName}
+            </a>
+          ))}
+        </nav>
+      </PageHero>
 
-      <section className="bg-white">
-        <div className="wrap flex flex-col gap-[70px] py-20">
-          {sections.map((section, index) => (
-            <Reveal key={section.id} id={section.id} className="scroll-mt-24">
-              <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2">
-                <div className={index % 2 === 1 ? "lg:order-2" : undefined}>
-                  <span
-                    className="inline-block rounded-md px-[11px] py-[5px] text-[11px] font-semibold tracking-[.1em]"
-                    style={{ background: section.tint.bg, color: section.tint.text }}
-                  >
-                    {section.category}
-                  </span>
-                  <h2 className="mt-3.5 font-display text-[26px] font-semibold tracking-[-.02em] text-navy-900">
-                    {section.title}
-                  </h2>
-                  <p className="mt-3 text-pretty text-[15.5px] leading-[1.66] text-navy-900/65">{section.description}</p>
-                  <ul className="mt-5 flex flex-col gap-2 text-[14.5px] text-navy-900/70">
-                    {section.bullets.map((bullet) => (
-                      <li key={bullet} className="flex gap-2.5">
-                        <span className="mt-[7px] h-1.5 w-1.5 flex-none rounded-full bg-blue-600" />
-                        {bullet}
-                      </li>
-                    ))}
-                  </ul>
-                  {section.workLink ? (
-                    <Link href={section.workLink.href} className="mt-5 inline-block text-[13.5px] font-semibold text-blue-600 hover:underline">
-                      {section.workLink.label} →
-                    </Link>
-                  ) : null}
-                </div>
-                <div>
-                  {section.kind === "image" ? (
-                    section.frame === "phone" ? (
-                      <div className="flex justify-center">
-                        <PhoneFrame src={section.src} alt={section.alt} size="lg" />
-                      </div>
-                    ) : (
-                      <BrowserFrame src={section.src} alt={section.alt} />
-                    )
-                  ) : (
-                    <div className="rounded-2xl border border-navy-900/8 bg-surface p-8">
-                      <span className="flex h-12 w-12 items-center justify-center rounded-[12px]" style={{ background: section.swatch }} />
-                      <p className="mt-5 text-sm leading-[1.7] text-navy-900/60">
-                        This platform runs as an internal system for clients today — screens are available to walk
-                        through on a call.
-                      </p>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </Reveal>
+      <section className="bg-paper">
+        <div className="shell">
+          {platforms.map((platform, index) => (
+            <PlatformRow key={platform.id} platform={platform} index={index} />
           ))}
         </div>
       </section>
 
-      <section className="border-t border-navy-900/7 bg-surface">
-        <div className="wrap py-[72px]">
-          <Reveal className="relative isolate grid grid-cols-1 items-center gap-8 overflow-hidden rounded-[18px] p-11 sm:grid-cols-2">
-            <div className="absolute inset-0 -z-10" style={{ background: "linear-gradient(120deg,#0B2A7A,#0B5CFF 55%,#2F9BFF)" }} />
-            <div>
-              <h2 className="text-balance font-display text-[clamp(26px,3vw,36px)] font-bold leading-[1.14] tracking-[-.028em] text-white">
-                Need a platform that isn&apos;t listed here?
-              </h2>
-              <p className="mt-3.5 max-w-[460px] text-[16px] leading-[1.65] text-white/85">
-                These are the categories we build most often — not the only ones. Tell us what you&apos;re running
-                today.
-              </p>
-            </div>
-            <div className="flex max-w-[240px] flex-col gap-2.5 sm:ml-auto">
-              <Button href="/contact" variant="light" className="text-center">
-                Book a discovery call
-              </Button>
-              <Button href="/services" variant="secondary" className="text-center">
-                See services
-              </Button>
-            </div>
-          </Reveal>
-        </div>
-      </section>
+      <Section tone="paper-2" className="border-t border-ink/10">
+        <SectionHeader
+          eyebrow="Also delivered"
+          title={
+            <>
+              The categories we build most often — <span className="accent">not the only ones.</span>
+            </>
+          }
+        />
+        <ul className="grid gap-px border-y border-ink/15 bg-ink/15 sm:grid-cols-2 lg:grid-cols-3">
+          {alsoDelivered.map((item) => (
+            <li key={item} className="reveal bg-paper-2 py-6 text-[18px] tracking-[-0.01em] sm:px-6">
+              {item}
+            </li>
+          ))}
+        </ul>
+      </Section>
+
+      <CtaBand
+        title={
+          <>
+            Need a platform that <span className="accent">isn&apos;t listed here?</span>
+          </>
+        }
+        description="Tell us what you're running today. A 45-minute call gets you a scope sketch and a price range."
+        secondary={{ label: "See services", href: "/services" }}
+      />
     </>
+  );
+}
+
+function PlatformRow({ platform, index }: { platform: Platform; index: number }) {
+  const project = platform.caseStudy ? requireWorkProject(platform.caseStudy) : undefined;
+  const flipped = index % 2 === 1;
+
+  return (
+    <article
+      id={platform.id}
+      className="grid scroll-mt-20 items-center gap-12 border-b border-ink/10 py-20 last:border-b-0 sm:py-24 lg:grid-cols-12"
+    >
+      <div className={clsx("reveal lg:col-span-5", flipped && "lg:order-2 lg:col-start-8")}>
+        <div className="label flex gap-3 text-ink/50">
+          <span>{String(index + 1).padStart(2, "0")}</span>
+          <span>/</span>
+          <span>{platform.sector}</span>
+        </div>
+        <h2 className="mt-4 text-[clamp(30px,3.6vw,46px)] leading-[1.04] font-semibold tracking-[-0.035em]">
+          {platform.name}
+        </h2>
+        <p className="mt-5 text-[17px] leading-relaxed text-ink/70">{platform.summary}</p>
+        <ul className="mt-8 border-t border-ink/15">
+          {platform.capabilities.map((capability) => (
+            <li key={capability} className="flex items-center gap-3 border-b border-ink/15 py-3 text-[15.5px]">
+              <span aria-hidden="true" className="size-1.5 flex-none rounded-full bg-brand" />
+              {capability}
+            </li>
+          ))}
+        </ul>
+        <div className="mt-6">
+          {project ? (
+            <ArrowLink href={`/work/${project.slug}`}>See the {project.name} case study</ArrowLink>
+          ) : (
+            <ArrowLink href="/contact">Talk through a {platform.sector.toLowerCase()} build</ArrowLink>
+          )}
+        </div>
+      </div>
+
+      <div className={clsx("reveal lg:col-span-6", flipped ? "lg:order-1 lg:col-start-1" : "lg:col-start-7")}>
+        {project?.platform === "mobile" ? (
+          <div className="grid-paper flex justify-center overflow-hidden rounded-2xl bg-paper-2 px-6 pt-12">
+            <Screenshot frame="phone" src={project.image.src} alt={project.image.alt} className="w-[52%] max-w-[260px] translate-y-6" />
+          </div>
+        ) : project ? (
+          <Screenshot src={project.image.src} alt={project.image.alt} url={project.domain} />
+        ) : (
+          <ModuleManifest platform={platform} />
+        )}
+      </div>
+    </article>
+  );
+}
+
+/** Stand-in visual for internal systems whose screens aren't public. */
+function ModuleManifest({ platform }: { platform: Platform }) {
+  return (
+    <div className="relative overflow-hidden rounded-2xl bg-ink p-8 text-paper sm:p-10">
+      <div aria-hidden="true" className="brand-gradient absolute inset-x-0 top-0 h-1" />
+      <div className="label flex justify-between text-paper/50">
+        <span>mtx / {platform.id}</span>
+        <span className="flex items-center gap-2">
+          <span className="size-1.5 rounded-full bg-emerald-400" /> In production
+        </span>
+      </div>
+      <ul className="mt-10 font-mono text-[14px]">
+        {platform.capabilities.map((capability, index) => (
+          <li key={capability} className="flex gap-4 border-t border-paper/10 py-3.5">
+            <span className="text-paper/35">{String(index + 1).padStart(2, "0")}</span>
+            <span className="text-paper/85">{capability}</span>
+          </li>
+        ))}
+      </ul>
+      <p className="mt-8 text-[14px] leading-relaxed text-paper/55">
+        Runs as an internal system for clients today — screens are available to walk through on a call.
+      </p>
+    </div>
   );
 }

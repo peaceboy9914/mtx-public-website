@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { address, founder, siteConfig, socialLinks } from "./site";
+import { address, founder, siteConfig, socialLinks } from "@/content/site";
 
 type PageSeoInput = {
   title: string;
@@ -15,7 +15,8 @@ export function pageMetadata({ title, description, path, image, type = "website"
   const fullTitle = path === "/" ? title : `${title} | ${siteConfig.shortName}`;
 
   return {
-    title: fullTitle,
+    // `absolute` skips the root layout's "%s | MTX" template, which would double the suffix.
+    title: { absolute: fullTitle },
     description,
     alternates: {
       canonical: url,

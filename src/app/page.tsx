@@ -1,25 +1,16 @@
 import Link from "next/link";
-import { Badge } from "@/components/badge";
-import { Button } from "@/components/button";
-import { BrowserFrame } from "@/components/browser-frame";
-import { PhoneFrame } from "@/components/phone-frame";
-import { Marquee } from "@/components/marquee";
-import { WorkThumb } from "@/components/work-thumb";
-import { Reveal, RevealGroup, RevealItem } from "@/components/reveal";
-import { SectionEyebrow, SectionHeading } from "@/components/section-heading";
-import { Stat } from "@/components/stat";
-import {
-  IconBanknote,
-  IconDevice,
-  IconFactory,
-  IconGraduationCap,
-  IconHeartPulse,
-  IconPieChart,
-  IconShield,
-} from "@/components/icons";
-import { getWorkProject, workProjects } from "@/data/work";
+import { Screenshot } from "@/components/media/screenshot";
+import { ButtonLink } from "@/components/ui/button";
+import { CtaBand } from "@/components/ui/cta-band";
+import { IconArrowRight } from "@/components/ui/icons";
+import { Eyebrow, Section, SectionHeader } from "@/components/ui/section";
+import { ProjectCard } from "@/components/work/project-card";
+import { deliveryProcess, foundations, sectors } from "@/content/company";
+import { platforms } from "@/content/platforms";
+import { companyStats, siteConfig } from "@/content/site";
+import { requireWorkProject, workProjects } from "@/content/work";
+import { riseDelay } from "@/lib/motion";
 import { pageMetadata } from "@/lib/seo";
-import { siteConfig } from "@/lib/site";
 
 export const metadata = pageMetadata({
   title: `${siteConfig.name} — ${siteConfig.tagline}`,
@@ -27,327 +18,209 @@ export const metadata = pageMetadata({
   path: "/",
 });
 
-const sectors = [
-  "Banking & finance",
-  "Healthcare",
-  "Education",
-  "Manufacturing",
-  "Transport",
-  "Retail",
-  "Civil society",
-  "Publishing",
-];
-
-const productLines = [
+const capabilityIndex = [
+  ...platforms.map((platform) => ({
+    title: platform.shortName,
+    body: platform.summary,
+    href: `/platforms#${platform.id}`,
+  })),
   {
-    icon: IconBanknote,
-    title: "Financial systems",
-    description: "Ledgers, loan books, collections and multi-company ETB reporting with month-end close built in.",
-    href: "/platforms#finance",
-    cta: "Open live dashboard →",
-    dark: true,
-  },
-  {
-    icon: IconHeartPulse,
-    title: "Healthcare systems",
-    description: "Patient records, triage queues, lab orders, pharmacy stock and bed occupancy in one view.",
-    href: "/platforms#healthcare",
-    cta: "Open live dashboard →",
-  },
-  {
-    icon: IconGraduationCap,
-    title: "School ERP",
-    description: "Enrolment, grade books, timetables, fee collection and parent portals with role-based access.",
-    href: "/platforms#school-erp",
-    cta: "See the build →",
-  },
-  {
-    icon: IconFactory,
-    title: "Manufacturing ERP",
-    description: "Production orders, bill of materials, warehouse movements and machine downtime tracking.",
-    href: "/platforms#manufacturing",
-    cta: "Open live dashboard →",
-  },
-  {
-    icon: IconPieChart,
-    title: "Shareholder management",
-    description: "Share registries, capital calls, dividend runs and AGM voting with a certified paper trail.",
-    href: "/platforms#shareholder",
-    cta: "Open live dashboard →",
-  },
-  {
-    icon: IconShield,
-    title: "Civil society & advocacy",
-    description: "Public awareness sites paired with case intake, registration and partner or donor workflows.",
-    href: "/platforms#civil-society",
-    cta: "Open live dashboard →",
-  },
-  {
-    icon: IconDevice,
     title: "Web & mobile products",
-    description: "Marketplaces, booking platforms, author and corporate sites, and Play Store apps.",
+    body: "Marketplaces, booking platforms, author and corporate sites, and Play Store apps.",
     href: "/work",
-    cta: "Browse the portfolio →",
   },
 ];
 
-const workflow = [
-  {
-    phase: "WEEK 1–2",
-    title: "Discovery",
-    description: "Process mapping, system audit and a costed delivery plan. Fixed fee, fully creditable.",
-  },
-  {
-    phase: "WEEK 3–5",
-    title: "Architecture",
-    description: "Data model, integration contracts and a working vertical slice in your environment.",
-  },
-  {
-    phase: "ONGOING",
-    title: "Build",
-    description: "Two-week increments demoed to your team. Scope moves; the release date does not.",
-  },
-  {
-    phase: "POST-LAUNCH",
-    title: "Run",
-    description: "Monitoring, support hours and quarterly roadmap reviews — or a clean handover.",
-  },
-];
+const featuredSlugs = ["grand-valley-hospital", "grandbirr-market", "nur-bus", "school-erp", "mrpo"];
 
 export default function HomePage() {
-  const hospital = getWorkProject("grand-valley-hospital")!;
-  const grandbirr = getWorkProject("grandbirr-market")!;
+  const hospital = requireWorkProject("grand-valley-hospital");
+  const grandbirr = requireWorkProject("grandbirr-market");
+  const featured = featuredSlugs.map(requireWorkProject);
 
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-navy-950 text-white">
-        <div
-          className="pointer-events-none absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(900px 500px at 76% 6%, rgba(47,155,255,.30), transparent 62%), radial-gradient(700px 500px at 4% 100%, rgba(11,92,255,.24), transparent 64%)",
-          }}
-        />
-        <div className="pointer-events-none absolute -right-[140px] -top-[180px] h-[560px] w-[560px] rounded-full border border-white/6" />
-        <div className="wrap relative grid grid-cols-1 items-center gap-12 py-20 pb-[92px] lg:grid-cols-[0.92fr_1.08fr]">
-          <Reveal>
-            <Badge>{siteConfig.tagline}</Badge>
-            <h1 className="mt-[22px] text-balance font-display text-[clamp(36px,4.8vw,58px)] font-bold leading-[1.05] tracking-[-.032em]">
-              We build the software
-              <br />
-              <span className="gradient-text">Ethiopian institutions run on</span>
-            </h1>
-            <p className="mt-[22px] max-w-[520px] text-pretty text-[17px] leading-[1.66] text-white/72">
-              Financial systems, school and manufacturing ERP, hospital platforms, shareholder registries,
-              marketplaces and mobile apps — designed, built and maintained by one senior team.
-            </p>
-            <div className="mt-[30px] flex flex-wrap gap-3">
-              <Button href="/contact" variant="primary">
-                Start a project
-              </Button>
-              <Button href="/work" variant="secondary">
-                See our work
-              </Button>
-            </div>
-            <div className="mt-11 flex flex-wrap gap-8 border-t border-white/10 pt-6">
-              <Stat value="40+" label="Systems delivered" />
-              <Stat value="50K+" label="App downloads" />
-              <Stat value="7" label="Industries served" />
-            </div>
-          </Reveal>
+      <section className="grid-paper relative overflow-hidden border-b border-ink/10">
+        <div className="shell pt-14 pb-16 sm:pt-20 sm:pb-24">
+          <div className="rise">
+            <Eyebrow>Software engineering · {siteConfig.location}</Eyebrow>
+          </div>
+          <h1
+            className="rise mt-6 text-[clamp(44px,8.6vw,124px)] leading-[0.94] font-semibold tracking-[-0.05em]"
+            style={riseDelay(80)}
+          >
+            We build the software
+            <br className="hidden sm:block" /> Ethiopian institutions <span className="accent text-brand">run on.</span>
+          </h1>
 
-          <Reveal delay={0.12} className="relative pb-10">
-            <div className="ml-auto w-full max-w-[660px]">
-              <BrowserFrame src={hospital.image.src} alt={hospital.image.alt} priority />
-            </div>
-            <div className="absolute bottom-0 left-0">
-              <PhoneFrame src={grandbirr.image.src} alt="Grandbirr Market mobile app" priority />
-            </div>
-            <div className="absolute bottom-[18px] left-[128px] max-w-[150px] rounded-xl border border-white/14 bg-white/7 p-[10px_12px] backdrop-blur-md sm:bottom-[26px] sm:left-[180px] sm:max-w-none sm:p-[12px_15px]">
-              <div className="text-[8.5px] font-medium tracking-[.1em] text-white/55 sm:text-[9.5px] sm:tracking-[.11em]">
-                SHIPPED FOR CLIENTS
+          <div className="mt-12 grid gap-12 lg:mt-16 lg:grid-cols-12">
+            <div className="rise lg:col-span-4" style={riseDelay(160)}>
+              <p className="text-[18px] leading-relaxed text-ink/70">
+                Financial systems, school and manufacturing ERP, hospital platforms, shareholder registries,
+                marketplaces and mobile apps — designed, built and maintained by one senior team.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <ButtonLink href="/contact">Start a project</ButtonLink>
+                <ButtonLink href="/work" variant="outline" arrow={false}>
+                  See our work
+                </ButtonLink>
               </div>
-              <div className="mt-1 text-[11.5px] font-semibold sm:mt-[5px] sm:text-[13.5px]">
-                Web · Mobile · ERP · Dashboards
+
+              <dl className="mt-12 grid grid-cols-3 border-t border-ink/15">
+                {companyStats.map((stat) => (
+                  <div key={stat.label} className="flex flex-col border-r border-ink/15 pt-5 pr-4 last:border-r-0 [&:not(:first-child)]:pl-4">
+                    <dt className="label order-2 mt-1 text-ink/55">{stat.label}</dt>
+                    <dd className="text-[32px] font-semibold tracking-[-0.04em]">{stat.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+
+            <div className="rise relative lg:col-span-8" style={riseDelay(240)}>
+              <div className="relative pb-12 pl-[12%]">
+                <Screenshot
+                  src={hospital.image.src}
+                  alt={hospital.image.alt}
+                  url={hospital.domain}
+                  priority
+                  sizes="(min-width: 1024px) 760px, 100vw"
+                />
+                <div className="absolute bottom-0 left-0 w-[24%] max-w-[180px]">
+                  <Screenshot frame="phone" src={grandbirr.image.src} alt={grandbirr.image.alt} priority sizes="200px" />
+                </div>
               </div>
             </div>
-          </Reveal>
+          </div>
         </div>
       </section>
 
-      {/* Sectors strip */}
-      <section className="border-b border-navy-900/7 bg-white py-7">
-        <div className="wrap mb-4 flex items-center gap-3">
-          <span className="h-1.5 w-1.5 flex-none rounded-full bg-blue-600" />
-          <span className="text-[11.5px] font-semibold tracking-[.14em] text-navy-900/45">SECTORS WE BUILD FOR</span>
+      {/* Sectors */}
+      <section className="border-b border-ink/10 bg-paper">
+        <div className="shell flex flex-col gap-4 py-6 sm:flex-row sm:items-center sm:gap-10">
+          <span className="label flex-none text-ink/50">Sectors we build for</span>
+          <ul className="flex flex-wrap gap-x-6 gap-y-2 text-[15px] text-ink/75">
+            {sectors.map((sector) => (
+              <li key={sector}>{sector}</li>
+            ))}
+          </ul>
         </div>
-        <Marquee items={sectors} />
       </section>
 
       {/* What we build */}
-      <section className="bg-surface">
-        <div className="wrap py-20">
-          <div className="mb-10 grid grid-cols-1 items-end gap-9 sm:grid-cols-2">
-            <div>
-              <SectionEyebrow>WHAT WE BUILD</SectionEyebrow>
-              <h2 className="mt-3.5 text-balance font-display text-[clamp(28px,3.4vw,40px)] font-bold leading-[1.12] tracking-[-.028em] text-navy-900">
-                One engineering standard, everywhere we build
-              </h2>
-            </div>
-            <p className="text-pretty text-[16px] leading-[1.66] text-navy-900/62">
-              Every platform below is running in production today. Each one shares the same foundations:
-              role-based access, full audit trails, Amharic and Afaan Oromoo interfaces, and reporting your finance
-              team can sign off on.
-            </p>
-          </div>
-          <RevealGroup className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {productLines.map((line) => (
-              <RevealItem key={line.title}>
-                <Link
-                  href={line.href}
-                  className={
-                    "group block h-full rounded-[14px] p-[26px] transition-transform duration-200 hover:-translate-y-[3px] " +
-                    (line.dark
-                      ? "bg-navy-950 text-white"
-                      : "border border-navy-900/8 bg-white text-navy-900 hover:border-blue-600/40 hover:shadow-[0_24px_44px_-26px_rgba(14,28,66,.4)]")
-                  }
-                >
-                  <div
-                    className={
-                      "flex h-10 w-10 items-center justify-center rounded-[11px] text-white " +
-                      (line.dark ? "gradient-cta" : "bg-navy-900")
-                    }
-                  >
-                    <line.icon className="h-[18px] w-[18px]" />
-                  </div>
-                  <h3 className="mt-[18px] font-display text-[18.5px] font-semibold">{line.title}</h3>
-                  <p className={"mt-[9px] text-sm leading-[1.6] " + (line.dark ? "text-white/65" : "text-navy-900/62")}>
-                    {line.description}
-                  </p>
-                  <span
-                    className={
-                      "mt-3.5 inline-block text-[12.5px] font-semibold " +
-                      (line.dark ? "text-blue-300" : "text-blue-600")
-                    }
-                  >
-                    {line.cta}
-                  </span>
-                </Link>
-              </RevealItem>
-            ))}
-          </RevealGroup>
-        </div>
-      </section>
+      <Section>
+        <SectionHeader
+          index="01"
+          eyebrow="What we build"
+          title={
+            <>
+              One engineering standard, <span className="accent">everywhere</span> we build.
+            </>
+          }
+          description="Every platform below is running in production today, on the same foundations: role-based access, full audit trails, bilingual interfaces and reporting your finance team can sign off on."
+        />
+        <ol className="border-t border-ink/15">
+          {capabilityIndex.map((item, index) => (
+            <li key={item.title} className="reveal">
+              <Link
+                href={item.href}
+                className="group grid grid-cols-[3rem_1fr_auto] items-baseline gap-x-4 gap-y-2 border-b border-ink/15 py-7 transition-colors hover:bg-white/60 sm:grid-cols-[4rem_1fr_1.2fr_auto] sm:gap-x-8 sm:px-2"
+              >
+                <span className="label text-ink/45">{String(index + 1).padStart(2, "0")}</span>
+                <span className="text-[clamp(22px,2.6vw,32px)] font-semibold tracking-[-0.03em] transition-colors group-hover:text-brand">
+                  {item.title}
+                </span>
+                <span className="col-start-2 row-start-2 text-[15px] leading-relaxed text-ink/65 sm:col-start-3 sm:row-start-1">
+                  {item.body}
+                </span>
+                <IconArrowRight className="col-start-3 row-start-1 size-5 self-center text-ink/40 transition-all group-hover:translate-x-1 group-hover:text-brand sm:col-start-4" />
+              </Link>
+            </li>
+          ))}
+        </ol>
+      </Section>
 
       {/* Selected work */}
-      <section className="bg-white">
-        <div className="wrap py-20">
-          <div className="mb-9 flex flex-wrap items-baseline gap-4">
-            <div>
-              <SectionEyebrow>SELECTED WORK</SectionEyebrow>
-              <h2 className="mt-3.5 font-display text-[clamp(28px,3.4vw,40px)] font-bold leading-[1.12] tracking-[-.028em] text-navy-900">
-                Live products, real users
-              </h2>
-            </div>
-            <Link
-              href="/work"
-              className="ml-auto rounded-lg border border-navy-900/14 px-5 py-3 text-[13.5px] font-semibold text-navy-900 hover:bg-surface"
-            >
-              View all projects
-            </Link>
-          </div>
-
-          <RevealGroup className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {workProjects.map((project) => (
-              <RevealItem key={project.slug}>
-                <Link
-                  href={`/work/${project.slug}`}
-                  className="group block h-full overflow-hidden rounded-2xl border border-navy-900/8 bg-white transition-transform duration-200 hover:-translate-y-[3px] hover:shadow-[0_24px_44px_-26px_rgba(14,28,66,.4)]"
-                >
-                  <div className="relative aspect-[16/10] overflow-hidden">
-                    {project.frame === "phone" ? (
-                      <div className="flex h-full items-center justify-center bg-[radial-gradient(circle_at_50%_15%,rgba(47,155,255,.28),transparent_60%)] bg-navy-950 py-5">
-                        <PhoneFrame src={project.image.src} alt={project.image.alt} size="sm" />
-                      </div>
-                    ) : (
-                      <WorkThumb src={project.image.src} alt={project.image.alt} />
-                    )}
-                    <span
-                      className="absolute left-3.5 top-3.5 rounded-md px-2.5 py-1 text-[10.5px] font-semibold tracking-[.08em]"
-                      style={{ background: project.categoryTint.bg, color: project.categoryTint.text }}
-                    >
-                      {project.category.toUpperCase()}
-                    </span>
-                  </div>
-                  <div className="p-5">
-                    <h3 className="font-display text-[18px] font-semibold text-navy-900">{project.cardTitle}</h3>
-                    <p className="mt-2 text-[13.5px] leading-[1.6] text-navy-900/62">{project.cardSummary}</p>
-                  </div>
-                </Link>
-              </RevealItem>
-            ))}
-          </RevealGroup>
+      <Section tone="white" className="border-y border-ink/10">
+        <SectionHeader
+          index="02"
+          eyebrow="Selected work"
+          title={
+            <>
+              Live products, <span className="accent">real users.</span>
+            </>
+          }
+          action={
+            <ButtonLink href="/work" variant="outline">
+              View all {workProjects.length} projects
+            </ButtonLink>
+          }
+        />
+        <div className="grid gap-x-8 gap-y-16 md:grid-cols-2">
+          {featured.slice(0, 2).map((project) => (
+            <ProjectCard key={project.slug} project={project} />
+          ))}
         </div>
-      </section>
+        <div className="mt-16 grid gap-x-8 gap-y-16 md:grid-cols-2 lg:grid-cols-3">
+          {featured.slice(2).map((project) => (
+            <ProjectCard key={project.slug} project={project} />
+          ))}
+        </div>
+      </Section>
+
+      {/* Foundations */}
+      <Section tone="ink">
+        <SectionHeader
+          index="03"
+          eyebrow="Why MTX"
+          title={
+            <>
+              Software that fits <span className="accent text-brand-2">the place it runs.</span>
+            </>
+          }
+          description="We build for Ethiopian institutions specifically — so the things other vendors treat as change requests are in the first sprint."
+        />
+        <div className="grid gap-px border-y border-paper/15 bg-paper/15 sm:grid-cols-2 lg:grid-cols-4">
+          {foundations.map((item, index) => (
+            <div key={item.title} className="reveal bg-ink py-8 sm:p-8">
+              <span className="label text-brand-2">{String(index + 1).padStart(2, "0")}</span>
+              <h3 className="mt-6 text-[21px] font-semibold tracking-[-0.02em] text-paper">{item.title}</h3>
+              <p className="mt-3 text-[15px] leading-relaxed text-paper/65">{item.body}</p>
+            </div>
+          ))}
+        </div>
+      </Section>
 
       {/* How we work */}
-      <section className="relative overflow-hidden bg-navy-950 text-white">
-        <div
-          className="pointer-events-none absolute inset-0"
-          style={{ background: "radial-gradient(700px 420px at 82% 0%, rgba(47,155,255,.2), transparent 62%)" }}
+      <Section>
+        <SectionHeader
+          index="04"
+          eyebrow="How we work"
+          title={
+            <>
+              A delivery rhythm you can <span className="accent">plan around.</span>
+            </>
+          }
+          description="Fixed-fee discovery, a working slice in your environment within five weeks, then two-week increments demoed to your team."
         />
-        <div className="wrap relative py-20">
-          <SectionHeading
-            eyebrow="HOW WE WORK"
-            title="A delivery rhythm you can plan around"
-            tone="dark"
-            className="max-w-[640px]"
-          />
-          <RevealGroup className="mt-11 grid grid-cols-1 gap-px bg-white/12 sm:grid-cols-2 lg:grid-cols-4">
-            {workflow.map((step) => (
-              <RevealItem key={step.phase} className="bg-navy-950 p-[26px]">
-                <div className="text-xs font-semibold tracking-[.1em] text-blue-300">{step.phase}</div>
-                <h3 className="mt-3 font-display text-[17.5px] font-semibold text-white">{step.title}</h3>
-                <p className="mt-2 text-sm leading-[1.6] text-white/62">{step.description}</p>
-              </RevealItem>
-            ))}
-          </RevealGroup>
-        </div>
-      </section>
+        <ol className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-0">
+          {deliveryProcess.map((step, index) => (
+            <li key={step.title} className="reveal relative lg:pr-8">
+              <div className="flex items-center gap-3">
+                <span className="flex size-9 flex-none items-center justify-center rounded-full border border-ink font-mono text-[12px]">
+                  {index + 1}
+                </span>
+                <span aria-hidden="true" className="hidden h-px flex-1 bg-ink/20 lg:block" />
+              </div>
+              <div className="label mt-6 text-brand">{step.phase}</div>
+              <h3 className="mt-2 text-[24px] font-semibold tracking-[-0.025em]">{step.title}</h3>
+              <p className="mt-3 text-[15px] leading-relaxed text-ink/65">{step.body}</p>
+            </li>
+          ))}
+        </ol>
+      </Section>
 
-      {/* CTA banner */}
-      <section className="border-t border-navy-900/7 bg-surface">
-        <div className="wrap py-[72px]">
-          <Reveal
-            className="relative isolate grid grid-cols-1 items-center gap-8 overflow-hidden rounded-[18px] p-11 sm:grid-cols-2"
-            as="div"
-          >
-            <div
-              className="absolute inset-0 -z-10"
-              style={{ background: "linear-gradient(120deg,#0B2A7A,#0B5CFF 55%,#2F9BFF)" }}
-            />
-            <div className="pointer-events-none absolute right-[140px] -top-[90px] h-[300px] w-[300px] rounded-full border border-white/14" />
-            <div>
-              <h2 className="text-balance font-display text-[clamp(26px,3vw,36px)] font-bold leading-[1.14] tracking-[-.028em] text-white">
-                Tell us the process that keeps breaking
-              </h2>
-              <p className="mt-3.5 max-w-[500px] text-[16px] leading-[1.65] text-white/85">
-                A 45-minute call with the engineers who would run the work. You leave with a scope sketch and a
-                price range, whether or not you hire us.
-              </p>
-            </div>
-            <div className="flex max-w-[240px] flex-col gap-2.5 sm:ml-auto">
-              <Button href="/contact" variant="light" className="text-center">
-                Book a discovery call
-              </Button>
-              <Button href="/services" variant="secondary" className="text-center">
-                See services &amp; pricing
-              </Button>
-            </div>
-          </Reveal>
-        </div>
-      </section>
+      <CtaBand secondary={{ label: "See services", href: "/services" }} />
     </>
   );
 }
