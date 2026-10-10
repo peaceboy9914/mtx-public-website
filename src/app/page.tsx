@@ -6,29 +6,27 @@ import { IconArrowRight } from "@/components/ui/icons";
 import { Eyebrow, Section, SectionHeader } from "@/components/ui/section";
 import { ProjectCard } from "@/components/work/project-card";
 import { deliveryProcess, foundations, sectors } from "@/content/company";
-import { platforms } from "@/content/platforms";
+import { CardGrid, SystemCard } from "@/components/catalog/catalog";
+import { platforms, requirePlatform } from "@/content/platforms";
+import { services } from "@/content/services";
 import { companyStats, siteConfig } from "@/content/site";
 import { requireWorkProject, workProjects } from "@/content/work";
 import { riseDelay } from "@/lib/motion";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: `${siteConfig.name} — ${siteConfig.tagline}`,
+  title: `Software Development Company in Ethiopia | ${siteConfig.name}`,
   description: siteConfig.description,
   path: "/",
 });
 
-const capabilityIndex = [
-  ...platforms.map((platform) => ({
-    title: platform.shortName,
-    body: platform.summary,
-    href: `/platforms#${platform.id}`,
-  })),
-  {
-    title: "Web & mobile products",
-    body: "Marketplaces, booking platforms, author and corporate sites, and Play Store apps.",
-    href: "/work",
-  },
+const featuredSystems = [
+  "financial-management-system",
+  "hospital-management-system",
+  "school-management-system",
+  "hr-payroll-system",
+  "loan-management-system",
+  "inventory-pos-system",
 ];
 
 const featuredSlugs = ["grand-valley-hospital", "grandbirr-market", "nur-bus", "school-erp", "mrpo"];
@@ -44,7 +42,7 @@ export default function HomePage() {
       <section className="grid-paper relative overflow-hidden border-b border-ink/10">
         <div className="shell pt-14 pb-16 sm:pt-20 sm:pb-24">
           <div className="rise">
-            <Eyebrow>Software engineering · {siteConfig.location}</Eyebrow>
+            <Eyebrow>Software development company · {siteConfig.location}</Eyebrow>
           </div>
           <h1
             className="rise mt-6 text-[clamp(44px,8.6vw,124px)] leading-[0.94] font-semibold tracking-[-0.05em]"
@@ -107,31 +105,36 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* What we build */}
+      {/* Services */}
       <Section>
         <SectionHeader
           index="01"
-          eyebrow="What we build"
+          eyebrow="Services"
           title={
             <>
-              One engineering standard, <span className="accent">everywhere</span> we build.
+              The full software lifecycle, <span className="accent">under one roof.</span>
             </>
           }
-          description="Every platform below is running in production today, on the same foundations: role-based access, full audit trails, bilingual interfaces and reporting your finance team can sign off on."
+          description="Strategy, design, engineering, integration, hosting and support — delivered by MTX teams to one engineering standard: role-based access, full audit trails, bilingual interfaces and reporting your finance team can sign off on."
+          action={
+            <ButtonLink href="/services" variant="outline">
+              All services
+            </ButtonLink>
+          }
         />
         <ol className="border-t border-ink/15">
-          {capabilityIndex.map((item, index) => (
-            <li key={item.title} className="reveal">
+          {services.map((service, index) => (
+            <li key={service.slug} className="reveal">
               <Link
-                href={item.href}
+                href={`/services/${service.slug}`}
                 className="group grid grid-cols-[3rem_1fr_auto] items-baseline gap-x-4 gap-y-2 border-b border-ink/15 py-7 transition-colors hover:bg-white/60 sm:grid-cols-[4rem_1fr_1.2fr_auto] sm:gap-x-8 sm:px-2"
               >
                 <span className="label text-ink/45">{String(index + 1).padStart(2, "0")}</span>
                 <span className="text-[clamp(22px,2.6vw,32px)] font-semibold tracking-[-0.03em] transition-colors group-hover:text-brand">
-                  {item.title}
+                  {service.name}
                 </span>
                 <span className="col-start-2 row-start-2 text-[15px] leading-relaxed text-ink/65 sm:col-start-3 sm:row-start-1">
-                  {item.body}
+                  {service.summary}
                 </span>
                 <IconArrowRight className="col-start-3 row-start-1 size-5 self-center text-ink/40 transition-all group-hover:translate-x-1 group-hover:text-brand sm:col-start-4" />
               </Link>
@@ -140,10 +143,34 @@ export default function HomePage() {
         </ol>
       </Section>
 
+      {/* Systems */}
+      <Section tone="paper-2" className="border-t border-ink/10">
+        <SectionHeader
+          index="02"
+          eyebrow="Systems"
+          title={
+            <>
+              {platforms.length} proven platforms, <span className="accent">ready to adapt.</span>
+            </>
+          }
+          description="Hospital, school, finance, payroll, lending, retail, logistics and workflow systems — each running in production and configurable to how your organisation works."
+          action={
+            <ButtonLink href="/platforms" variant="outline">
+              All {platforms.length} systems
+            </ButtonLink>
+          }
+        />
+        <CardGrid>
+          {featuredSystems.map(requirePlatform).map((platform) => (
+            <SystemCard key={platform.slug} platform={platform} />
+          ))}
+        </CardGrid>
+      </Section>
+
       {/* Selected work */}
       <Section tone="white" className="border-y border-ink/10">
         <SectionHeader
-          index="02"
+          index="03"
           eyebrow="Selected work"
           title={
             <>
@@ -171,7 +198,7 @@ export default function HomePage() {
       {/* Foundations */}
       <Section tone="ink">
         <SectionHeader
-          index="03"
+          index="04"
           eyebrow="Why MTX"
           title={
             <>
@@ -194,7 +221,7 @@ export default function HomePage() {
       {/* How we work */}
       <Section>
         <SectionHeader
-          index="04"
+          index="05"
           eyebrow="How we work"
           title={
             <>

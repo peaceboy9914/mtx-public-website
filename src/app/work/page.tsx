@@ -1,15 +1,14 @@
-import Link from "next/link";
+import { CardGrid, SystemCard } from "@/components/catalog/catalog";
 import { CtaBand } from "@/components/ui/cta-band";
-import { IconArrowRight } from "@/components/ui/icons";
 import { JsonLd } from "@/components/ui/json-ld";
 import { PageHero } from "@/components/ui/page-hero";
 import { Section, SectionHeader } from "@/components/ui/section";
 import { ProjectCard } from "@/components/work/project-card";
-import { alsoDelivered, platforms } from "@/content/platforms";
+import { platforms } from "@/content/platforms";
 import { workProjects } from "@/content/work";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
-const title = "Work in production";
+const title = "Software Projects & Case Studies in Ethiopia";
 const description =
   "Websites, mobile apps and enterprise platforms MTX has delivered for hospitals, transport operators, schools, manufacturers and retailers across Ethiopia.";
 
@@ -51,30 +50,13 @@ export default function WorkPage() {
               Systems we build <span className="accent text-brand-2">and operate.</span>
             </>
           }
-          description="Most of what we run for clients sits behind a login. Here's what each platform covers — the Platforms page has the full breakdown."
+          description="Most of what we run for clients sits behind a login. Here's every system we build and operate — each has its own page with modules and FAQs."
         />
-        <div className="grid gap-px border-y border-paper/15 bg-paper/15 sm:grid-cols-2 lg:grid-cols-3">
+        <CardGrid tone="ink">
           {platforms.map((platform) => (
-            <Link
-              key={platform.id}
-              href={`/platforms#${platform.id}`}
-              className="group reveal flex flex-col bg-ink py-8 transition-colors hover:bg-ink-2 sm:p-8"
-            >
-              <span className="label text-brand-2">{platform.sector}</span>
-              <h3 className="mt-4 text-[21px] font-semibold tracking-[-0.02em] text-paper">{platform.name}</h3>
-              <p className="mt-3 flex-1 text-[15px] leading-relaxed text-paper/60">{platform.summary}</p>
-              <IconArrowRight className="mt-6 size-5 text-paper/40 transition-all group-hover:translate-x-1 group-hover:text-paper" />
-            </Link>
+            <SystemCard key={platform.slug} platform={platform} tone="ink" />
           ))}
-          <div className="reveal bg-ink py-8 sm:p-8">
-            <span className="label text-paper/45">Also delivered</span>
-            <ul className="mt-4 flex flex-col gap-2.5 text-[15px] text-paper/75">
-              {alsoDelivered.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
+        </CardGrid>
       </Section>
 
       <CtaBand />
