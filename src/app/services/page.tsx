@@ -1,14 +1,16 @@
-import { ArrowLink } from "@/components/ui/button";
+import { CardGrid, ServiceCard } from "@/components/catalog/catalog";
+import { ButtonLink } from "@/components/ui/button";
 import { CtaBand } from "@/components/ui/cta-band";
 import { JsonLd } from "@/components/ui/json-ld";
 import { PageHero } from "@/components/ui/page-hero";
 import { Section, SectionHeader } from "@/components/ui/section";
-import { principles, services } from "@/content/company";
-import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
+import { principles } from "@/content/company";
+import { serviceCategories, services } from "@/content/services";
+import { breadcrumbJsonLd, itemListJsonLd, pageMetadata } from "@/lib/seo";
 
-const title = "Services";
+const title = "Software Development Services in Ethiopia";
 const description =
-  "Web applications, mobile apps, enterprise ERP and financial platforms, and AI solutions — designed, built and operated by MTX Digital Technologies in Addis Ababa.";
+  "Custom software, web and mobile apps, ERP, fintech, system integration, AI, cloud and support services from MTX Digital Technologies — a software development company in Addis Ababa, Ethiopia.";
 
 export const metadata = pageMetadata({ title, description, path: "/services" });
 
@@ -16,91 +18,80 @@ export default function ServicesPage() {
   return (
     <>
       <JsonLd
-        data={breadcrumbJsonLd([
-          { name: "Home", path: "/" },
-          { name: "Services", path: "/services" },
-        ])}
+        data={[
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Services", path: "/services" },
+          ]),
+          itemListJsonLd(services.map((service) => ({ name: service.name, path: `/services/${service.slug}` }))),
+        ]}
       />
 
       <PageHero
-        eyebrow="Services"
+        eyebrow={`Services · ${services.length} practices`}
         title={
           <>
-            How we help you run on <span className="accent text-brand">better software.</span>
+            Software development services, <span className="accent text-brand">end to end.</span>
           </>
         }
-        description="Web, mobile, enterprise systems and AI — built by one senior team that stays on after launch, instead of handing you off to a support queue."
+        description="From strategy and design through engineering, integration, hosting and long-term support — MTX delivers the full lifecycle of business software for Ethiopian organisations."
       >
-        <nav aria-label="Services on this page" className="flex flex-wrap gap-2">
-          {services.map((service, index) => (
+        <nav aria-label="Service categories" className="flex flex-wrap gap-2">
+          {serviceCategories.map((category) => (
             <a
-              key={service.id}
-              href={`#${service.id}`}
+              key={category}
+              href={`#${slugify(category)}`}
               className="rounded-full border border-ink/15 bg-paper px-4 py-2 text-[14px] transition-colors hover:border-ink"
             >
-              <span className="mr-2 font-mono text-[11px] text-ink/45">{String(index + 1).padStart(2, "0")}</span>
-              {service.name}
+              {category}
             </a>
           ))}
         </nav>
       </PageHero>
 
-      <section className="bg-paper">
-        <div className="shell">
-          {services.map((service, index) => (
-            <article
-              key={service.id}
-              id={service.id}
-              className="grid scroll-mt-20 gap-10 border-b border-ink/10 py-20 last:border-b-0 sm:py-24 lg:grid-cols-12"
-            >
-              <div className="reveal lg:col-span-5">
-                <div className="lg:sticky lg:top-28">
-                  <span className="label text-ink/45">{String(index + 1).padStart(2, "0")}</span>
-                  <h2 className="mt-4 text-[clamp(32px,4vw,52px)] leading-[1.02] font-semibold tracking-[-0.035em]">
-                    {service.name}
-                  </h2>
-                  <p className="mt-5 max-w-md text-[17px] leading-relaxed text-ink/70">{service.summary}</p>
-                  <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
-                    {service.links.map((link) => (
-                      <ArrowLink key={link.href} href={link.href}>
-                        {link.label}
-                      </ArrowLink>
-                    ))}
-                  </div>
-                </div>
-              </div>
-              <ul className="border-t border-ink/15 lg:col-span-6 lg:col-start-7">
-                {service.capabilities.map((capability, capabilityIndex) => (
-                  <li
-                    key={capability}
-                    className="reveal flex gap-6 border-b border-ink/15 py-6 text-[18px] leading-snug tracking-[-0.01em] sm:text-[20px]"
-                  >
-                    <span className="label mt-1.5 flex-none text-brand">
-                      {String(index + 1).padStart(2, "0")}.{capabilityIndex + 1}
-                    </span>
-                    {capability}
-                  </li>
-                ))}
-              </ul>
-            </article>
-          ))}
-        </div>
-      </section>
+      {serviceCategories.map((category, categoryIndex) => {
+        const inCategory = services.filter((service) => service.category === category);
+        return (
+          <Section
+            key={category}
+            id={slugify(category)}
+            tone={categoryIndex % 2 === 0 ? "paper" : "paper-2"}
+            innerClassName="py-16 sm:py-20"
+          >
+            <div className="reveal mb-10 flex items-baseline justify-between gap-6">
+              <h2 className="text-[clamp(28px,3.4vw,44px)] font-semibold tracking-[-0.035em]">{category}</h2>
+              <span className="label text-ink/45">
+                {inCategory.length} {inCategory.length === 1 ? "service" : "services"}
+              </span>
+            </div>
+            <CardGrid>
+              {inCategory.map((service) => (
+                <ServiceCard key={service.slug} service={service} />
+              ))}
+            </CardGrid>
+          </Section>
+        );
+      })}
 
-      <Section tone="paper-2" className="border-t border-ink/10">
+      <Section tone="ink">
         <SectionHeader
           eyebrow="Why MTX"
           title={
             <>
-              One team across <span className="accent">the whole stack.</span>
+              One engineering standard <span className="accent text-brand-2">across every practice.</span>
             </>
           }
+          action={
+            <ButtonLink href="/platforms" variant="outline-inverse">
+              See the systems we build
+            </ButtonLink>
+          }
         />
-        <div className="grid gap-px border-y border-ink/15 bg-ink/15 sm:grid-cols-2">
+        <div className="grid gap-px border-y border-paper/15 bg-paper/15 sm:grid-cols-2">
           {principles.map((item) => (
-            <div key={item.title} className="reveal bg-paper-2 py-8 sm:p-10">
-              <h3 className="text-[22px] font-semibold tracking-[-0.02em]">{item.title}</h3>
-              <p className="mt-3 max-w-md text-[15.5px] leading-relaxed text-ink/65">{item.body}</p>
+            <div key={item.title} className="reveal bg-ink py-8 sm:p-10">
+              <h3 className="text-[22px] font-semibold tracking-[-0.02em] text-paper">{item.title}</h3>
+              <p className="mt-3 max-w-md text-[15.5px] leading-relaxed text-paper/65">{item.body}</p>
             </div>
           ))}
         </div>
@@ -113,8 +104,12 @@ export default function ServicesPage() {
           </>
         }
         description="Tell us the process that keeps breaking. A 45-minute call gets you a scope sketch and a price range."
-        secondary={{ label: "Explore platforms", href: "/platforms" }}
+        secondary={{ label: "Explore systems", href: "/platforms" }}
       />
     </>
   );
+}
+
+function slugify(value: string) {
+  return value.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 }

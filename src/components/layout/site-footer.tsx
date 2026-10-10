@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { IconArrowUpRight, IconLinkedIn } from "@/components/ui/icons";
 import { platforms } from "@/content/platforms";
+import { services } from "@/content/services";
 import { directionsUrl, formattedAddress, navLinks, siteConfig, socialLinks } from "@/content/site";
 import { Logo } from "./logo";
 
@@ -9,35 +10,48 @@ export function SiteFooter() {
   return (
     <footer className="bg-ink text-paper/65">
       <div className="shell">
-        <div className="grid gap-12 border-b border-paper/10 py-16 sm:py-20 lg:grid-cols-12">
-          <div className="lg:col-span-5">
+        <div className="flex flex-col gap-8 border-b border-paper/10 py-16 sm:py-20 lg:flex-row lg:items-end lg:justify-between">
+          <div>
             <Logo tone="light" />
-            <p className="mt-6 max-w-sm text-[15px] leading-relaxed">
-              {siteConfig.tagline}. Custom software, ERP and platform engineering — built in Addis Ababa.
+            <p className="mt-6 max-w-md text-[15px] leading-relaxed">
+              {siteConfig.tagline}. A software development company in Addis Ababa building custom software, ERP, web and
+              mobile applications for Ethiopian organisations.
             </p>
-            <a
-              href={`mailto:${siteConfig.email}`}
-              className="group mt-8 inline-flex items-center gap-2 text-[clamp(20px,2.4vw,28px)] font-medium tracking-[-0.02em] text-paper"
-            >
-              {siteConfig.email}
-              <IconArrowUpRight className="size-5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-            </a>
           </div>
+          <a
+            href={`mailto:${siteConfig.email}`}
+            className="group inline-flex items-center gap-2 text-[clamp(22px,3vw,40px)] font-medium tracking-[-0.03em] break-all text-paper"
+          >
+            {siteConfig.email}
+            <IconArrowUpRight className="size-6 flex-none transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+          </a>
+        </div>
 
-          <FooterColumn title="Platforms" className="lg:col-span-3">
+        <div className="grid grid-cols-2 gap-x-8 gap-y-12 border-b border-paper/10 py-16 lg:grid-cols-12">
+          <FooterColumn title="Services" className="lg:col-span-4">
+            {services.map((service) => (
+              <Link key={service.slug} href={`/services/${service.slug}`} className="hover:text-paper">
+                {service.name}
+              </Link>
+            ))}
+          </FooterColumn>
+
+          <FooterColumn title="Systems" className="lg:col-span-4">
             {platforms.map((platform) => (
-              <Link key={platform.id} href={`/platforms#${platform.id}`} className="hover:text-paper">
+              <Link key={platform.slug} href={`/platforms/${platform.slug}`} className="hover:text-paper">
                 {platform.shortName}
               </Link>
             ))}
           </FooterColumn>
 
           <FooterColumn title="Company" className="lg:col-span-2">
-            {navLinks.map((link) => (
-              <Link key={link.href} href={link.href} className="hover:text-paper">
-                {link.label}
-              </Link>
-            ))}
+            {navLinks
+              .filter((link) => link.href !== "/services" && link.href !== "/platforms")
+              .map((link) => (
+                <Link key={link.href} href={link.href} className="hover:text-paper">
+                  {link.label}
+                </Link>
+              ))}
           </FooterColumn>
 
           <FooterColumn title="Visit" className="lg:col-span-2">

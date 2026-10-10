@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { riseDelay } from "@/lib/motion";
+import { Breadcrumbs } from "./breadcrumbs";
 import { Eyebrow } from "./section";
 
 /** Top-of-page header shared by every inner page. */
@@ -7,9 +8,11 @@ export function PageHero({
   eyebrow,
   title,
   description,
+  breadcrumbs,
   children,
 }: {
   eyebrow: string;
+  breadcrumbs?: { name: string; path: string }[];
   title: ReactNode;
   description?: ReactNode;
   children?: ReactNode;
@@ -17,6 +20,11 @@ export function PageHero({
   return (
     <section className="grid-paper relative border-b border-ink/10">
       <div className="shell pt-16 pb-16 sm:pt-24 sm:pb-20">
+        {breadcrumbs ? (
+          <div className="rise mb-10">
+            <Breadcrumbs items={breadcrumbs} />
+          </div>
+        ) : null}
         <div className="rise">
           <Eyebrow>{eyebrow}</Eyebrow>
         </div>

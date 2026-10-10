@@ -4,7 +4,7 @@ export const siteConfig = {
   shortName: "MTX",
   tagline: "Your partner in digital transformation",
   description:
-    "MTX Digital Technologies builds financial systems, school and manufacturing ERP, hospital platforms, shareholder registries, marketplaces and mobile apps for Ethiopian institutions — designed, built and maintained by one senior team in Addis Ababa.",
+    "MTX Digital Technologies is a software development company in Addis Ababa, Ethiopia. We build custom software, ERP, hospital and school management systems, fintech platforms, web and mobile apps for Ethiopian organisations — and support them after launch.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://mtxdigitaltechnologies.com",
   email: "info@mtxdigitaltechnologies.com",
   phone: "+251 991 329 914",
@@ -45,7 +45,7 @@ export type NavLink = { label: string; href: string };
 
 export const navLinks: NavLink[] = [
   { label: "Services", href: "/services" },
-  { label: "Platforms", href: "/platforms" },
+  { label: "Systems", href: "/platforms" },
   { label: "Work", href: "/work" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
