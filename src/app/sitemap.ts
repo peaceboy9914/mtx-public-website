@@ -5,7 +5,7 @@ import { siteConfig } from "@/content/site";
 import { workProjects } from "@/content/work";
 
 /** Bump when page content changes meaningfully; a fresh timestamp on every build tells crawlers nothing. */
-const CONTENT_UPDATED = new Date("2026-10-09");
+const CONTENT_UPDATED = new Date("2026-11-16");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const entry = (path: string, priority: number): MetadataRoute.Sitemap[number] => ({
@@ -25,5 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...workProjects.map((project) => entry(`/work/${project.slug}`, 0.6)),
     entry("/about", 0.6),
     entry("/contact", 0.7),
+    entry("/privacy", 0.2),
+    entry("/terms", 0.2),
   ];
 }

@@ -76,7 +76,15 @@ export function SiteFooter() {
           <span>
             © {new Date().getFullYear()} {siteConfig.legalName}
           </span>
-          <span>{siteConfig.location}</span>
+          <span className="flex gap-5">
+            <Link href="/privacy" className="hover:text-paper">
+              Privacy
+            </Link>
+            <Link href="/terms" className="hover:text-paper">
+              Terms
+            </Link>
+            <span>{siteConfig.location}</span>
+          </span>
         </div>
       </div>
     </footer>
