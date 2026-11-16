@@ -1,3 +1,5 @@
+import { sectors } from "./company";
+
 export const siteConfig = {
   name: "MTX Digital Technologies",
   legalName: "MTX Digital Technologies PLC",
@@ -23,10 +25,23 @@ export const address = {
 
 export const formattedAddress = `${address.streetAddress}, ${address.addressLocality} ${address.postalCode}, ${address.countryName}`;
 
+/** Confirmed by the founder, November 2026. */
+export const companyFacts = {
+  yearsInBusiness: 4,
+  teamSize: 15,
+  systemsDelivered: "15+",
+};
+
 export const founder = {
   name: "Mahdi Nurazaman",
   role: "Founder",
   linkedin: "https://www.linkedin.com/in/mahdi-nurazaman/",
+  photo: { src: "/images/team/mahdi-nurazaman.webp", alt: "Portrait of Mahdi Nurazaman, founder of MTX Digital Technologies" },
+  /** Drafted from facts on this site; awaiting the founder's review. */
+  bio: [
+    `Mahdi Nurazaman founded MTX Digital Technologies PLC and has led it for ${companyFacts.yearsInBusiness} years, growing it into a ${companyFacts.teamSize}-person software team in Addis Ababa.`,
+    `Under his leadership MTX has delivered ${companyFacts.systemsDelivered} systems for Ethiopian organisations: hospital and school platforms, a bus booking and share-sale platform, hotel systems, a multi-vendor marketplace app, a legal services marketplace, an Afaan Oromoo Quran app with more than 50,000 downloads, and websites for NGOs, contractors and authors.`,
+  ],
 };
 
 export const socialLinks = {
@@ -52,7 +67,8 @@ export const navLinks: NavLink[] = [
 ];
 
 export const companyStats = [
-  { value: "40+", label: "Systems delivered" },
+  { value: companyFacts.systemsDelivered, label: "Systems delivered" },
+  { value: String(companyFacts.yearsInBusiness), label: "Years in business" },
+  { value: String(sectors.length), label: "Industries served" },
   { value: "50K+", label: "App downloads" },
-  { value: "7", label: "Industries served" },
 ];

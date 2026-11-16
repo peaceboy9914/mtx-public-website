@@ -1,6 +1,6 @@
 import { platforms } from "@/content/platforms";
 import { services } from "@/content/services";
-import { companyStats, formattedAddress, siteConfig } from "@/content/site";
+import { companyFacts, companyStats, formattedAddress, siteConfig } from "@/content/site";
 import { workProjects } from "@/content/work";
 
 export const dynamic = "force-static";
@@ -15,6 +15,7 @@ export function GET() {
     "",
     `${siteConfig.legalName} is a software development company based at ${formattedAddress}. ` +
       `Contact: ${siteConfig.email}, ${siteConfig.phone}. ` +
+      `Team of ${companyFacts.teamSize}. ` +
       companyStats.map((stat) => `${stat.value} ${stat.label.toLowerCase()}`).join(", ") +
       ".",
     "",

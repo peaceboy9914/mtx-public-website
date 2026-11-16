@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { platforms } from "@/content/platforms";
 import { services, type Faq } from "@/content/services";
-import { address, founder, siteConfig, socialLinks } from "@/content/site";
+import { address, companyFacts, founder, siteConfig, socialLinks } from "@/content/site";
 
 /** Stable node ids so every page's JSON-LD points at the same organization entity. */
 const ORG_ID = `${siteConfig.url}/#organization`;
@@ -98,6 +98,7 @@ export function organizationJsonLd() {
       name: founder.name,
       url: founder.linkedin,
     },
+    numberOfEmployees: { "@type": "QuantitativeValue", value: companyFacts.teamSize },
     sameAs: [socialLinks.linkedin],
     knowsAbout: [
       "Software development in Ethiopia",
@@ -126,6 +127,8 @@ export function personJsonLd() {
     "@type": "Person",
     name: founder.name,
     jobTitle: founder.role,
+    description: founder.bio.join(" "),
+    image: `${siteConfig.url}${founder.photo.src}`,
     url: founder.linkedin,
     sameAs: [founder.linkedin],
     worksFor: { "@id": ORG_ID },

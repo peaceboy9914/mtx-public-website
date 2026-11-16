@@ -1,14 +1,50 @@
-export const sectors = [
-  "Banking & finance",
-  "Microfinance",
-  "Healthcare",
-  "Education",
-  "Manufacturing",
-  "Transport & logistics",
-  "Retail & e-commerce",
-  "Civil society",
-  "Publishing",
+/**
+ * Kinds of work MTX has delivered, as confirmed by the founder. `projects` link to a case study when
+ * one exists (by work.ts slug); plain names are delivered projects without a public write-up yet.
+ */
+export const trackRecord: { sector: string; work: string; projects: { name: string; slug?: string }[] }[] = [
+  {
+    sector: "Healthcare",
+    work: "Hospital websites with appointment booking",
+    projects: [{ name: "Grand Valley Primary Hospital", slug: "grand-valley-hospital" }],
+  },
+  {
+    sector: "Education",
+    work: "School management systems",
+    projects: [{ name: "SchoolERP", slug: "school-erp" }],
+  },
+  { sector: "Hospitality", work: "Hotel systems", projects: [{ name: "Nur Palace" }] },
+  {
+    sector: "Transport",
+    work: "Booking and share-sale platforms",
+    projects: [{ name: "Nur Bus", slug: "nur-bus" }],
+  },
+  {
+    sector: "Retail & e-commerce",
+    work: "Multi-vendor marketplace apps",
+    projects: [{ name: "Grandbirr Market", slug: "grandbirr-market" }],
+  },
+  { sector: "Legal services", work: "A legal services marketplace", projects: [] },
+  { sector: "Construction", work: "Company websites", projects: [{ name: "MGC General Contractor" }] },
+  {
+    sector: "Civil society",
+    work: "NGO websites with case registration",
+    projects: [{ name: "MRPO", slug: "mrpo" }],
+  },
+  {
+    sector: "Faith & community",
+    work: "Mobile apps with offline audio",
+    projects: [{ name: "Ibsa Qur'aanaa", slug: "ibsa-quraanaa" }],
+  },
+  {
+    sector: "Publishing",
+    work: "Author, personal and landing-page sites",
+    projects: [{ name: "Qarooma Baha Oromiyaa", slug: "qarooma-baha-oromiyaa" }],
+  },
 ];
+
+/** Sectors with delivered work. Derived from the track record so the list and the stat can't drift apart. */
+export const sectors = trackRecord.map((entry) => entry.sector);
 
 /** What every MTX build shares, regardless of sector. */
 export const foundations = [

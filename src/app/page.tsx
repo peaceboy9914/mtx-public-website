@@ -10,6 +10,7 @@ import { CardGrid, SystemCard } from "@/components/catalog/catalog";
 import { platforms, requirePlatform } from "@/content/platforms";
 import { services } from "@/content/services";
 import { companyStats, siteConfig } from "@/content/site";
+import { StatGrid } from "@/components/ui/stat-grid";
 import { requireWorkProject, workProjects } from "@/content/work";
 import { riseDelay } from "@/lib/motion";
 import { pageMetadata } from "@/lib/seo";
@@ -65,14 +66,7 @@ export default function HomePage() {
                 </ButtonLink>
               </div>
 
-              <dl className="mt-12 grid grid-cols-3 border-t border-ink/15">
-                {companyStats.map((stat) => (
-                  <div key={stat.label} className="flex flex-col border-r border-ink/15 pt-5 pr-4 last:border-r-0 [&:not(:first-child)]:pl-4">
-                    <dt className="label order-2 mt-1 text-ink/55">{stat.label}</dt>
-                    <dd className="text-[32px] font-semibold tracking-[-0.04em]">{stat.value}</dd>
-                  </div>
-                ))}
-              </dl>
+              <StatGrid stats={companyStats} className="mt-12" />
             </div>
 
             <div className="rise relative lg:col-span-8" style={riseDelay(240)}>
