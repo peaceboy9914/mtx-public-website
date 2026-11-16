@@ -32,6 +32,9 @@ export function GET() {
     `- [About](${url}/about)`,
     `- [Contact](${url}/contact)`,
     "",
+    "## Optional",
+    `- [Full site content](${url}/llms-full.txt): every service, system, FAQ and case study in one file`,
+    "",
   ].join("\n");
 
   return new Response(body, { headers: { "Content-Type": "text/plain; charset=utf-8" } });
