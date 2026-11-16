@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 import { Screenshot } from "@/components/media/screenshot";
+import { CaseStudyDetail } from "@/components/work/case-study-sections";
 import { CtaBand } from "@/components/ui/cta-band";
 import { IconArrowRight, IconArrowUpRight } from "@/components/ui/icons";
 import { JsonLd } from "@/components/ui/json-ld";
@@ -54,6 +55,9 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
             path,
             image: project.image.src,
             sector: project.sector,
+            keywords: project.stack ?? project.tags,
+            dateCreated: project.year?.match(/\d{4}/)?.[0],
+            dateModified: project.updated,
           }),
         ]}
       />
@@ -88,7 +92,10 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
 
             <div className="rise self-end lg:col-span-4" style={riseDelay(240)}>
               <dl className="border-t border-ink/15 text-[15px]">
-                <MetaRow label="Client">{project.name}</MetaRow>
+                <MetaRow label="Client">{project.client?.name ?? project.name}</MetaRow>
+                {project.client?.location ? <MetaRow label="Location">{project.client.location}</MetaRow> : null}
+                {project.year ? <MetaRow label="Year">{project.year}</MetaRow> : null}
+                {project.duration ? <MetaRow label="Delivery">{project.duration}</MetaRow> : null}
                 <MetaRow label="Delivered as">{project.platform === "mobile" ? "Mobile app" : "Web platform"}</MetaRow>
                 {project.domain ? (
                   <MetaRow label="Live at">
@@ -103,6 +110,8 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
                     </a>
                   </MetaRow>
                 ) : null}
+                {project.status ? <MetaRow label="Status">{project.status}</MetaRow> : null}
+                {project.services?.length ? <MetaRow label="Our role">{project.services.join(", ")}</MetaRow> : null}
                 {project.stats?.map((stat) => (
                   <MetaRow key={stat.label} label={stat.label}>
                     <span className="text-[22px] font-semibold tracking-[-0.03em]">{stat.value}</span>
@@ -138,6 +147,8 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
           )}
         </div>
       </section>
+
+      <CaseStudyDetail project={project} />
 
       <section className="border-t border-ink/10 bg-paper">
         <Link href={`/work/${next.slug}`} className="group shell flex flex-wrap items-end justify-between gap-6 py-16 sm:py-20">

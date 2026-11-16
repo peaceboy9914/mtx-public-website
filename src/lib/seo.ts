@@ -151,10 +151,16 @@ export function creativeWorkJsonLd(project: {
   path: string;
   image?: string;
   sector: string;
+  keywords?: string[];
+  dateCreated?: string;
+  dateModified?: string;
 }) {
   return {
     "@context": "https://schema.org",
     "@type": "CreativeWork",
+    keywords: project.keywords?.length ? project.keywords.join(", ") : undefined,
+    dateCreated: project.dateCreated,
+    dateModified: project.dateModified,
     name: project.name,
     description: project.description,
     url: `${siteConfig.url}${project.path}`,

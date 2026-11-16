@@ -1,3 +1,22 @@
+/**
+ * A measured outcome. `source` says where the number comes from (analytics, client report, store listing…)
+ * so every figure on the site can be traced back. Never add a metric without one.
+ */
+export type CaseStudyMetric = { value: string; label: string; source?: string };
+
+/**
+ * A client quote. `approved` must be set to `true` only once the client has agreed, in writing,
+ * to have the quote and their name published. Unapproved testimonials are never rendered.
+ */
+export type Testimonial = {
+  quote: string;
+  name: string;
+  role: string;
+  organization: string;
+  photo?: { src: string; alt: string };
+  approved: boolean;
+};
+
 export type WorkProject = {
   slug: string;
   name: string;
@@ -11,7 +30,45 @@ export type WorkProject = {
   caseSummary: string;
   tags: string[];
   stats?: { value: string; label: string }[];
+
+  // ---- Optional case-study detail. Each section on the case-study page renders only when its data is present. ----
+
+  /** Who the client is, in a sentence or two. */
+  client?: {
+    /** Defaults to `name` when omitted. */
+    name?: string;
+    location?: string;
+    about?: string;
+    /** Logo for the client strip. Only set when the client has granted permission to show it. */
+    logo?: { src: string; alt: string };
+  };
+  /** Year(s) of the engagement, e.g. "2024" or "2023–2025". */
+  year?: string;
+  /** Delivery length, e.g. "14 weeks". */
+  duration?: string;
+  status?: "Live" | "In pilot" | "Maintained by MTX" | "Handed over";
+  /** What MTX did on the project, e.g. ["Discovery", "UX design", "Build", "Support"]. */
+  services?: string[];
+  /** The situation before MTX was involved. One paragraph per entry. */
+  challenge?: string[];
+  /** How the problem was approached. One paragraph per entry. */
+  approach?: string[];
+  features?: { title: string; body: string }[];
+  /** Technologies and integrations, e.g. ["Next.js", "PostgreSQL", "Telebirr"]. */
+  stack?: string[];
+  timeline?: { period: string; title: string; body?: string }[];
+  results?: CaseStudyMetric[];
+  testimonial?: Testimonial;
+  /** Additional screenshots shown below the main image. */
+  gallery?: { src: string; alt: string; frame?: "browser" | "phone" }[];
+  /** ISO date the case study was last reviewed; feeds sitemap lastModified later. */
+  updated?: string;
 };
+
+/** True when a testimonial may be shown publicly. */
+export function isPublishable(testimonial?: Testimonial): testimonial is Testimonial {
+  return Boolean(testimonial?.approved);
+}
 
 export const workProjects: WorkProject[] = [
   {
