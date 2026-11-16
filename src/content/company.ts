@@ -5,15 +5,22 @@
 export const trackRecord: { sector: string; work: string; projects: { name: string; slug?: string }[] }[] = [
   {
     sector: "Healthcare",
-    work: "Hospital websites with appointment booking",
-    projects: [{ name: "Grand Valley Primary Hospital", slug: "grand-valley-hospital" }],
+    work: "Hospital ERP and hospital websites",
+    projects: [
+      { name: "MTX-Care", slug: "mtx-care" },
+      { name: "Grand Valley Primary Hospital", slug: "grand-valley-hospital" },
+    ],
   },
   {
     sector: "Education",
     work: "School management systems",
     projects: [{ name: "SchoolERP", slug: "school-erp" }],
   },
-  { sector: "Hospitality", work: "Hotel systems", projects: [{ name: "Nur Palace" }] },
+  {
+    sector: "Hospitality",
+    work: "Restaurant management systems",
+    projects: [{ name: "Nur Palace", slug: "nur-palace" }],
+  },
   {
     sector: "Transport",
     work: "Booking and share-sale platforms",
@@ -24,8 +31,16 @@ export const trackRecord: { sector: string; work: string; projects: { name: stri
     work: "Multi-vendor marketplace apps",
     projects: [{ name: "Grandbirr Market", slug: "grandbirr-market" }],
   },
-  { sector: "Legal services", work: "A legal services marketplace", projects: [] },
-  { sector: "Construction", work: "Company websites", projects: [{ name: "MGC General Contractor" }] },
+  {
+    sector: "Legal services",
+    work: "A legal services marketplace",
+    projects: [{ name: "Tebekaye", slug: "tebekaye" }],
+  },
+  {
+    sector: "Construction",
+    work: "Company websites",
+    projects: [{ name: "MGC General Contractor", slug: "mgc" }],
+  },
   {
     sector: "Civil society",
     work: "NGO websites with case registration",

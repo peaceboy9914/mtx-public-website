@@ -69,6 +69,7 @@ export function GET() {
       `### ${project.caseTitle}`,
       `URL: ${url}/work/${project.slug}`,
       `Sector: ${project.sector}`,
+      project.status && `Status: ${project.status}`,
       project.domain && `Live at: https://${project.domain}`,
       project.year && `Year: ${project.year}`,
       project.duration && `Delivery: ${project.duration}`,

@@ -46,7 +46,7 @@ export type WorkProject = {
   year?: string;
   /** Delivery length, e.g. "14 weeks". */
   duration?: string;
-  status?: "Live" | "In pilot" | "Maintained by MTX" | "Handed over";
+  status?: "Live" | "In development" | "In pilot" | "Maintained by MTX" | "Handed over";
   /** What MTX did on the project, e.g. ["Discovery", "UX design", "Build", "Support"]. */
   services?: string[];
   /** The situation before MTX was involved. One paragraph per entry. */
@@ -88,6 +88,145 @@ export const workProjects: WorkProject[] = [
     tags: ["Next.js", "Appointment booking", "SEO"],
   },
   {
+    slug: "mtx-care",
+    name: "MTX-Care",
+    sector: "Healthcare · Hospital ERP",
+    platform: "web",
+    image: {
+      src: "/images/work/mtx-care-reports.webp",
+      alt: "MTX-Care revenue report in ETB by payment method, cashier and service type for an Ethiopian-calendar month (demo data)",
+    },
+    cardSummary: "Hospital ERP: registration, a cashier billing gate, lab, pharmacy and inpatient care, in Amharic, Afaan Oromoo and English.",
+    caseTitle: "MTX-Care — hospital ERP for Ethiopian hospitals",
+    caseSummary:
+      "MTX's own hospital ERP for public and private hospitals: patient registration, outpatient, emergency and inpatient care, a cashier that gates lab and pharmacy work until the bill is paid, pharmacy stock, and HMIS reports on the Ethiopian calendar. Screens shown here use demo data.",
+    tags: ["Billing gate", "Ethiopian calendar", "Amharic / Afaan Oromoo"],
+    client: {
+      name: "MTX product",
+      about:
+        "MTX-Care is a product MTX builds and owns, designed for Ethiopian public and private hospitals and packaged to install at a pilot hospital on a local server or in the cloud.",
+    },
+    status: "In development",
+    services: ["Product design", "Build", "Deployment tooling"],
+    challenge: [
+      "Ethiopian hospitals work with payers, payment methods, calendars and reports that imported systems don't cover: CBHI and SHI members, Telebirr and CBE Birr at the cashier, HMIS reports by Ethiopian-calendar period, and staff who work in Amharic and Afaan Oromo.",
+      "Money also leaks when work is done before it's paid for, so the cashier needed to sit between ordering a test and doing it.",
+    ],
+    approach: [
+      "The clinical model is inspired by OpenMRS, with billing built in from the start. A lab order stays invisible to the lab until it's paid, and prescriptions are checked against pharmacy stock before the patient reaches the cashier.",
+      "Diagnoses use the CIEL medical dictionary, shipped with the software so no internet is needed: about 53,000 concepts mapped to ICD-10 and LOINC. Doctors search by everyday names; reports still count by ICD-10.",
+    ],
+    features: [
+      {
+        title: "Registration",
+        body: "Medical record numbers, Fayda ID, Ethiopian address and date of birth, duplicate-patient warnings and audited merges.",
+      },
+      {
+        title: "Cashier and billing gate",
+        body: "Shifts with cash counts, partial payments, cash, Telebirr, CBE Birr, M-Pesa or bank, 80 mm receipts and supervisor-approved refunds.",
+      },
+      {
+        title: "Lab and imaging",
+        body: "Worklists, sample collection, flagged results and verification by a second technologist; corrections keep the earlier version.",
+      },
+      {
+        title: "Pharmacy",
+        body: "Prescription review, first-expiry-first-out dispensing of paid drugs, Model 19 receiving, bin cards and near-expiry tracking.",
+      },
+      {
+        title: "Inpatient care",
+        body: "Wards and beds, admissions, transfers, bed-day billing, deposits, medication administration records and discharge summaries.",
+      },
+      {
+        title: "Reports and audit",
+        body: "Revenue by method and cashier, HMIS morbidity by ICD-10, stock value and expiry, an append-only audit log and clinical-record access audit.",
+      },
+    ],
+    stack: ["NestJS", "PostgreSQL", "Prisma", "React", "Vite", "TanStack Query", "i18next", "Docker", "Caddy", "CIEL · ICD-10 · LOINC", "Playwright"],
+    gallery: [
+      { src: "/images/work/mtx-care-reports-om.webp", alt: "MTX-Care revenue report in Afaan Oromoo (demo data)" },
+      { src: "/images/work/mtx-care-morbidity.webp", alt: "MTX-Care morbidity report: top diagnoses by ICD-10, age group and sex for an Ethiopian-calendar month (demo data)" },
+    ],
+    updated: "2026-11-16",
+  },
+  {
+    slug: "nur-palace",
+    name: "Nur Palace",
+    sector: "Hospitality · Restaurant",
+    platform: "web",
+    image: {
+      src: "/images/work/nur-palace-pos.webp",
+      alt: "Nur Palace point of sale taking a table order priced in ETB (demo menu)",
+    },
+    cardSummary: "Restaurant management for a premium restaurant and coffee house: POS, station screens, inventory, attendance and payroll.",
+    caseTitle: "Nur Palace — restaurant management system",
+    caseSummary:
+      "A custom system for Nur Palace Restaurant: point of sale, waiter app, QR table ordering, kitchen, coffee and juice screens, a queue TV, inventory with recipes, and staff attendance, deductions and payroll, with a fingerprint device MTX built in-house. Four languages, and it keeps running when the internet doesn't.",
+    tags: ["Offline-first", "Fingerprint attendance", "Four languages"],
+    client: {
+      name: "Nur Palace Restaurant",
+      about: "A premium restaurant and coffee house, opening with one branch and planning more.",
+    },
+    year: "2026",
+    status: "In development",
+    services: ["Scoping", "Design & build", "Fingerprint hardware"],
+    challenge: [
+      "Nur Palace wanted one system for the whole operation: orders at the counter, at tables and by QR code, each item sent to the right preparation station, a till that balances, and staff attendance and pay.",
+      "Working offline was a hard requirement. A restaurant can't stop serving because the connection drops.",
+    ],
+    approach: [
+      "MTX built it around a restaurant hub: a small server on the restaurant's own network that every tablet and screen talks to, syncing with the cloud when a connection is available. The delivery plan includes a 30-minute offline test in which no data may be lost.",
+      "The opening release was planned in 20 days, with working demos on days 7 and 12. Rules the client changes over time, such as lateness deductions and tax, pension and overtime rates, are edited in the admin, not hard-coded.",
+    ],
+    features: [
+      {
+        title: "Point of sale and waiter app",
+        body: "Dine-in and takeaway, split bills, discounts behind a manager PIN, audited voids, service charge and VAT.",
+      },
+      {
+        title: "Station screens and queue TV",
+        body: "Each item goes to the kitchen, coffee bar or juice bar screen that makes it, with prep timers; a TV in the hall shows order status.",
+      },
+      {
+        title: "QR table ordering",
+        body: "Guests order from their table and staff approve each order before it reaches the stations.",
+      },
+      {
+        title: "Payments and till",
+        body: "Cash and Chapa, with references for CBE Birr and card; cashier sessions with a cash count and Z report.",
+      },
+      {
+        title: "Attendance and payroll",
+        body: "An ESP32 fingerprint device built by MTX, a PIN-and-photo fallback, shifts, versioned deduction rules and a monthly payroll run with payslips.",
+      },
+      {
+        title: "Inventory and recipes",
+        body: "Every sale deducts its ingredients; low-stock alerts, receiving, waste and stocktake. Menus in Amharic, Afaan Oromoo, English and Arabic.",
+      },
+    ],
+    stack: ["NestJS", "PostgreSQL", "Prisma", "Socket.IO", "React", "Vite", "Tailwind CSS", "React Native (Expo)", "ESP32 firmware", "Chapa", "SMS Ethiopia"],
+    timeline: [
+      { period: "Day 1–2", title: "Foundation", body: "Database, shared contracts and every app booting in CI." },
+      { period: "Day 7", title: "Demo 1", body: "An order on the POS appears on the right station screen in under a second." },
+      {
+        period: "30 Oct 2026",
+        title: "Demo 2",
+        body: "Full flow: waiter order, stations, queue TV, cash and Chapa payment, printed receipt and stock deducted.",
+      },
+      {
+        period: "Nov 2026",
+        title: "Mobile app started",
+        body: "At the client's request: one app with customer, waiter and rider modes for delivery and pickup.",
+      },
+    ],
+    gallery: [
+      { src: "/images/work/nur-palace-kds.webp", alt: "Nur Palace coffee bar station screen with two open orders (demo data)" },
+      { src: "/images/work/nur-palace-floor.webp", alt: "Nur Palace POS floor view with table status by area (demo data)" },
+      { src: "/images/work/nur-palace-admin-menu.webp", alt: "Nur Palace admin menu editor with prices, stations and translation status (demo menu)" },
+    ],
+    updated: "2026-11-16",
+  },
+  {
     slug: "nur-bus",
     name: "Nur Bus",
     domain: "nurbus.et",
@@ -117,6 +256,139 @@ export const workProjects: WorkProject[] = [
     caseSummary:
       "A full academic and finance platform with separate super admin, academic admin, finance admin, teacher and parent roles. Enrolment, grade books, attendance, timetables, fee collection in ETB and analytics across departments, with dark mode and multi-language from day one.",
     tags: ["Role-based access", "Fee collection", "Parent portal"],
+    features: [
+      {
+        title: "Six roles, two layers of security",
+        body: "Super admin, academic admin, finance admin, teacher, parent and student. Route guards in the app plus row-level security in PostgreSQL.",
+      },
+      {
+        title: "Admission wizard",
+        body: "Multi-step admission with guardian linking and medical details. Students move from under review to accepted to enrolled, and enrolled records can't be demoted by accident.",
+      },
+      {
+        title: "Teacher attendance per lesson",
+        body: "Each classroom door has a signed QR code. Teachers scan it at the start of every lesson, inside the school's location radius, which also opens student attendance for that period.",
+      },
+      {
+        title: "Ethiopian and Gregorian calendars",
+        body: "Exact conversion between the two calendars for holidays, exams and school events.",
+      },
+      {
+        title: "Timetables without clashes",
+        body: "Conflict detection stops a teacher being double-booked; teachers and parents see only their own schedules.",
+      },
+      {
+        title: "Grades, report cards and fees",
+        body: "Score entry, GPA and class rank, printable report cards, bulk invoicing in ETB and payment verification.",
+      },
+    ],
+    stack: ["React", "TypeScript", "Vite", "Supabase (PostgreSQL + row-level security)", "Express", "Prisma", "Tailwind CSS", "i18next", "Playwright"],
+  },
+  {
+    slug: "tebekaye",
+    name: "Tebekaye",
+    sector: "Legal services · Marketplace",
+    platform: "web",
+    image: {
+      src: "/images/work/tebekaye.webp",
+      alt: "Tebekaye home page: find a verified lawyer in Addis Ababa by legal problem and sub-city",
+    },
+    cardSummary: "A legal marketplace: describe a problem in plain language and get proposals from verified advocates, in English and Amharic.",
+    caseTitle: "Tebekaye — legal services marketplace",
+    caseSummary:
+      "A web platform where people in Ethiopia describe a legal problem in plain language, receive proposals from advocates whose licences have been checked, choose one, and work with them securely, in English and Amharic. In development, with a pilot planned in Addis Ababa.",
+    tags: ["Marketplace", "Amharic / English", "Privacy by design"],
+    status: "In development",
+    services: ["Requirements", "Design", "Build"],
+    challenge: [
+      "The goal is to let someone describe a legal problem once, in everyday language, and compare offers from verified advocates without needing to know the legal specialty first.",
+      "Trust and privacy shape every screen: clients stay pseudonymous until they choose an advocate, and the platform never names a \"best lawyer\" or predicts outcomes.",
+    ],
+    approach: [
+      "Requirements live in one specification, with every role, action and case state covered by an authorisation matrix and a test. Legal questions run as a separate workstream with counsel, and no real user data is used until that legal gate passes.",
+      "Personal data stays in Ethiopia: the platform is designed for in-country hosting, uploads are virus-scanned, and payments go through Chapa.",
+    ],
+    features: [
+      {
+        title: "Search and compare",
+        body: "Filter by legal problem and Addis Ababa sub-city; advocates are ordered by experience and nobody can pay to rank higher.",
+      },
+      {
+        title: "Post a case, get proposals",
+        body: "Describe the problem once and verified advocates send offers to compare side by side.",
+      },
+      {
+        title: "Licence checks",
+        body: "Each advocate is checked against the Ministry of Justice register before being listed.",
+      },
+      {
+        title: "Secure workspace",
+        body: "Messaging, shared documents and consultation booking between client and advocate once a proposal is accepted.",
+      },
+      {
+        title: "Local payments",
+        body: "A flat platform fee paid with telebirr, CBE Birr, M-Pesa or card.",
+      },
+      {
+        title: "Built for Ethiopia",
+        body: "Amharic as a first-class language, Ethiopian calendar and time, local phone formats and tolerance for weak networks.",
+      },
+    ],
+    stack: ["Next.js", "NestJS", "PostgreSQL", "Drizzle ORM", "Redis", "BullMQ", "Socket.IO", "S3-compatible storage", "ClamAV", "Chapa"],
+    timeline: [
+      { period: "10 Nov 2026", title: "Build starts", body: "Architecture signed off." },
+      { period: "Mar 2027 · planned", title: "Feature-complete website in staging" },
+      { period: "Apr 2027 · planned", title: "Pilot launch in Addis Ababa" },
+      { period: "Aug 2027 · planned", title: "Android app on the same API" },
+    ],
+    gallery: [
+      { src: "/images/work/tebekaye-am.webp", alt: "Tebekaye home page in Amharic" },
+      { src: "/images/work/tebekaye-how.webp", alt: "Tebekaye how-it-works page" },
+    ],
+    updated: "2026-11-16",
+  },
+  {
+    slug: "mgc",
+    name: "MGC — Miftah General Contractor",
+    domain: "mgc-landing-page-eta.vercel.app",
+    sector: "Construction",
+    platform: "web",
+    image: {
+      src: "/images/work/mgc.webp",
+      alt: "MGC Miftah General Contractor website hero: Building Ethiopia, together",
+    },
+    cardSummary: "Website for a licensed construction firm: services, filterable project photos, a coverage map and WhatsApp enquiries.",
+    caseTitle: "MGC — website for a construction company",
+    caseSummary:
+      "A company website for Miftah General Contractor: twelve core services, project photography with category filters, the owner's profile, a coverage map of Ethiopia and an enquiry form that prepares a WhatsApp or email message.",
+    tags: ["React", "Project gallery", "WhatsApp enquiries"],
+    client: {
+      name: "Miftah General Contractor",
+      location: "Addis Ababa",
+      about:
+        "A construction and engineering company headquartered in Addis Ababa and working across Ethiopia, licensed by the Ethiopian Construction Authority.",
+    },
+    status: "Live",
+    services: ["Design", "Build", "Content structure"],
+    challenge: [
+      "MGC's company profile needed to work as a website: their services and real project photography in front of clients and partners, with an easy way to get in touch.",
+    ],
+    approach: [
+      "All text comes from MGC's company profile and lives in a single content file, so updates never touch the layout. Testimonials, project names and dates are added only once MGC verifies them.",
+      "The enquiry form stores nothing: it prepares a WhatsApp or email draft with the chosen service already filled in, and the visitor sends it from their own app.",
+    ],
+    features: [
+      { title: "Services", body: "Twelve core services grouped into building, infrastructure and engineering, each linking straight to an enquiry." },
+      { title: "Project gallery", body: "Photography filtered by category, with an accessible full-size viewer." },
+      { title: "Coverage map", body: "An outline map of Ethiopia showing where MGC operates." },
+      { title: "Accessible by default", body: "Keyboard navigation, focus handling in the photo viewer and reduced-motion support." },
+    ],
+    stack: ["React", "Vite", "GSAP"],
+    gallery: [
+      { src: "/images/work/mgc-projects.webp", alt: "MGC project gallery with category filters" },
+      { src: "/images/work/mgc-services.webp", alt: "MGC core services section" },
+    ],
+    updated: "2026-11-16",
   },
   {
     slug: "grandbirr-market",

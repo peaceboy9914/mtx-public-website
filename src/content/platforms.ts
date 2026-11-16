@@ -80,7 +80,7 @@ export const platforms: Platform[] = [
       "Management dashboards",
     ],
     audience: ["Primary and general hospitals", "Specialty clinics", "Diagnostic laboratories", "Health networks with several sites"],
-    caseStudy: "grand-valley-hospital",
+    caseStudy: "mtx-care",
     relatedServices: ["web-application-development", "custom-software-development", "data-analytics"],
     faqs: [
       {
@@ -246,6 +246,7 @@ export const platforms: Platform[] = [
       "HR reports & headcount analytics",
     ],
     audience: ["Companies with 50+ employees", "Multi-branch organisations", "NGOs & international organisations", "Factories with shift workers"],
+    caseStudy: "nur-palace",
     relatedServices: ["erp-development", "custom-software-development"],
     faqs: [
       {
@@ -277,6 +278,7 @@ export const platforms: Platform[] = [
       "Accounting integration",
     ],
     audience: ["Retail chains", "Wholesalers & distributors", "Pharmacies", "Supermarkets & mini-markets"],
+    caseStudy: "nur-palace",
     relatedServices: ["erp-development", "system-integration", "ai-solutions"],
     faqs: [
       {

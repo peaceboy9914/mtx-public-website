@@ -134,7 +134,7 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
             eyebrow="Related work"
             title={
               <>
-                Delivered and <span className="accent">running in production.</span>
+                Where we&apos;ve <span className="accent">put it to work.</span>
               </>
             }
           />

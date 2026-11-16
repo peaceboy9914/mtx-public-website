@@ -26,7 +26,12 @@ export function ProjectCard({ project, className }: { project: WorkProject; clas
       </div>
       <div className="mt-5 flex items-start justify-between gap-6">
         <div>
-          <div className="label text-ink/55">{project.sector}</div>
+          <div className="label flex flex-wrap items-center gap-x-3 gap-y-1 text-ink/55">
+            <span>{project.sector}</span>
+            {project.status === "In development" ? (
+              <span className="rounded-full border border-current/30 px-2 py-0.5 normal-case">In development</span>
+            ) : null}
+          </div>
           <h3 className="mt-2 text-[22px] font-semibold tracking-[-0.02em]">{project.name}</h3>
           <p className="mt-2 max-w-md text-[15px] leading-relaxed text-ink/65">{project.cardSummary}</p>
         </div>
