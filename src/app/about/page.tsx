@@ -37,7 +37,7 @@ export default function AboutPage() {
             Software built in Ethiopia, for how Ethiopian institutions <span className="accent text-brand">actually run.</span>
           </>
         }
-        description={`MTX Digital Technologies is a ${companyFacts.teamSize}-person product team based in Addis Ababa. We design, build and maintain financial systems, school and manufacturing ERP, hospital platforms, shareholder registries, marketplaces and mobile apps — end to end, on one team.`}
+        description={`MTX Digital Technologies is a ${companyFacts.teamSize}-person product team based in Addis Ababa. We design, build and maintain hospital and school systems, hotel systems, booking and share-sale platforms, marketplaces and mobile apps — end to end, on one team.`}
       >
         <StatGrid stats={companyStats} wide valueClassName="text-[clamp(28px,4vw,44px)]" className="max-w-3xl" />
       </PageHero>

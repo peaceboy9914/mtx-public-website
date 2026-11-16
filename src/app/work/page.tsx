@@ -10,7 +10,7 @@ import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
 const title = "Software Projects & Case Studies in Ethiopia";
 const description =
-  "Websites, mobile apps and enterprise platforms MTX has delivered for hospitals, transport operators, schools, manufacturers and retailers across Ethiopia.";
+  "Websites, mobile apps and enterprise platforms MTX has delivered for hospitals, transport operators, schools, hotels, NGOs and retailers across Ethiopia.";
 
 export const metadata = pageMetadata({ title, description, path: "/work" });
 
@@ -31,7 +31,7 @@ export default function WorkPage() {
             Work in <span className="accent text-brand">production.</span>
           </>
         }
-        description="Websites, mobile apps and enterprise platforms delivered for hospitals, transport operators, schools, manufacturers and retailers. Screens below are from live builds."
+        description="Websites, mobile apps and enterprise platforms delivered for hospitals, transport operators, schools, hotels, NGOs and retailers. Screens below are from live builds."
       />
 
       <Section tone="white">

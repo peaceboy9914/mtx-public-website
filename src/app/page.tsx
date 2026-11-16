@@ -56,8 +56,8 @@ export default function HomePage() {
           <div className="mt-12 grid gap-12 lg:mt-16 lg:grid-cols-12">
             <div className="rise lg:col-span-4" style={riseDelay(160)}>
               <p className="text-[18px] leading-relaxed text-ink/70">
-                Financial systems, school and manufacturing ERP, hospital platforms, shareholder registries,
-                marketplaces and mobile apps — designed, built and maintained by one senior team.
+                Hospital and school systems, booking and share-sale platforms, marketplaces and mobile apps —
+                designed, built and maintained by one team in Addis Ababa.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <ButtonLink href="/contact">Start a project</ButtonLink>
@@ -147,7 +147,7 @@ export default function HomePage() {
               {platforms.length} proven platforms, <span className="accent">ready to adapt.</span>
             </>
           }
-          description="Hospital, school, finance, payroll, lending, retail, logistics and workflow systems — each running in production and configurable to how your organisation works."
+          description="Hospital, school, finance, payroll, lending, retail, logistics and workflow systems — each configurable to how your organisation works."
           action={
             <ButtonLink href="/platforms" variant="outline">
               All {platforms.length} systems
