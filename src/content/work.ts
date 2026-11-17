@@ -65,6 +65,11 @@ export type WorkProject = {
   deliveredAs?: string;
   /** Shown under the main screenshot, e.g. to say the screens use demo data. */
   screensNote?: string;
+  /**
+   * For products and published apps: describes the software itself to search engines (schema.org
+   * SoftwareApplication). `category` uses schema.org's applicationCategory values.
+   */
+  software?: { category: string; os: string };
   /** Public link when the project isn't a website, e.g. an app-store listing. */
   link?: { href: string; label: string };
   /** ISO date the case study was last reviewed; feeds sitemap lastModified later. */
@@ -106,6 +111,7 @@ export const workProjects: WorkProject[] = [
     caseTitle: "MTX-Care — hospital ERP for Ethiopian hospitals",
     caseSummary:
       "MTX's own hospital ERP, in use at Grand Valley Primary Hospital: patient registration, outpatient, emergency and inpatient care, a cashier that gates lab and pharmacy work until the bill is paid, pharmacy stock, and HMIS reports on the Ethiopian calendar. Screens shown here use demo data.",
+    software: { category: "BusinessApplication", os: "Web" },
     tags: ["Billing gate", "Ethiopian calendar", "Amharic / Afaan Oromoo"],
     client: {
       name: "MTX product",
@@ -216,6 +222,7 @@ export const workProjects: WorkProject[] = [
     caseTitle: "Nur Palace — restaurant management system",
     caseSummary:
       "A custom system Nur Palace Restaurant runs on: point of sale, waiter app, QR table ordering, kitchen, coffee and juice screens, a queue TV, inventory with recipes, and staff attendance, deductions and payroll, with a fingerprint device MTX built in-house. Four languages, and it keeps running when the internet doesn't.",
+    software: { category: "BusinessApplication", os: "Web, Android" },
     tags: ["Offline-first", "Fingerprint attendance", "Four languages"],
     client: {
       name: "Nur Palace Restaurant",
@@ -395,6 +402,7 @@ export const workProjects: WorkProject[] = [
     caseTitle: "Tebekaye — legal services marketplace",
     caseSummary:
       "A web platform where people in Ethiopia describe a legal problem in plain language, receive proposals from advocates whose licences have been checked, choose one, and work with them securely, in English and Amharic. Built and run by MTX.",
+    software: { category: "BusinessApplication", os: "Web" },
     tags: ["Marketplace", "Amharic / English", "Privacy by design"],
     client: { name: "MTX product" },
     status: "Live",
@@ -497,6 +505,7 @@ export const workProjects: WorkProject[] = [
     caseTitle: "QuickGebeta — campus food delivery and marketplace",
     caseSummary:
       "MTX's own platform for university students: order food from campus restaurants, get it delivered, and buy and sell on a campus marketplace, all inside Telegram. Four connected apps serve students, restaurants, delivery drivers and sellers. Live and serving university students.",
+    software: { category: "ShoppingApplication", os: "Web (Telegram mini app)" },
     tags: ["Telegram mini app", "Food delivery", "Marketplace"],
     client: { name: "MTX product" },
     year: "2025",
@@ -532,6 +541,7 @@ export const workProjects: WorkProject[] = [
     caseTitle: "Grandbirr Market — multi-vendor marketplace app",
     caseSummary:
       "Multi-vendor commerce with retail, wholesale (Jimla) and neighbourhood storefronts (Gebeya) shopping modes. Category browsing, wishlists, live cart and notifications, and a dedicated account and vendor experience.",
+    software: { category: "ShoppingApplication", os: "Android" },
     tags: ["React Native", "Multi-vendor", "Category browsing"],
   },
   {
@@ -547,6 +557,7 @@ export const workProjects: WorkProject[] = [
     caseTitle: "Laziz — learn and read in Afaan Oromoo",
     caseSummary:
       "An educational app built for a client, for Afaan Oromoo students and readers: a library of books, grade 1–8 textbooks and quizzes, with an admin area for publishing content. Built in Flutter and live on Google Play.",
+    software: { category: "EducationalApplication", os: "Android" },
     tags: ["Flutter", "Afaan Oromoo", "Google Play"],
     client: { name: "Private client" },
     year: "2026",
@@ -579,6 +590,7 @@ export const workProjects: WorkProject[] = [
     caseTitle: "Ibsa Qur'aanaa — Oromo Quran app",
     caseSummary:
       "Afaan Oromoo Quran translation with offline reading and audio recitation. Published on Google Play and maintained through staged releases.",
+    software: { category: "ReferenceApplication", os: "Android" },
     tags: ["Offline audio", "Google Play", "Afaan Oromoo"],
     stats: [
       { value: "50K+", label: "Downloads" },

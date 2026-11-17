@@ -19,6 +19,8 @@ export type Platform = {
   /** Slugs from content/services.ts. */
   relatedServices: string[];
   faqs: Faq[];
+  /** ISO date this page was last reviewed; defaults to SITE_CONTENT_UPDATED. */
+  updated?: string;
 };
 
 export const platforms: Platform[] = [

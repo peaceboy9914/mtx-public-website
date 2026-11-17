@@ -1,3 +1,4 @@
+import { publishedPosts } from "@/content/insights";
 import { platforms } from "@/content/platforms";
 import { services } from "@/content/services";
 import { companyFacts, companyStats, formattedAddress, siteConfig } from "@/content/site";
@@ -28,6 +29,9 @@ export function GET() {
     "## Case studies",
     ...workProjects.map((project) => `- [${project.name}](${url}/work/${project.slug}): ${project.cardSummary}`),
     "",
+    ...(publishedPosts.length
+      ? ["## Insights", ...publishedPosts.map((post) => `- [${post.title}](${url}/insights/${post.slug}): ${post.description}`), ""]
+      : []),
     "## Company",
     `- [About](${url}/about)`,
     `- [Contact](${url}/contact)`,

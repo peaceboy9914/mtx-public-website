@@ -1,3 +1,4 @@
+import { SITE_CONTENT_UPDATED } from "@/lib/dates";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CardGrid, ServiceCard, SystemCard, SystemVisual } from "@/components/catalog/catalog";
@@ -51,7 +52,13 @@ export default async function PlatformPage({ params }: PageProps<"/platforms/[sl
         ]}
       />
 
-      <PageHero breadcrumbs={breadcrumbs.slice(1)} eyebrow={platform.sector} title={platform.seoTitle} description={platform.summary}>
+      <PageHero
+        breadcrumbs={breadcrumbs.slice(1)}
+        eyebrow={platform.sector}
+        title={platform.seoTitle}
+        description={platform.summary}
+        updated={platform.updated ?? SITE_CONTENT_UPDATED}
+      >
         <div className="flex flex-wrap gap-3">
           <ButtonLink href="/contact">Request a demo</ButtonLink>
           <ButtonLink href="#modules" variant="outline" arrow={false}>

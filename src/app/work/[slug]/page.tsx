@@ -9,10 +9,12 @@ import { IconArrowRight, IconArrowUpRight } from "@/components/ui/icons";
 import { JsonLd } from "@/components/ui/json-ld";
 import { Eyebrow } from "@/components/ui/section";
 import { Tag } from "@/components/ui/tag";
+import { siteConfig } from "@/content/site";
 import { getWorkProject, workProjects } from "@/content/work";
 import { hasImage } from "@/lib/images";
 import { riseDelay } from "@/lib/motion";
-import { breadcrumbJsonLd, creativeWorkJsonLd, pageMetadata } from "@/lib/seo";
+import { formatDate, SITE_CONTENT_UPDATED } from "@/lib/dates";
+import { breadcrumbJsonLd, caseStudyJsonLd, pageMetadata, softwareApplicationJsonLd } from "@/lib/seo";
 
 export function generateStaticParams() {
   return workProjects.map((project) => ({ slug: project.slug }));
@@ -28,6 +30,9 @@ export async function generateMetadata({ params }: PageProps<"/work/[slug]">): P
     description: project.caseSummary,
     path: `/work/${project.slug}`,
     image: hasImage(project.image.src) ? project.image.src : undefined,
+    type: "article",
+    publishedTime: project.updated ?? SITE_CONTENT_UPDATED,
+    modifiedTime: project.updated ?? SITE_CONTENT_UPDATED,
   });
 }
 
@@ -39,6 +44,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
   const index = workProjects.indexOf(project);
   const next = workProjects[(index + 1) % workProjects.length];
   const path = `/work/${project.slug}`;
+  const updated = project.updated ?? SITE_CONTENT_UPDATED;
 
   return (
     <>
@@ -49,16 +55,31 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
             { name: "Work", path: "/work" },
             { name: project.name, path },
           ]),
-          creativeWorkJsonLd({
-            name: project.name,
+          caseStudyJsonLd({
+            headline: project.caseTitle,
             description: project.caseSummary,
             path,
             image: project.image.src,
             sector: project.sector,
             keywords: project.stack ?? project.tags,
-            dateCreated: project.year?.match(/\d{4}/)?.[0],
-            dateModified: project.updated,
+            datePublished: updated,
+            dateModified: updated,
+            clientName: project.client?.name && project.client.name !== "MTX product" && project.client.name !== "Private client" ? project.client.name : undefined,
+            softwareId: project.software ? `${siteConfig.url}${path}#software` : undefined,
           }),
+          ...(project.software
+            ? [
+                softwareApplicationJsonLd({
+                  path,
+                  name: project.name,
+                  description: project.cardSummary,
+                  category: project.software.category,
+                  os: project.software.os,
+                  image: project.image.src,
+                  url: project.link?.href ?? (project.domain ? `https://${project.domain}` : undefined),
+                }),
+              ]
+            : []),
         ]}
       />
 
@@ -137,6 +158,9 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
                   <Tag key={tag}>{tag}</Tag>
                 ))}
               </div>
+              <p className="label mt-4 text-ink/45">
+                Last updated <time dateTime={updated}>{formatDate(updated)}</time>
+              </p>
             </div>
           </div>
         </div>

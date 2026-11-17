@@ -7,8 +7,9 @@ import { ProjectCard } from "@/components/work/project-card";
 import { platforms } from "@/content/platforms";
 import { workProjects } from "@/content/work";
 
-const liveCount = workProjects.filter((project) => project.status !== "In development").length;
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
+
+const liveCount = workProjects.filter((project) => project.status !== "In development").length;
 
 const title = "Software Projects & Case Studies in Ethiopia";
 const description =

@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { riseDelay } from "@/lib/motion";
 import { Breadcrumbs } from "./breadcrumbs";
+import { formatDate } from "@/lib/dates";
 import { Eyebrow } from "./section";
 
 /** Top-of-page header shared by every inner page. */
@@ -9,8 +10,11 @@ export function PageHero({
   title,
   description,
   breadcrumbs,
+  updated,
   children,
 }: {
+  /** ISO date; shown as a "Last updated" line under the description. */
+  updated?: string;
   eyebrow: string;
   breadcrumbs?: { name: string; path: string }[];
   title: ReactNode;
@@ -40,6 +44,11 @@ export function PageHero({
             style={riseDelay(160)}
           >
             {description}
+          </p>
+        ) : null}
+        {updated ? (
+          <p className="rise label mt-6 text-ink/45" style={riseDelay(200)}>
+            Last updated <time dateTime={updated}>{formatDate(updated)}</time>
           </p>
         ) : null}
         {children ? (

@@ -1,4 +1,5 @@
 import { sectors } from "./company";
+import { publishedPosts } from "./insights";
 
 export const siteConfig = {
   name: "MTX Digital Technologies",
@@ -62,6 +63,7 @@ export const navLinks: NavLink[] = [
   { label: "Services", href: "/services" },
   { label: "Systems", href: "/platforms" },
   { label: "Work", href: "/work" },
+  ...(publishedPosts.length ? [{ label: "Insights", href: "/insights" }] : []),
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];

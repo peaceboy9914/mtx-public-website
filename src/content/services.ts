@@ -19,6 +19,8 @@ export type Service = {
   /** Slugs from content/work.ts. */
   relatedWork: string[];
   faqs: Faq[];
+  /** ISO date this page was last reviewed; defaults to SITE_CONTENT_UPDATED. */
+  updated?: string;
 };
 
 export const services: Service[] = [
