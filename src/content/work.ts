@@ -648,18 +648,44 @@ export const workProjects: WorkProject[] = [
   {
     slug: "mrpo",
     name: "MRPO",
-    domain: "mrightpo.com",
+    domain: "www.ymtd.org",
     sector: "Civil society",
     platform: "web",
     image: {
-      src: "/images/work/migrant-right.png",
-      alt: "MRPO — Migrant Rights Protection Organization homepage",
+      src: "/images/work/mrpo-home.webp",
+      alt: "MRPO website home page: Every journey. Every person. Every right.",
     },
-    cardSummary: "A registered civil-society site with case registration, advocacy and partner/donor pages.",
-    caseTitle: "MRPO — Migrant Rights Protection Organization",
+    cardSummary: "Website and migrant registration system for a registered civil-society organization, in English, Amharic and Afaan Oromoo.",
+    caseTitle: "MRPO — Migrant Right Protection Organization",
     caseSummary:
-      "A public site for a registered Ethiopian civil-society organization protecting migrant rights through awareness, advocacy and community-based support, with a migrant registration flow, case handling behind the scenes, and dedicated partner and donor pages.",
-    tags: ["Case registration", "Civil society", "Bilingual"],
+      "The website and registration system of a registered Ethiopian civil-society organization that protects migrants' rights. Ethiopians abroad without valid documents can register for support, partners and donors can see the organization's programmes, progress and reports, and the staff publish stories and updates themselves, in three languages.",
+    tags: ["Migrant registration", "Three languages", "Content admin"],
+    client: {
+      name: "Migrant Right Protection Organization (MRPO)",
+      location: "Ethiopia",
+      about:
+        "An Ethiopian civil-society organization working for migrants' rights through awareness, advocacy and community-based support. Registered with the Authority for Civil Society Organizations (ACSO).",
+    },
+    year: "2026",
+    status: "Live",
+    services: ["Design", "Build", "Hosting set-up"],
+    challenge: [
+      "MRPO needed to reach two very different audiences: Ethiopian migrants abroad, often without documents, who need a safe way to ask for help, and partners and donors who need to see that the organization is registered, accountable and active.",
+    ],
+    approach: [
+      "Migrants can register without a passport, visa or employment contract. The form explains up front what it asks and why, and submissions go to a separate API and database rather than an inbox.",
+      "Everything else is built for trust: the organization's legal registration on the page, leadership biographies, programmes, progress, reports and stories that MRPO's own staff can update from an admin area, in English, Amharic and Afaan Oromoo.",
+    ],
+    features: [
+      { title: "Migrant support registration", body: "A guided form for Ethiopians abroad without complete documents, stored in its own database behind an API." },
+      { title: "Three languages", body: "Every page in English, Amharic and Afaan Oromoo, switchable from any page." },
+      { title: "Partnerships and donors", body: "Partnership requests, programme pages, progress and downloadable reports." },
+      { title: "Stories and updates", body: "News and stories published by MRPO's staff from the content admin." },
+      { title: "Accountability", body: "Legal registration details, leadership and the organization's framework set out on the site." },
+    ],
+    stack: ["Next.js", "React", "TypeScript", "NestJS", "Prisma", "PostgreSQL", "GSAP"],
+    gallery: [{ src: "/images/work/mrpo-am.webp", alt: "MRPO website in Amharic" }],
+    updated: "2026-11-17",
   },
 ];
 
