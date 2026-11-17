@@ -235,6 +235,21 @@ export function softwareApplicationJsonLd(input: {
   };
 }
 
+/** The company facts page: an AboutPage whose subject is the organization node. */
+export function factsPageJsonLd(input: { name: string; description: string; path: string; dateModified: string }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    name: input.name,
+    description: input.description,
+    url: abs(input.path),
+    about: { "@id": ORG_ID },
+    mainEntity: { "@id": ORG_ID },
+    dateModified: input.dateModified,
+    inLanguage: "en",
+  };
+}
+
 /** A blog post with a named author. */
 export function blogPostingJsonLd(input: {
   headline: string;

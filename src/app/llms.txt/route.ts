@@ -35,6 +35,7 @@ export function GET() {
       ? ["## Insights", ...publishedPosts.map((post) => `- [${post.title}](${url}/insights/${post.slug}): ${post.description}`), ""]
       : []),
     "## Company",
+    `- [Company facts](${url}/facts): verified facts about the company, kept in sync with the site`,
     `- [About](${url}/about)`,
     `- [Contact](${url}/contact)`,
     "",
