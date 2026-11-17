@@ -52,6 +52,9 @@ export function SiteFooter() {
                   {link.label}
                 </Link>
               ))}
+            <Link href="/facts" className="hover:text-paper">
+              Company facts
+            </Link>
           </FooterColumn>
 
           <FooterColumn title="Visit" className="lg:col-span-2">

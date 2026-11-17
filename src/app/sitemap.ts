@@ -47,6 +47,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         ]
       : []),
     entry("/about", 0.6),
+    entry("/facts", 0.6),
     entry("/contact", 0.7),
     entry("/privacy", 0.2),
     entry("/terms", 0.2),
