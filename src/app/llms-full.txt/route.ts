@@ -1,3 +1,4 @@
+import { clients } from "@/content/clients";
 import { trackRecord } from "@/content/company";
 import { platforms } from "@/content/platforms";
 import { services } from "@/content/services";
@@ -23,6 +24,9 @@ export function GET() {
     `- Founder: ${founder.name} (${founder.linkedin})`,
     "",
     founder.bio.join(" "),
+    "",
+    "## Clients",
+    ...clients.map((client) => `- ${client.name}` + (client.slug ? ` (${url}/work/${client.slug})` : "")),
     "",
     "## Track record by sector",
     ...trackRecord.map(

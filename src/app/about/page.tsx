@@ -3,6 +3,7 @@ import Link from "next/link";
 import { CtaBand } from "@/components/ui/cta-band";
 import { IconArrowUpRight } from "@/components/ui/icons";
 import { StatGrid } from "@/components/ui/stat-grid";
+import { ClientLogos } from "@/components/work/client-logos";
 import { IconLinkedIn } from "@/components/ui/icons";
 import { JsonLd } from "@/components/ui/json-ld";
 import { PageHero } from "@/components/ui/page-hero";
@@ -126,8 +127,13 @@ export default function AboutPage() {
         </ul>
       </Section>
 
+      <Section tone="white" className="border-y border-ink/10">
+        <SectionHeader index="04" eyebrow="Clients" title="Organisations we build for" />
+        <ClientLogos />
+      </Section>
+
       <Section>
-        <SectionHeader index="04" eyebrow="Leadership" title="Founder" />
+        <SectionHeader index="05" eyebrow="Leadership" title="Founder" />
         <div className="reveal grid gap-8 rounded-2xl border border-ink/12 bg-white p-6 sm:p-8 md:grid-cols-12 md:gap-10">
           <div className="md:col-span-4">
             <Image

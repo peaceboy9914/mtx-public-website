@@ -12,6 +12,9 @@ import { services } from "@/content/services";
 import { companyStats, siteConfig } from "@/content/site";
 import { StatGrid } from "@/components/ui/stat-grid";
 import { requireWorkProject, workProjects } from "@/content/work";
+import { ClientLogos } from "@/components/work/client-logos";
+import { ClientQuotes } from "@/components/work/client-quotes";
+import { clients } from "@/content/clients";
 import { riseDelay } from "@/lib/motion";
 import { pageMetadata } from "@/lib/seo";
 
@@ -98,6 +101,23 @@ export default function HomePage() {
           </ul>
         </div>
       </section>
+
+      {/* Clients */}
+      <Section tone="white" className="border-b border-ink/10">
+        <SectionHeader
+          eyebrow="Clients"
+          title={
+            <>
+              Trusted by <span className="accent">{clients.length} organisations</span> across Ethiopia.
+            </>
+          }
+          description="Hospitals, schools, transport and construction companies, restaurants, retailers and non-profits. Logos link to the work we did for them."
+        />
+        <ClientLogos />
+        <div className="mt-12">
+          <ClientQuotes />
+        </div>
+      </Section>
 
       {/* Services */}
       <Section>

@@ -102,17 +102,17 @@ export const workProjects: WorkProject[] = [
       src: "/images/work/mtx-care-reports.webp",
       alt: "MTX-Care revenue report in ETB by payment method, cashier and service type for an Ethiopian-calendar month (demo data)",
     },
-    cardSummary: "Hospital ERP: registration, a cashier billing gate, lab, pharmacy and inpatient care, in Amharic, Afaan Oromoo and English.",
+    cardSummary: "Hospital ERP in use at Grand Valley Primary Hospital: registration, a cashier billing gate, lab, pharmacy and inpatient care.",
     caseTitle: "MTX-Care — hospital ERP for Ethiopian hospitals",
     caseSummary:
-      "MTX's own hospital ERP for public and private hospitals: patient registration, outpatient, emergency and inpatient care, a cashier that gates lab and pharmacy work until the bill is paid, pharmacy stock, and HMIS reports on the Ethiopian calendar. Screens shown here use demo data.",
+      "MTX's own hospital ERP, in use at Grand Valley Primary Hospital: patient registration, outpatient, emergency and inpatient care, a cashier that gates lab and pharmacy work until the bill is paid, pharmacy stock, and HMIS reports on the Ethiopian calendar. Screens shown here use demo data.",
     tags: ["Billing gate", "Ethiopian calendar", "Amharic / Afaan Oromoo"],
     client: {
       name: "MTX product",
       about:
-        "MTX-Care is a product MTX builds and owns, designed for Ethiopian public and private hospitals and packaged to install at a pilot hospital on a local server or in the cloud.",
+        "MTX-Care is a product MTX builds and owns for Ethiopian public and private hospitals. Grand Valley Primary Hospital runs on it; it installs on a hospital's own server or in the cloud.",
     },
-    status: "In development",
+    status: "Live",
     services: ["Product design", "Build", "Deployment tooling"],
     challenge: [
       "Ethiopian hospitals work with payers, payment methods, calendars and reports that imported systems don't cover: CBHI and SHI members, Telebirr and CBE Birr at the cashier, HMIS reports by Ethiopian-calendar period, and staff who work in Amharic and Afaan Oromo.",
@@ -215,14 +215,14 @@ export const workProjects: WorkProject[] = [
     cardSummary: "Restaurant management for a premium restaurant and coffee house: POS, station screens, inventory, attendance and payroll.",
     caseTitle: "Nur Palace — restaurant management system",
     caseSummary:
-      "A custom system for Nur Palace Restaurant: point of sale, waiter app, QR table ordering, kitchen, coffee and juice screens, a queue TV, inventory with recipes, and staff attendance, deductions and payroll, with a fingerprint device MTX built in-house. Four languages, and it keeps running when the internet doesn't.",
+      "A custom system Nur Palace Restaurant runs on: point of sale, waiter app, QR table ordering, kitchen, coffee and juice screens, a queue TV, inventory with recipes, and staff attendance, deductions and payroll, with a fingerprint device MTX built in-house. Four languages, and it keeps running when the internet doesn't.",
     tags: ["Offline-first", "Fingerprint attendance", "Four languages"],
     client: {
       name: "Nur Palace Restaurant",
       about: "A premium restaurant and coffee house, opening with one branch and planning more.",
     },
     year: "2026",
-    status: "In development",
+    status: "Live",
     services: ["Scoping", "Design & build", "Fingerprint hardware"],
     challenge: [
       "Nur Palace wanted one system for the whole operation: orders at the counter, at tables and by QR code, each item sent to the right preparation station, a till that balances, and staff attendance and pay.",
@@ -394,16 +394,17 @@ export const workProjects: WorkProject[] = [
     cardSummary: "A legal marketplace: describe a problem in plain language and get proposals from verified advocates, in English and Amharic.",
     caseTitle: "Tebekaye — legal services marketplace",
     caseSummary:
-      "A web platform where people in Ethiopia describe a legal problem in plain language, receive proposals from advocates whose licences have been checked, choose one, and work with them securely, in English and Amharic. In development, with a pilot planned in Addis Ababa.",
+      "A web platform where people in Ethiopia describe a legal problem in plain language, receive proposals from advocates whose licences have been checked, choose one, and work with them securely, in English and Amharic. Built and run by MTX.",
     tags: ["Marketplace", "Amharic / English", "Privacy by design"],
-    status: "In development",
+    client: { name: "MTX product" },
+    status: "Live",
     services: ["Requirements", "Design", "Build"],
     challenge: [
       "The goal is to let someone describe a legal problem once, in everyday language, and compare offers from verified advocates without needing to know the legal specialty first.",
       "Trust and privacy shape every screen: clients stay pseudonymous until they choose an advocate, and the platform never names a \"best lawyer\" or predicts outcomes.",
     ],
     approach: [
-      "Requirements live in one specification, with every role, action and case state covered by an authorisation matrix and a test. Legal questions run as a separate workstream with counsel, and no real user data is used until that legal gate passes.",
+      "Requirements live in one specification, with every role, action and case state covered by an authorisation matrix and a test. Legal questions run as a separate workstream with counsel.",
       "Personal data stays in Ethiopia: the platform is designed for in-country hosting, uploads are virus-scanned, and payments go through Chapa.",
     ],
     features: [
@@ -433,12 +434,6 @@ export const workProjects: WorkProject[] = [
       },
     ],
     stack: ["Next.js", "NestJS", "PostgreSQL", "Drizzle ORM", "Redis", "BullMQ", "Socket.IO", "S3-compatible storage", "ClamAV", "Chapa"],
-    timeline: [
-      { period: "10 Nov 2026", title: "Build starts", body: "Architecture signed off." },
-      { period: "Mar 2027 · planned", title: "Feature-complete website in staging" },
-      { period: "Apr 2027 · planned", title: "Pilot launch in Addis Ababa" },
-      { period: "Aug 2027 · planned", title: "Android app on the same API" },
-    ],
     gallery: [
       { src: "/images/work/tebekaye-am.webp", alt: "Tebekaye home page in Amharic" },
       { src: "/images/work/tebekaye-how.webp", alt: "Tebekaye how-it-works page" },

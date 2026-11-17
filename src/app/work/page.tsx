@@ -33,7 +33,7 @@ export default function WorkPage() {
             Work we&apos;ve <span className="accent text-brand">shipped and are shipping.</span>
           </>
         }
-        description="Websites, mobile apps and enterprise platforms for hospitals, restaurants, transport operators, schools, NGOs and retailers. Projects still in development are marked; their screens use demo data."
+        description="Websites, mobile apps and enterprise platforms for hospitals, restaurants, transport operators, schools, NGOs and retailers. Screens of internal systems use demo data, as noted on each project."
       />
 
       <Section tone="white">
