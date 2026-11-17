@@ -130,7 +130,7 @@ function ModuleManifest({ platform }: { platform: Platform }) {
       <div className="label flex justify-between gap-4 text-paper/50">
         <span className="truncate">mtx / {platform.slug}</span>
         <span className="flex flex-none items-center gap-2">
-          <span className="size-1.5 rounded-full bg-emerald-400" /> In production
+          <span className="size-1.5 rounded-full bg-emerald-400" /> Internal system
         </span>
       </div>
       <ul className="mt-10 font-mono text-[14px]">
@@ -142,7 +142,7 @@ function ModuleManifest({ platform }: { platform: Platform }) {
         ))}
       </ul>
       <p className="mt-8 text-[14px] leading-relaxed text-paper/55">
-        Runs as an internal system for clients — screens are available to walk through on a call.
+        Runs behind a login, so there are no public screens. We walk through the modules on a call.
       </p>
     </div>
   );

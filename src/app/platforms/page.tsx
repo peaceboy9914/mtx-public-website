@@ -27,13 +27,13 @@ export default function PlatformsPage() {
       />
 
       <PageHero
-        eyebrow={`Systems · ${platforms.length} platforms in production`}
+        eyebrow={`Systems · ${platforms.length} platforms`}
         title={
           <>
             The systems running behind our clients&apos; <span className="accent text-brand">front doors.</span>
           </>
         }
-        description="Proven platforms for finance, healthcare, education, manufacturing, retail, logistics and civil society — adapted to each client and built on one shared engineering foundation."
+        description="Platforms for finance, healthcare, education, manufacturing, retail, logistics and civil society — adapted to each client and built on one shared engineering foundation."
       />
 
       <Section>

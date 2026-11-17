@@ -10,7 +10,11 @@ import { CardGrid, SystemCard } from "@/components/catalog/catalog";
 import { platforms, requirePlatform } from "@/content/platforms";
 import { services } from "@/content/services";
 import { companyStats, siteConfig } from "@/content/site";
+import { StatGrid } from "@/components/ui/stat-grid";
 import { requireWorkProject, workProjects } from "@/content/work";
+import { ClientLogos } from "@/components/work/client-logos";
+import { ClientQuotes } from "@/components/work/client-quotes";
+import { clients } from "@/content/clients";
 import { riseDelay } from "@/lib/motion";
 import { pageMetadata } from "@/lib/seo";
 
@@ -55,8 +59,8 @@ export default function HomePage() {
           <div className="mt-12 grid gap-12 lg:mt-16 lg:grid-cols-12">
             <div className="rise lg:col-span-4" style={riseDelay(160)}>
               <p className="text-[18px] leading-relaxed text-ink/70">
-                Financial systems, school and manufacturing ERP, hospital platforms, shareholder registries,
-                marketplaces and mobile apps — designed, built and maintained by one senior team.
+                Hospital and school systems, booking and share-sale platforms, marketplaces and mobile apps —
+                designed, built and maintained by one team in Addis Ababa.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <ButtonLink href="/contact">Start a project</ButtonLink>
@@ -65,14 +69,7 @@ export default function HomePage() {
                 </ButtonLink>
               </div>
 
-              <dl className="mt-12 grid grid-cols-3 border-t border-ink/15">
-                {companyStats.map((stat) => (
-                  <div key={stat.label} className="flex flex-col border-r border-ink/15 pt-5 pr-4 last:border-r-0 [&:not(:first-child)]:pl-4">
-                    <dt className="label order-2 mt-1 text-ink/55">{stat.label}</dt>
-                    <dd className="text-[32px] font-semibold tracking-[-0.04em]">{stat.value}</dd>
-                  </div>
-                ))}
-              </dl>
+              <StatGrid stats={companyStats} className="mt-12" />
             </div>
 
             <div className="rise relative lg:col-span-8" style={riseDelay(240)}>
@@ -104,6 +101,23 @@ export default function HomePage() {
           </ul>
         </div>
       </section>
+
+      {/* Clients */}
+      <Section tone="white" className="border-b border-ink/10">
+        <SectionHeader
+          eyebrow="Clients"
+          title={
+            <>
+              Trusted by <span className="accent">{clients.length} organisations</span> across Ethiopia.
+            </>
+          }
+          description="Hospitals, schools, transport and construction companies, restaurants, retailers and non-profits. Logos link to the work we did for them."
+        />
+        <ClientLogos />
+        <div className="mt-12">
+          <ClientQuotes />
+        </div>
+      </Section>
 
       {/* Services */}
       <Section>
@@ -153,7 +167,7 @@ export default function HomePage() {
               {platforms.length} proven platforms, <span className="accent">ready to adapt.</span>
             </>
           }
-          description="Hospital, school, finance, payroll, lending, retail, logistics and workflow systems — each running in production and configurable to how your organisation works."
+          description="Hospital, school, finance, payroll, lending, retail, logistics and workflow systems — each configurable to how your organisation works."
           action={
             <ButtonLink href="/platforms" variant="outline">
               All {platforms.length} systems

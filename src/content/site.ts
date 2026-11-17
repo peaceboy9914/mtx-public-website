@@ -1,3 +1,6 @@
+import { sectors } from "./company";
+import { publishedPosts } from "./insights";
+
 export const siteConfig = {
   name: "MTX Digital Technologies",
   legalName: "MTX Digital Technologies PLC",
@@ -23,23 +26,62 @@ export const address = {
 
 export const formattedAddress = `${address.streetAddress}, ${address.addressLocality} ${address.postalCode}, ${address.countryName}`;
 
+/** Confirmed by the founder, November 2026. */
+export const companyFacts = {
+  yearsInBusiness: 4,
+  teamSize: 15,
+  systemsDelivered: "15+",
+};
+
 export const founder = {
   name: "Mahdi Nurazaman",
   role: "Founder",
   linkedin: "https://www.linkedin.com/in/mahdi-nurazaman/",
+  /** Personal profile, used as MTX's Facebook presence until an official company page exists. */
+  facebook: "https://www.facebook.com/mahdi.nurazaman.jibril/",
+  photo: { src: "/images/team/mahdi-nurazaman.webp", alt: "Portrait of Mahdi Nurazaman, founder of MTX Digital Technologies" },
+  /** Drafted from facts on this site; awaiting the founder's review. */
+  bio: [
+    `Mahdi Nurazaman founded MTX Digital Technologies PLC and has led it for ${companyFacts.yearsInBusiness} years, growing it into a ${companyFacts.teamSize}-person software team in Addis Ababa.`,
+    `Under his leadership MTX has delivered ${companyFacts.systemsDelivered} systems for Ethiopian organisations: a hospital ERP, a finance system for a group of sister companies, hospital and school platforms, a bus booking platform with its shareholder registry, a restaurant management system with its own fingerprint attendance device, a multi-vendor marketplace app, a campus food delivery platform running inside Telegram, a courier management system, a legal services marketplace, an Afaan Oromoo Quran app with more than 50,000 downloads, an Afaan Oromoo learning app, and websites for NGOs, contractors and authors.`,
+  ],
 };
 
 export const socialLinks = {
   linkedin: "https://www.linkedin.com/company/mtx-digital-technologies",
+  /** Set when the official company Facebook page exists; it then replaces the founder's profile in the footer. */
+  facebook: undefined as string | undefined,
 };
 
-/** Google Maps Platform "Locator Plus" embed — hosted by Google, wired in verbatim. */
-export const mapEmbedSrc = "https://storage.googleapis.com/maps-solutions-xp7mz3vu5w/locator-plus/xvi4/locator-plus.html";
+/** The verified Google Business Profile. The place ID is the stable key every Maps link below is built from. */
+export const googleBusiness = {
+  placeId: "ChIJEZMdD2OFSxYRfT7oUNA9Dyc",
+  coords: { lat: 8.993874, lng: 38.7662892 },
+  profileUrl: "https://www.google.com/maps/search/?api=1&query=MTX+Digital+Technologies+PLC&query_place_id=ChIJEZMdD2OFSxYRfT7oUNA9Dyc",
+  reviewUrl: "https://g.page/r/CX0-6FDQPQ8nEAE/review",
+  /** Copied from the profile on the date below; update both when the profile changes. */
+  rating: { value: "5.0", count: 18, asOf: "2026-11-17" },
+};
 
-/** "Get directions" links resolve to the registered address via a Google Maps search. */
-export const directionsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+/** Opening hours, exactly as on the Business Profile. Times are Addis Ababa local time. */
+export const openingHours = [
+  { days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], opens: "08:30", closes: "19:00" },
+  { days: ["Sunday"], opens: "08:30", closes: "14:00" },
+];
+export const openingHoursLabel = [
+  { label: "Monday – Saturday", hours: "08:30 – 19:00" },
+  { label: "Sunday", hours: "08:30 – 14:00" },
+];
+
+/** Map of the business listing itself (no API key needed). */
+export const mapEmbedSrc = `https://maps.google.com/maps?q=${encodeURIComponent(
   `${siteConfig.legalName}, ${formattedAddress}`
-)}`;
+)}&ll=${googleBusiness.coords.lat},${googleBusiness.coords.lng}&z=17&output=embed`;
+
+/** "Get directions" opens Google Maps routing straight to the verified listing. */
+export const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+  siteConfig.legalName
+)}&destination_place_id=${googleBusiness.placeId}`;
 
 export type NavLink = { label: string; href: string };
 
@@ -47,12 +89,14 @@ export const navLinks: NavLink[] = [
   { label: "Services", href: "/services" },
   { label: "Systems", href: "/platforms" },
   { label: "Work", href: "/work" },
+  ...(publishedPosts.length ? [{ label: "Insights", href: "/insights" }] : []),
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
 
 export const companyStats = [
-  { value: "40+", label: "Systems delivered" },
+  { value: companyFacts.systemsDelivered, label: "Systems delivered" },
+  { value: String(companyFacts.yearsInBusiness), label: "Years in business" },
+  { value: String(sectors.length), label: "Industries served" },
   { value: "50K+", label: "App downloads" },
-  { value: "7", label: "Industries served" },
 ];

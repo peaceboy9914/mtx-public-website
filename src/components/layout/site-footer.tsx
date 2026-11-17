@@ -1,9 +1,9 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { IconArrowUpRight, IconLinkedIn } from "@/components/ui/icons";
+import { IconArrowUpRight, IconFacebook, IconLinkedIn } from "@/components/ui/icons";
 import { platforms } from "@/content/platforms";
 import { services } from "@/content/services";
-import { directionsUrl, formattedAddress, navLinks, siteConfig, socialLinks } from "@/content/site";
+import { directionsUrl, formattedAddress, founder, navLinks, siteConfig, socialLinks } from "@/content/site";
 import { Logo } from "./logo";
 
 export function SiteFooter() {
@@ -69,6 +69,14 @@ export function SiteFooter() {
             >
               <IconLinkedIn className="size-4" /> LinkedIn
             </a>
+            <a
+              href={socialLinks.facebook ?? founder.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 hover:text-paper"
+            >
+              <IconFacebook className="size-4" /> {socialLinks.facebook ? "Facebook" : `Facebook (${founder.name})`}
+            </a>
           </FooterColumn>
         </div>
 
@@ -76,7 +84,15 @@ export function SiteFooter() {
           <span>
             © {new Date().getFullYear()} {siteConfig.legalName}
           </span>
-          <span>{siteConfig.location}</span>
+          <span className="flex gap-5">
+            <Link href="/privacy" className="hover:text-paper">
+              Privacy
+            </Link>
+            <Link href="/terms" className="hover:text-paper">
+              Terms
+            </Link>
+            <span>{siteConfig.location}</span>
+          </span>
         </div>
       </div>
     </footer>

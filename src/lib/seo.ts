@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { platforms } from "@/content/platforms";
 import { services, type Faq } from "@/content/services";
-import { address, founder, siteConfig, socialLinks } from "@/content/site";
+import { address, companyFacts, founder, googleBusiness, openingHours, siteConfig, socialLinks } from "@/content/site";
 
 /** Stable node ids so every page's JSON-LD points at the same organization entity. */
 const ORG_ID = `${siteConfig.url}/#organization`;
 const SITE_ID = `${siteConfig.url}/#website`;
+const PERSON_ID = `${siteConfig.url}/about#founder`;
 
 type PageSeoInput = {
   title: string;
@@ -17,9 +18,22 @@ type PageSeoInput = {
    */
   image?: string;
   type?: "website" | "article";
+  /** For type "article": ISO dates for open graph `article:published_time` / `article:modified_time`. */
+  publishedTime?: string;
+  modifiedTime?: string;
+  authors?: string[];
 };
 
-export function pageMetadata({ title, description, path, image, type = "website" }: PageSeoInput): Metadata {
+export function pageMetadata({
+  title,
+  description,
+  path,
+  image,
+  type = "website",
+  publishedTime,
+  modifiedTime,
+  authors,
+}: PageSeoInput): Metadata {
   const url = `${siteConfig.url}${path}`;
   const fullTitle = path === "/" ? title : `${title} | ${siteConfig.shortName}`;
   const ogImage = image ?? "/opengraph-image";
@@ -37,7 +51,7 @@ export function pageMetadata({ title, description, path, image, type = "website"
       url,
       siteName: siteConfig.name,
       locale: "en_US",
-      type,
+      ...(type === "article" ? { type, publishedTime, modifiedTime, authors } : { type }),
       images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
     },
     twitter: {
@@ -93,12 +107,17 @@ export function organizationJsonLd() {
         itemOffered: { "@type": "Service", name: service.name, url: `${siteConfig.url}/services/${service.slug}` },
       })),
     },
-    founder: {
-      "@type": "Person",
-      name: founder.name,
-      url: founder.linkedin,
-    },
-    sameAs: [socialLinks.linkedin],
+    founder: { "@type": "Person", "@id": PERSON_ID, name: founder.name, url: founder.linkedin },
+    numberOfEmployees: { "@type": "QuantitativeValue", value: companyFacts.teamSize },
+    sameAs: [socialLinks.linkedin, googleBusiness.profileUrl, ...(socialLinks.facebook ? [socialLinks.facebook] : [])],
+    hasMap: googleBusiness.profileUrl,
+    geo: { "@type": "GeoCoordinates", latitude: googleBusiness.coords.lat, longitude: googleBusiness.coords.lng },
+    openingHoursSpecification: openingHours.map((slot) => ({
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: slot.days.map((day) => `https://schema.org/${day}`),
+      opens: slot.opens,
+      closes: slot.closes,
+    })),
     knowsAbout: [
       "Software development in Ethiopia",
       ...services.map((service) => service.name),
@@ -124,10 +143,13 @@ export function personJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "Person",
+    "@id": PERSON_ID,
     name: founder.name,
     jobTitle: founder.role,
+    description: founder.bio.join(" "),
+    image: `${siteConfig.url}${founder.photo.src}`,
     url: founder.linkedin,
-    sameAs: [founder.linkedin],
+    sameAs: [founder.linkedin, founder.facebook],
     worksFor: { "@id": ORG_ID },
   };
 }
@@ -145,22 +167,101 @@ export function breadcrumbJsonLd(items: { name: string; path: string }[]) {
   };
 }
 
-export function creativeWorkJsonLd(project: {
-  name: string;
+const abs = (path: string) => (path.startsWith("http") ? path : `${siteConfig.url}${path}`);
+
+/**
+ * A case study as an Article published by MTX. `about` points at the client organisation and, for
+ * products, at the SoftwareApplication node on the same page.
+ */
+export function caseStudyJsonLd(input: {
+  headline: string;
   description: string;
   path: string;
   image?: string;
   sector: string;
+  keywords?: string[];
+  datePublished: string;
+  dateModified?: string;
+  clientName?: string;
+  softwareId?: string;
+}) {
+  const url = abs(input.path);
+  const about: object[] = [];
+  if (input.clientName) about.push({ "@type": "Organization", name: input.clientName });
+  if (input.softwareId) about.push({ "@id": input.softwareId });
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "@id": `${url}#article`,
+    headline: input.headline,
+    description: input.description,
+    url,
+    mainEntityOfPage: url,
+    image: input.image ? abs(input.image) : undefined,
+    datePublished: input.datePublished,
+    dateModified: input.dateModified ?? input.datePublished,
+    author: { "@id": ORG_ID },
+    publisher: { "@id": ORG_ID },
+    articleSection: "Case studies",
+    keywords: input.keywords?.length ? input.keywords.join(", ") : undefined,
+    about: about.length ? about : input.sector,
+    inLanguage: "en",
+  };
+}
+
+/** A product or published app, credited to MTX. No ratings or prices: only facts the site can back up. */
+export function softwareApplicationJsonLd(input: {
+  path: string;
+  name: string;
+  description: string;
+  category: string;
+  os: string;
+  image?: string;
+  url?: string;
+  inLanguage?: string[];
 }) {
   return {
     "@context": "https://schema.org",
-    "@type": "CreativeWork",
-    name: project.name,
-    description: project.description,
-    url: `${siteConfig.url}${project.path}`,
-    image: project.image ? `${siteConfig.url}${project.image}` : undefined,
-    about: project.sector,
+    "@type": input.os.toLowerCase().includes("android") ? ["SoftwareApplication", "MobileApplication"] : "SoftwareApplication",
+    "@id": `${abs(input.path)}#software`,
+    name: input.name,
+    description: input.description,
+    applicationCategory: input.category,
+    operatingSystem: input.os,
+    image: input.image ? abs(input.image) : undefined,
+    url: input.url,
+    inLanguage: input.inLanguage,
     creator: { "@id": ORG_ID },
+  };
+}
+
+/** A blog post with a named author. */
+export function blogPostingJsonLd(input: {
+  headline: string;
+  description: string;
+  path: string;
+  datePublished: string;
+  dateModified?: string;
+  authorName: string;
+  authorIsFounder: boolean;
+  image?: string;
+  keywords?: string[];
+}) {
+  const url = abs(input.path);
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: input.headline,
+    description: input.description,
+    url,
+    mainEntityOfPage: url,
+    image: input.image ? abs(input.image) : undefined,
+    datePublished: input.datePublished,
+    dateModified: input.dateModified ?? input.datePublished,
+    author: input.authorIsFounder ? { "@id": PERSON_ID } : { "@type": "Organization", name: input.authorName, url: siteConfig.url },
+    publisher: { "@id": ORG_ID },
+    keywords: input.keywords?.length ? input.keywords.join(", ") : undefined,
+    inLanguage: "en",
   };
 }
 

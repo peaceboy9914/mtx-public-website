@@ -19,6 +19,8 @@ export type Service = {
   /** Slugs from content/work.ts. */
   relatedWork: string[];
   faqs: Faq[];
+  /** ISO date this page was last reviewed; defaults to SITE_CONTENT_UPDATED. */
+  updated?: string;
 };
 
 export const services: Service[] = [
@@ -117,7 +119,7 @@ export const services: Service[] = [
     ],
     technologies: ["React Native", "Expo", "TypeScript", "Android", "iOS", "Firebase"],
     relatedSystems: ["multi-vendor-marketplace", "booking-ticketing-system", "loan-management-system"],
-    relatedWork: ["grandbirr-market", "ibsa-quraanaa"],
+    relatedWork: ["grandbirr-market", "quickgebeta", "ibsa-quraanaa", "laziz"],
     faqs: [
       {
         q: "Do you build for both Android and iOS?",
@@ -187,7 +189,7 @@ export const services: Service[] = [
     ],
     technologies: ["PostgreSQL", "Node.js", "TypeScript", "Next.js", "Role-based access control", "Audit logging"],
     relatedSystems: ["financial-management-system", "hr-payroll-system", "inventory-pos-system", "manufacturing-erp", "school-management-system"],
-    relatedWork: ["school-erp"],
+    relatedWork: ["school-erp", "grand-valley-finance", "nur-palace", "mtx-care"],
     faqs: [
       {
         q: "Should we buy an off-the-shelf ERP or build a custom one?",
@@ -224,7 +226,7 @@ export const services: Service[] = [
     ],
     technologies: ["PostgreSQL", "Node.js", "TypeScript", "Encryption at rest", "Audit logging", "Payment APIs"],
     relatedSystems: ["loan-management-system", "shareholder-management-system", "financial-management-system"],
-    relatedWork: ["nur-bus"],
+    relatedWork: ["grand-valley-finance", "nur-bus-shareholders", "nur-bus"],
     faqs: [
       {
         q: "Do you build systems for microfinance institutions and SACCOs?",
@@ -290,7 +292,7 @@ export const services: Service[] = [
     ],
     technologies: ["Large language models", "Python", "OCR", "Vector search", "Forecasting models", "Human-in-the-loop review"],
     relatedSystems: ["document-workflow-system", "financial-management-system", "inventory-pos-system"],
-    relatedWork: [],
+    relatedWork: ["iqra-foundation"],
     faqs: [
       {
         q: "Can AI work with Amharic documents?",
@@ -385,7 +387,7 @@ export const services: Service[] = [
     ],
     technologies: ["Playwright", "Unit & integration tests", "Load testing", "CI pipelines"],
     relatedSystems: [],
-    relatedWork: [],
+    relatedWork: ["mtx-care", "school-erp"],
     faqs: [
       {
         q: "Can you test software built by another company?",

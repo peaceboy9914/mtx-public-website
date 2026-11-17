@@ -14,6 +14,7 @@ import { deliveryProcess } from "@/content/company";
 import { requirePlatform } from "@/content/platforms";
 import { getService, services } from "@/content/services";
 import { requireWorkProject } from "@/content/work";
+import { SITE_CONTENT_UPDATED } from "@/lib/dates";
 import { breadcrumbJsonLd, faqJsonLd, pageMetadata, serviceJsonLd } from "@/lib/seo";
 
 export function generateStaticParams() {
@@ -53,7 +54,13 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
         ]}
       />
 
-      <PageHero breadcrumbs={breadcrumbs.slice(1)} eyebrow={service.category} title={service.seoTitle} description={service.summary}>
+      <PageHero
+        breadcrumbs={breadcrumbs.slice(1)}
+        eyebrow={service.category}
+        title={service.seoTitle}
+        description={service.summary}
+        updated={service.updated ?? SITE_CONTENT_UPDATED}
+      >
         <div className="flex flex-wrap gap-3">
           <ButtonLink href="/contact">Discuss your project</ButtonLink>
           <ButtonLink href="#deliverables" variant="outline" arrow={false}>
@@ -134,7 +141,7 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
             eyebrow="Related work"
             title={
               <>
-                Delivered and <span className="accent">running in production.</span>
+                Where we&apos;ve <span className="accent">put it to work.</span>
               </>
             }
           />

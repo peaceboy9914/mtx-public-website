@@ -6,11 +6,14 @@ import { Section, SectionHeader } from "@/components/ui/section";
 import { ProjectCard } from "@/components/work/project-card";
 import { platforms } from "@/content/platforms";
 import { workProjects } from "@/content/work";
+
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
+
+const liveCount = workProjects.filter((project) => project.status !== "In development").length;
 
 const title = "Software Projects & Case Studies in Ethiopia";
 const description =
-  "Websites, mobile apps and enterprise platforms MTX has delivered for hospitals, transport operators, schools, manufacturers and retailers across Ethiopia.";
+  "Websites, mobile apps and enterprise platforms MTX has built for hospitals, restaurants, transport operators, schools, NGOs, construction firms and retailers across Ethiopia.";
 
 export const metadata = pageMetadata({ title, description, path: "/work" });
 
@@ -25,13 +28,13 @@ export default function WorkPage() {
       />
 
       <PageHero
-        eyebrow={`Portfolio · ${workProjects.length} live builds`}
+        eyebrow={`Portfolio · ${workProjects.length} projects · ${liveCount} live`}
         title={
           <>
-            Work in <span className="accent text-brand">production.</span>
+            Work we&apos;ve <span className="accent text-brand">shipped and are shipping.</span>
           </>
         }
-        description="Websites, mobile apps and enterprise platforms delivered for hospitals, transport operators, schools, manufacturers and retailers. Screens below are from live builds."
+        description="Websites, mobile apps and enterprise platforms for hospitals, restaurants, transport operators, schools, NGOs and retailers. Screens of internal systems use demo data, as noted on each project."
       />
 
       <Section tone="white">
