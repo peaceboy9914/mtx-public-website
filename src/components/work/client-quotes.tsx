@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { clientQuotes } from "@/content/clients";
+import { publishedQuotes } from "@/content/clients";
 
 /** Approved client quotes. Renders nothing until at least one quote is approved. */
 export function ClientQuotes() {
-  const quotes = clientQuotes.filter((quote) => quote.approved);
+  const quotes = publishedQuotes;
   if (quotes.length === 0) return null;
 
   return (

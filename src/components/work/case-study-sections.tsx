@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Screenshot } from "@/components/media/screenshot";
 import { Eyebrow } from "@/components/ui/section";
 import { Tag } from "@/components/ui/tag";
+import { quoteForProject } from "@/content/clients";
 import { isPublishable, type WorkProject } from "@/content/work";
 import { hasImage } from "@/lib/images";
 
@@ -10,7 +11,12 @@ import { hasImage } from "@/lib/images";
  * basic fields still renders as a complete page and new detail appears as soon as it's added to work.ts.
  */
 export function CaseStudyDetail({ project }: { project: WorkProject }) {
-  const testimonial = isPublishable(project.testimonial) ? project.testimonial : undefined;
+  const clientQuote = quoteForProject(project.slug);
+  const testimonial = isPublishable(project.testimonial)
+    ? project.testimonial
+    : clientQuote
+      ? { ...clientQuote, approved: true }
+      : undefined;
 
   return (
     <>
