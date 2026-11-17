@@ -356,11 +356,13 @@ export const workProjects: WorkProject[] = [
       src: "/images/work/school-erp.png",
       alt: "SchoolERP sign-in screen for the school management system",
     },
-    cardSummary: "Enrolment, grade books, timetables, fee collection and parent portals with role-based access.",
+    cardSummary: "School management in use at Terbiya International School: enrolment, grade books, timetables, fees and parent portals.",
     caseTitle: "SchoolERP — school management system",
     caseSummary:
-      "A full academic and finance platform with separate super admin, academic admin, finance admin, teacher and parent roles. Enrolment, grade books, attendance, timetables, fee collection in ETB and analytics across departments, with dark mode and multi-language from day one.",
+      "A full academic and finance platform, in use at Terbiya International School, with separate super admin, academic admin, finance admin, teacher and parent roles. Enrolment, grade books, attendance, timetables, fee collection in ETB and analytics across departments, with dark mode and multi-language from day one.",
     tags: ["Role-based access", "Fee collection", "Parent portal"],
+    client: { name: "Terbiya International School" },
+    status: "Live",
     features: [
       {
         title: "Six roles, two layers of security",

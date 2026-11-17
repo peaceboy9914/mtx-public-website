@@ -74,6 +74,14 @@ Case study: https://mtxdigitaltechnologies.com/work/mrpo
 - Approved by (name, title): 
 - Date approved: 
 
+### Terbiya International School
+Case study: https://mtxdigitaltechnologies.com/work/school-erp
+
+> "Admissions, attendance, grades and fees are all in one system now. Teachers check in to each lesson at the classroom door, and parents follow their children's progress from their phones."
+
+- Approved by (name, title): 
+- Date approved: 
+
 ### Iqra Islamic Research Foundation
 Case study: https://mtxdigitaltechnologies.com/work/iqra-foundation
 
@@ -82,7 +90,6 @@ Case study: https://mtxdigitaltechnologies.com/work/iqra-foundation
 - Approved by (name, title): 
 - Date approved: 
 
-## Clients without a draft yet
+## Not included for now
 
-- **Terbiya International School** and **NISI**: tell me what we built for them and I will draft one.
-- **Laziz** (private client) and **Qarooma Baha Oromiyaa** (Jaalataa Abdullaahii Muhammad): say whether they want to be named.
+NISI, Laziz and Qarooma Baha Oromiyaa (decided 17 Nov 2026).

@@ -15,7 +15,7 @@ export const trackRecord: { sector: string; work: string; projects: { name: stri
     sector: "Education",
     work: "School management systems and learning apps",
     projects: [
-      { name: "SchoolERP", slug: "school-erp" },
+      { name: "SchoolERP at Terbiya International School", slug: "school-erp" },
       { name: "Laziz", slug: "laziz" },
     ],
   },

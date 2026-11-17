@@ -13,7 +13,7 @@ export const clients: Client[] = [
   { name: "Iqra Islamic Research Foundation", logo: "/images/clients/iqra.webp", slug: "iqra-foundation" },
   { name: "Migrant Rights Protection Organization", logo: "/images/clients/mrpo.webp", slug: "mrpo" },
   { name: "Grand Valley Medicine and Medical Devices Importer", logo: "/images/clients/grand-valley-importer.webp" },
-  { name: "Terbiya International School", logo: "/images/clients/terbiya.webp" },
+  { name: "Terbiya International School", logo: "/images/clients/terbiya.webp", slug: "school-erp" },
   { name: "NISI — Nexus Inter-Service Impact", logo: "/images/clients/nisi.webp" },
 ];
 
@@ -94,6 +94,15 @@ export const clientQuotes: ClientQuote[] = [
     slug: "mrpo",
     quote:
       "Migrants can now register and reach us online, and partners and donors can see what we do. MTX was patient with our needs and easy to work with.",
+    name: "",
+    role: "",
+    approved: false,
+  },
+  {
+    organization: "Terbiya International School",
+    slug: "school-erp",
+    quote:
+      "Admissions, attendance, grades and fees are all in one system now. Teachers check in to each lesson at the classroom door, and parents follow their children's progress from their phones.",
     name: "",
     role: "",
     approved: false,
