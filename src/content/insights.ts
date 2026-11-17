@@ -32,7 +32,7 @@ const posts: InsightPost[] = [
     author: "founder",
     tags: ["Offline-first", "Restaurants", "Architecture"],
     relatedWork: ["nur-palace"],
-    draft: true,
+    draft: false,
     sections: [
       {
         paragraphs: [
@@ -82,7 +82,7 @@ const posts: InsightPost[] = [
     author: "founder",
     tags: ["Payments", "Telebirr", "CBE Birr"],
     relatedWork: ["mtx-care", "quickgebeta", "nur-palace"],
-    draft: true,
+    draft: false,
     sections: [
       {
         paragraphs: [
@@ -143,7 +143,7 @@ const posts: InsightPost[] = [
     author: "founder",
     tags: ["Education", "School ERP", "Buying guide"],
     relatedWork: ["school-erp"],
-    draft: true,
+    draft: false,
     sections: [
       {
         paragraphs: [
@@ -207,7 +207,7 @@ const posts: InsightPost[] = [
     author: "founder",
     tags: ["Payroll", "HR", "Compliance"],
     relatedWork: ["nur-palace"],
-    draft: true,
+    draft: false,
     sections: [
       {
         paragraphs: [
