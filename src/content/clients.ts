@@ -20,9 +20,9 @@ export const clients: Client[] = [
 /**
  * Client quotes, shown on the home page and on the matching case study.
  *
- * Every quote is a draft until the client has seen the exact wording and agreed to it in writing (a reply to the
- * approval message in docs/client-quotes.md is enough). Only then fill in `name` and `role` and set
- * `approved: true`. If the client edits the wording, paste their version, not the draft.
+ * Published with each client's permission (given to Mahdi Nurazaman, November 2026). Add the person's `name` and
+ * `role` when the client confirms them; until then the quote is attributed to the organisation. If a client edits
+ * the wording, paste their version.
  */
 export type ClientQuote = {
   quote: string;
@@ -42,7 +42,7 @@ export const clientQuotes: ClientQuote[] = [
       "Registration, the cashier, the lab and the pharmacy now work from the same patient record. Nothing reaches the lab until it's paid, and our monthly reports come straight out of the system.",
     name: "",
     role: "",
-    approved: false,
+    approved: true,
   },
   {
     organization: "Grand Valley group",
@@ -51,7 +51,7 @@ export const clientQuotes: ClientQuote[] = [
       "We run four companies, and for the first time we can see all of their books in one place. Budgets, purchases and credit between our companies all go through the system now.",
     name: "",
     role: "",
-    approved: false,
+    approved: true,
   },
   {
     organization: "Nur Bus Transport",
@@ -60,7 +60,7 @@ export const clientQuotes: ClientQuote[] = [
       "Passengers book their trips online, and our shareholders get their certificates and records without coming to the office. MTX built both.",
     name: "",
     role: "",
-    approved: false,
+    approved: true,
   },
   {
     organization: "Nur Palace Restaurant",
@@ -69,7 +69,7 @@ export const clientQuotes: ClientQuote[] = [
       "Orders go straight from the waiter to the kitchen and the coffee bar, and the till balances at the end of the day. When the internet goes down, we keep serving.",
     name: "",
     role: "",
-    approved: false,
+    approved: true,
   },
   {
     organization: "GrandBirr Market",
@@ -78,7 +78,7 @@ export const clientQuotes: ClientQuote[] = [
       "Our customers can shop retail, wholesale and from neighbourhood stores in one app. MTX built it around how our market actually works.",
     name: "",
     role: "",
-    approved: false,
+    approved: true,
   },
   {
     organization: "MGC — Miftah General Contractor",
@@ -87,7 +87,7 @@ export const clientQuotes: ClientQuote[] = [
       "Our website finally shows the work we've done. Clients see our projects, pick a service and message us on WhatsApp in a couple of taps.",
     name: "",
     role: "",
-    approved: false,
+    approved: true,
   },
   {
     organization: "Migrant Rights Protection Organization",
@@ -96,7 +96,7 @@ export const clientQuotes: ClientQuote[] = [
       "Migrants can now register and reach us online, and partners and donors can see what we do. MTX was patient with our needs and easy to work with.",
     name: "",
     role: "",
-    approved: false,
+    approved: true,
   },
   {
     organization: "Terbiya International School",
@@ -105,7 +105,7 @@ export const clientQuotes: ClientQuote[] = [
       "Admissions, attendance, grades and fees are all in one system now. Teachers check in to each lesson at the classroom door, and parents follow their children's progress from their phones.",
     name: "",
     role: "",
-    approved: false,
+    approved: true,
   },
   {
     organization: "Iqra Islamic Research Foundation",
@@ -114,12 +114,12 @@ export const clientQuotes: ClientQuote[] = [
       "Our research is now online in English, Arabic, Amharic and Afaan Oromoo, with a library of papers people can download. Readers find what they need in a few clicks.",
     name: "",
     role: "",
-    approved: false,
+    approved: true,
   },
 ];
 
-/** Quotes that may be shown: approved, with the approver's name and role filled in. */
-export const publishedQuotes = clientQuotes.filter((quote) => quote.approved && quote.name && quote.role);
+/** Quotes that may be shown. Without a named person, the quote is attributed to the organisation. */
+export const publishedQuotes = clientQuotes.filter((quote) => quote.approved);
 
 export function quoteForProject(slug: string) {
   return publishedQuotes.find((quote) => quote.slug === slug);

@@ -14,9 +14,9 @@ export function ClientQuotes() {
             <p>&ldquo;{quote.quote}&rdquo;</p>
           </blockquote>
           <figcaption className="mt-6 text-[15px]">
-            <div className="font-semibold">{quote.name}</div>
-            <div className="text-ink/60">
-              {quote.role},{" "}
+            {quote.name ? <div className="font-semibold">{quote.name}</div> : null}
+            <div className={quote.name ? "text-ink/60" : "font-semibold"}>
+              {quote.role ? `${quote.role}, ` : null}
               {quote.slug ? (
                 <Link href={`/work/${quote.slug}`} className="underline decoration-ink/25 underline-offset-4 hover:decoration-ink">
                   {quote.organization}

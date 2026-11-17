@@ -163,9 +163,10 @@ function Quote({ testimonial }: { testimonial: NonNullable<WorkProject["testimon
             <Image src={photo.src} alt={photo.alt} width={56} height={56} className="size-14 rounded-full object-cover" />
           ) : null}
           <div>
-            <div className="font-semibold">{testimonial.name}</div>
-            <div className="text-[15px] text-ink/60">
-              {testimonial.role}, {testimonial.organization}
+            {testimonial.name ? <div className="font-semibold">{testimonial.name}</div> : null}
+            <div className={testimonial.name ? "text-[15px] text-ink/60" : "font-semibold"}>
+              {testimonial.role ? `${testimonial.role}, ` : null}
+              {testimonial.organization}
             </div>
           </div>
         </figcaption>
