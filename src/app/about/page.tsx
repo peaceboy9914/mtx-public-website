@@ -1,10 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { CtaBand } from "@/components/ui/cta-band";
-import { IconArrowUpRight } from "@/components/ui/icons";
 import { StatGrid } from "@/components/ui/stat-grid";
 import { ClientLogos } from "@/components/work/client-logos";
-import { IconLinkedIn } from "@/components/ui/icons";
+import { IconArrowUpRight, IconFacebook, IconLinkedIn } from "@/components/ui/icons";
 import { JsonLd } from "@/components/ui/json-ld";
 import { PageHero } from "@/components/ui/page-hero";
 import { Section, SectionHeader } from "@/components/ui/section";
@@ -164,6 +163,14 @@ export default function AboutPage() {
               className="mt-8 inline-flex w-fit items-center gap-2 rounded-full border border-ink/20 px-5 py-2.5 text-[14px] font-medium transition-colors hover:border-ink hover:bg-ink hover:text-paper"
             >
               <IconLinkedIn className="size-4" /> LinkedIn
+            </a>
+            <a
+              href={founder.facebook}
+              target="_blank"
+              rel="me noopener noreferrer"
+              className="mt-3 inline-flex w-fit items-center gap-2 rounded-full border border-ink/20 px-5 py-2.5 text-[14px] font-medium transition-colors hover:border-ink hover:bg-ink hover:text-paper"
+            >
+              <IconFacebook className="size-4" /> Facebook
             </a>
           </div>
         </div>

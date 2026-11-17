@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { ContactForm } from "@/components/contact/contact-form";
 import { buttonClass } from "@/components/ui/button";
-import { IconLinkedIn, IconMail, IconMapPin, IconPhone } from "@/components/ui/icons";
+import { IconFacebook, IconLinkedIn, IconMail, IconMapPin, IconPhone } from "@/components/ui/icons";
 import { JsonLd } from "@/components/ui/json-ld";
 import { Eyebrow } from "@/components/ui/section";
 import {
@@ -65,6 +65,9 @@ export default function ContactPage() {
               </ContactRow>
               <ContactRow icon={<IconLinkedIn className="size-[18px]" />} href={founder.linkedin} external>
                 {founder.name} ({founder.role})
+              </ContactRow>
+              <ContactRow icon={<IconFacebook className="size-[18px]" />} href={founder.facebook} external>
+                {founder.name} on Facebook
               </ContactRow>
             </ul>
           </div>

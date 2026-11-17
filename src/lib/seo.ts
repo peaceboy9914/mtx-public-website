@@ -109,7 +109,7 @@ export function organizationJsonLd() {
     },
     founder: { "@type": "Person", "@id": PERSON_ID, name: founder.name, url: founder.linkedin },
     numberOfEmployees: { "@type": "QuantitativeValue", value: companyFacts.teamSize },
-    sameAs: [socialLinks.linkedin, googleBusiness.profileUrl],
+    sameAs: [socialLinks.linkedin, googleBusiness.profileUrl, ...(socialLinks.facebook ? [socialLinks.facebook] : [])],
     hasMap: googleBusiness.profileUrl,
     geo: { "@type": "GeoCoordinates", latitude: googleBusiness.coords.lat, longitude: googleBusiness.coords.lng },
     openingHoursSpecification: openingHours.map((slot) => ({
@@ -149,7 +149,7 @@ export function personJsonLd() {
     description: founder.bio.join(" "),
     image: `${siteConfig.url}${founder.photo.src}`,
     url: founder.linkedin,
-    sameAs: [founder.linkedin],
+    sameAs: [founder.linkedin, founder.facebook],
     worksFor: { "@id": ORG_ID },
   };
 }

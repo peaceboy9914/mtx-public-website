@@ -37,6 +37,8 @@ export const founder = {
   name: "Mahdi Nurazaman",
   role: "Founder",
   linkedin: "https://www.linkedin.com/in/mahdi-nurazaman/",
+  /** Personal profile, used as MTX's Facebook presence until an official company page exists. */
+  facebook: "https://www.facebook.com/mahdi.nurazaman.jibril/",
   photo: { src: "/images/team/mahdi-nurazaman.webp", alt: "Portrait of Mahdi Nurazaman, founder of MTX Digital Technologies" },
   /** Drafted from facts on this site; awaiting the founder's review. */
   bio: [
@@ -47,6 +49,8 @@ export const founder = {
 
 export const socialLinks = {
   linkedin: "https://www.linkedin.com/company/mtx-digital-technologies",
+  /** Set when the official company Facebook page exists; it then replaces the founder's profile in the footer. */
+  facebook: undefined as string | undefined,
 };
 
 /** The verified Google Business Profile. The place ID is the stable key every Maps link below is built from. */
