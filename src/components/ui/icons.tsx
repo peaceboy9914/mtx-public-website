@@ -54,6 +54,14 @@ export function IconMapPin({ className }: IconProps) {
   );
 }
 
+export function IconChevronDown({ className }: IconProps) {
+  return (
+    <svg {...stroke} className={className}>
+      <path d="m6 9 6 6 6-6" />
+    </svg>
+  );
+}
+
 export function IconMenu({ className }: IconProps) {
   return (
     <svg {...stroke} className={className}>

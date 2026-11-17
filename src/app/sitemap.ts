@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { industries } from "@/content/industries";
 import { publishedPosts } from "@/content/insights";
 import { platforms } from "@/content/platforms";
 import { services } from "@/content/services";
@@ -27,6 +28,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     entry("", 1, newest([SITE_CONTENT_UPDATED, workUpdated])),
+    entry("/industries", 0.9),
+    ...industries.map((industry) => entry(`/industries/${industry.slug}`, 0.85, industry.updated)),
     entry("/services", 0.9),
     entry("/platforms", 0.9),
     ...services.map((service) => entry(`/services/${service.slug}`, 0.8, service.updated)),

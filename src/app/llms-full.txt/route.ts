@@ -1,5 +1,6 @@
 import { clients } from "@/content/clients";
 import { trackRecord } from "@/content/company";
+import { industries } from "@/content/industries";
 import { platforms } from "@/content/platforms";
 import { services } from "@/content/services";
 import { companyFacts, companyStats, formattedAddress, founder, siteConfig } from "@/content/site";
@@ -34,6 +35,22 @@ export function GET() {
         `- ${entry.sector}: ${entry.work}` +
         (entry.projects.length ? ` (${entry.projects.map((project) => project.name).join(", ")})` : "")
     ),
+    "",
+    "## Industries",
+    ...industries.flatMap((industry) => [
+      "",
+      `### ${industry.seoTitle}`,
+      `URL: ${url}/industries/${industry.slug}`,
+      "",
+      industry.summary,
+      "",
+      ...industry.intro,
+      "",
+      ...industry.needs.map((need) => `- ${need.title}: ${need.body}`),
+      "",
+      `Case studies: ${industry.work.map((slug) => `${url}/work/${slug}`).join(", ")}`,
+      ...faqLines(industry.faqs),
+    ]),
     "",
     "## Services",
     ...services.flatMap((service) => [
