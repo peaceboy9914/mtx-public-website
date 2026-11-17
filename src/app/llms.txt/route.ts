@@ -1,3 +1,4 @@
+import { industries } from "@/content/industries";
 import { publishedPosts } from "@/content/insights";
 import { platforms } from "@/content/platforms";
 import { services } from "@/content/services";
@@ -21,6 +22,9 @@ export function GET() {
       `Team of ${companyFacts.teamSize}. ` +
       companyStats.map((stat) => `${stat.value} ${stat.label.toLowerCase()}`).join(", ") +
       ".",
+    "",
+    "## Industries",
+    ...industries.map((industry) => `- [${industry.seoTitle}](${url}/industries/${industry.slug}): ${industry.summary}`),
     "",
     "## Services",
     ...services.map((service) => `- [${service.name}](${url}/services/${service.slug}): ${service.summary}`),

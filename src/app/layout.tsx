@@ -6,6 +6,7 @@ import { Logo } from "@/components/layout/logo";
 import { WhatsAppButton } from "@/components/layout/whatsapp-button";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import { industries } from "@/content/industries";
 import { JsonLd } from "@/components/ui/json-ld";
 import { siteConfig } from "@/content/site";
 import { organizationJsonLd, websiteJsonLd } from "@/lib/seo";
@@ -68,7 +69,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Skip to content
         </a>
-        <SiteHeader logo={<Logo />} />
+        <SiteHeader
+          logo={<Logo />}
+          submenus={{ "/industries": industries.map((industry) => ({ label: industry.name, href: `/industries/${industry.slug}` })) }}
+        />
         <main id="main" className="flex-1">
           {children}
         </main>

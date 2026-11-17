@@ -4,6 +4,8 @@ import { JsonLd } from "@/components/ui/json-ld";
 import { PageHero } from "@/components/ui/page-hero";
 import { Section, SectionHeader } from "@/components/ui/section";
 import { ProjectCard } from "@/components/work/project-card";
+import { WorkFilter } from "@/components/work/work-filter";
+import { industries, industriesForProject } from "@/content/industries";
 import { platforms } from "@/content/platforms";
 import { workProjects } from "@/content/work";
 
@@ -38,11 +40,20 @@ export default function WorkPage() {
       />
 
       <Section tone="white">
-        <div className="grid gap-x-8 gap-y-16 md:grid-cols-2">
-          {workProjects.map((project) => (
-            <ProjectCard key={project.slug} project={project} />
-          ))}
-        </div>
+        <WorkFilter
+          filters={[
+            ...industries.map((industry) => ({ slug: industry.slug, label: industry.name })),
+            { slug: "other", label: "Other" },
+          ]}
+          items={workProjects.map((project) => {
+            const groups = industriesForProject(project.slug).map((industry) => industry.slug);
+            return {
+              key: project.slug,
+              groups: groups.length ? groups : ["other"],
+              card: <ProjectCard project={project} />,
+            };
+          })}
+        />
       </Section>
 
       <Section tone="ink" id="platforms">

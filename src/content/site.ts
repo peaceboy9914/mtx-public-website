@@ -93,6 +93,7 @@ export type NavLink = { label: string; href: string };
 
 export const navLinks: NavLink[] = [
   { label: "Work", href: "/work" },
+  { label: "Industries", href: "/industries" },
   { label: "Services", href: "/services" },
   { label: "Systems", href: "/platforms" },
   ...(publishedPosts.length ? [{ label: "Insights", href: "/insights" }] : []),

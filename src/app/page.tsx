@@ -6,6 +6,7 @@ import { IconArrowRight } from "@/components/ui/icons";
 import { Eyebrow, Section, SectionHeader } from "@/components/ui/section";
 import { ProjectCard } from "@/components/work/project-card";
 import { deliveryProcess, foundations } from "@/content/company";
+import { industries } from "@/content/industries";
 import { platforms, requirePlatform } from "@/content/platforms";
 import { services } from "@/content/services";
 import { companyStats, googleBusiness, siteConfig } from "@/content/site";
@@ -160,6 +161,18 @@ export default function HomePage() {
           }
           description="Start from a blank page or from a system already working for another client, adapted to how your organisation works."
         />
+        <div className="reveal mb-12 flex flex-wrap items-center gap-2">
+          <span className="label me-2 text-ink/50">By industry</span>
+          {industries.map((industry) => (
+            <Link
+              key={industry.slug}
+              href={`/industries/${industry.slug}`}
+              className="inline-block rounded-full border border-ink/15 bg-paper px-4 py-2 text-[14px] transition-colors hover:border-ink"
+            >
+              {industry.name}
+            </Link>
+          ))}
+        </div>
         <div className="grid gap-12 lg:grid-cols-2">
           <LinkList
             heading="Services"

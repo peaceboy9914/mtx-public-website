@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { IconArrowUpRight, IconFacebook, IconLinkedIn } from "@/components/ui/icons";
+import { industries } from "@/content/industries";
 import { platforms } from "@/content/platforms";
 import { services } from "@/content/services";
 import { directionsUrl, formattedAddress, founder, navLinks, siteConfig, socialLinks } from "@/content/site";
@@ -28,7 +29,15 @@ export function SiteFooter() {
         </div>
 
         <div className="grid grid-cols-2 gap-x-8 gap-y-12 border-b border-paper/10 py-16 lg:grid-cols-12">
-          <FooterColumn title="Services" className="lg:col-span-4">
+          <FooterColumn title="Industries" className="lg:col-span-2">
+            {industries.map((industry) => (
+              <Link key={industry.slug} href={`/industries/${industry.slug}`} className="hover:text-paper">
+                {industry.name}
+              </Link>
+            ))}
+          </FooterColumn>
+
+          <FooterColumn title="Services" className="lg:col-span-3">
             {services.slice(0, 6).map((service) => (
               <Link key={service.slug} href={`/services/${service.slug}`} className="hover:text-paper">
                 {service.name}
@@ -39,7 +48,7 @@ export function SiteFooter() {
             </Link>
           </FooterColumn>
 
-          <FooterColumn title="Systems" className="lg:col-span-4">
+          <FooterColumn title="Systems" className="lg:col-span-3">
             {platforms
               .filter((platform) => platform.caseStudy)
               .slice(0, 6)
@@ -55,7 +64,7 @@ export function SiteFooter() {
 
           <FooterColumn title="Company" className="lg:col-span-2">
             {navLinks
-              .filter((link) => link.href !== "/services" && link.href !== "/platforms")
+              .filter((link) => link.href !== "/services" && link.href !== "/platforms" && link.href !== "/industries")
               .map((link) => (
                 <Link key={link.href} href={link.href} className="hover:text-paper">
                   {link.label}
