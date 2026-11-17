@@ -96,7 +96,9 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
                 {project.client?.location ? <MetaRow label="Location">{project.client.location}</MetaRow> : null}
                 {project.year ? <MetaRow label="Year">{project.year}</MetaRow> : null}
                 {project.duration ? <MetaRow label="Delivery">{project.duration}</MetaRow> : null}
-                <MetaRow label="Delivered as">{project.platform === "mobile" ? "Mobile app" : "Web platform"}</MetaRow>
+                <MetaRow label="Delivered as">
+                  {project.deliveredAs ?? (project.platform === "mobile" ? "Mobile app" : "Web platform")}
+                </MetaRow>
                 {project.domain ? (
                   <MetaRow label="Live at">
                     <a

@@ -61,6 +61,8 @@ export type WorkProject = {
   testimonial?: Testimonial;
   /** Additional screenshots shown below the main image. */
   gallery?: { src: string; alt: string; frame?: "browser" | "phone" }[];
+  /** Overrides the "Delivered as" label, e.g. "Telegram mini app". */
+  deliveredAs?: string;
   /** Shown under the main screenshot, e.g. to say the screens use demo data. */
   screensNote?: string;
   /** Public link when the project isn't a website, e.g. an app-store listing. */
@@ -487,6 +489,42 @@ export const workProjects: WorkProject[] = [
     updated: "2026-11-16",
   },
   {
+    slug: "quickgebeta",
+    name: "QuickGebeta",
+    sector: "Food delivery · Campus marketplace",
+    platform: "mobile",
+    deliveredAs: "Telegram mini app",
+    image: {
+      src: "/images/work/quickgebeta-foods.webp",
+      alt: "QuickGebeta student app: campus food menu with dishes priced in ETB (demo menu)",
+    },
+    cardSummary: "Campus food delivery and a student marketplace, running inside Telegram. Live with university students.",
+    caseTitle: "QuickGebeta — campus food delivery and marketplace",
+    caseSummary:
+      "MTX's own platform for university students: order food from campus restaurants, get it delivered, and buy and sell on a campus marketplace, all inside Telegram. Four connected apps serve students, restaurants, delivery drivers and sellers. Live and serving university students.",
+    tags: ["Telegram mini app", "Food delivery", "Marketplace"],
+    client: { name: "MTX product" },
+    year: "2025",
+    status: "Live",
+    services: ["Product", "Design", "Build", "Operations"],
+    challenge: [
+      "Students spend their day on campus and on Telegram. Ordering food from campus restaurants, and buying or selling things between students, had no simple shared place, and most students pay with CBE or Telebirr rather than cards.",
+    ],
+    approach: [
+      "The whole platform runs as a Telegram mini app, so students sign in with the Telegram account they already use and never install anything. Restaurants, drivers and sellers use the same platform with their own apps and email sign-in.",
+      "Payments work the way students already pay: they transfer with CBE or Telebirr and upload the screenshot, which the restaurant checks before accepting the order. Marketplace listings go live once their payment is verified.",
+    ],
+    features: [
+      { title: "Student app", body: "Browse restaurants and dishes, order, upload payment proof and follow the order on a status timeline." },
+      { title: "Restaurant app", body: "Incoming orders with payment screenshots to approve or reject, menu management and opening hours." },
+      { title: "Delivery app", body: "Drivers go online, accept deliveries, and track earnings and withdrawals." },
+      { title: "Campus marketplace", body: "Students list products by category; buyers browse, filter and send inquiries to sellers." },
+    ],
+    stack: ["Next.js", "React", "Tailwind CSS", "shadcn/ui", "PostgreSQL", "Prisma", "Auth.js", "Telegram Bot API", "Vercel"],
+    screensNote: "Screen shows the platform's demo menu.",
+    updated: "2026-11-17",
+  },
+  {
     slug: "grandbirr-market",
     name: "Grandbirr Market",
     sector: "Retail marketplace",
@@ -513,8 +551,9 @@ export const workProjects: WorkProject[] = [
     cardSummary: "A learning app for Afaan Oromoo students and readers: books, grade 1–8 textbooks and quizzes. Live on Google Play.",
     caseTitle: "Laziz — learn and read in Afaan Oromoo",
     caseSummary:
-      "An educational app for Afaan Oromoo students and readers: a library of books, grade 1–8 textbooks and quizzes, with an admin area for publishing content. Built in Flutter and live on Google Play.",
+      "An educational app built for a client, for Afaan Oromoo students and readers: a library of books, grade 1–8 textbooks and quizzes, with an admin area for publishing content. Built in Flutter and live on Google Play.",
     tags: ["Flutter", "Afaan Oromoo", "Google Play"],
+    client: { name: "Private client" },
     year: "2026",
     status: "Live",
     services: ["Design", "Build", "Store release"],

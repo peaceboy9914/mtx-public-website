@@ -31,16 +31,20 @@ export const trackRecord: { sector: string; work: string; projects: { name: stri
   },
   {
     sector: "Transport",
-    work: "Booking, share-sale and shareholder platforms",
+    work: "Booking, shareholder and courier management platforms",
     projects: [
       { name: "Nur Bus", slug: "nur-bus" },
       { name: "Nur Bus shareholders", slug: "nur-bus-shareholders" },
+      { name: "Courier management system" },
     ],
   },
   {
     sector: "Retail & e-commerce",
-    work: "Multi-vendor marketplace apps",
-    projects: [{ name: "Grandbirr Market", slug: "grandbirr-market" }],
+    work: "Marketplaces and campus food delivery",
+    projects: [
+      { name: "Grandbirr Market", slug: "grandbirr-market" },
+      { name: "QuickGebeta", slug: "quickgebeta" },
+    ],
   },
   {
     sector: "Legal services",

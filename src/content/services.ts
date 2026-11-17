@@ -117,7 +117,7 @@ export const services: Service[] = [
     ],
     technologies: ["React Native", "Expo", "TypeScript", "Android", "iOS", "Firebase"],
     relatedSystems: ["multi-vendor-marketplace", "booking-ticketing-system", "loan-management-system"],
-    relatedWork: ["grandbirr-market", "ibsa-quraanaa", "laziz"],
+    relatedWork: ["grandbirr-market", "quickgebeta", "ibsa-quraanaa", "laziz"],
     faqs: [
       {
         q: "Do you build for both Android and iOS?",
