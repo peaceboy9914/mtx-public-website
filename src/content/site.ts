@@ -54,6 +54,12 @@ export const socialLinks = {
 };
 
 /** The verified Google Business Profile. The place ID is the stable key every Maps link below is built from. */
+/** WhatsApp chat for the floating contact button; the message is pre-filled for the visitor to edit. */
+export const whatsapp = {
+  number: "251991329914",
+  url: `https://wa.me/251991329914?text=${encodeURIComponent("Hello MTX, I'd like to talk about a project.")}`,
+};
+
 export const googleBusiness = {
   placeId: "ChIJEZMdD2OFSxYRfT7oUNA9Dyc",
   coords: { lat: 8.993874, lng: 38.7662892 },
@@ -86,9 +92,9 @@ export const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination
 export type NavLink = { label: string; href: string };
 
 export const navLinks: NavLink[] = [
+  { label: "Work", href: "/work" },
   { label: "Services", href: "/services" },
   { label: "Systems", href: "/platforms" },
-  { label: "Work", href: "/work" },
   ...(publishedPosts.length ? [{ label: "Insights", href: "/insights" }] : []),
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },

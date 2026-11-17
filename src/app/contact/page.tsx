@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { ContactForm } from "@/components/contact/contact-form";
 import { buttonClass } from "@/components/ui/button";
-import { IconFacebook, IconLinkedIn, IconMail, IconMapPin, IconPhone } from "@/components/ui/icons";
+import { IconFacebook, IconLinkedIn, IconWhatsApp, IconMail, IconMapPin, IconPhone } from "@/components/ui/icons";
 import { JsonLd } from "@/components/ui/json-ld";
 import { Eyebrow } from "@/components/ui/section";
 import {
@@ -13,6 +13,7 @@ import {
   openingHoursLabel,
   siteConfig,
   socialLinks,
+  whatsapp,
 } from "@/content/site";
 import { riseDelay } from "@/lib/motion";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
@@ -56,6 +57,9 @@ export default function ContactPage() {
               </ContactRow>
               <ContactRow icon={<IconPhone className="size-[18px]" />} href={`tel:${siteConfig.phoneHref}`}>
                 {siteConfig.phone}
+              </ContactRow>
+              <ContactRow icon={<IconWhatsApp className="size-[18px]" />} href={whatsapp.url} external>
+                WhatsApp {siteConfig.phone}
               </ContactRow>
               <ContactRow icon={<IconMapPin className="size-[18px]" />} href={directionsUrl} external>
                 {formattedAddress}

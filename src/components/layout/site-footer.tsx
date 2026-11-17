@@ -29,19 +29,28 @@ export function SiteFooter() {
 
         <div className="grid grid-cols-2 gap-x-8 gap-y-12 border-b border-paper/10 py-16 lg:grid-cols-12">
           <FooterColumn title="Services" className="lg:col-span-4">
-            {services.map((service) => (
+            {services.slice(0, 6).map((service) => (
               <Link key={service.slug} href={`/services/${service.slug}`} className="hover:text-paper">
                 {service.name}
               </Link>
             ))}
+            <Link href="/services" className="text-paper hover:underline">
+              All {services.length} services →
+            </Link>
           </FooterColumn>
 
           <FooterColumn title="Systems" className="lg:col-span-4">
-            {platforms.map((platform) => (
-              <Link key={platform.slug} href={`/platforms/${platform.slug}`} className="hover:text-paper">
-                {platform.shortName}
-              </Link>
-            ))}
+            {platforms
+              .filter((platform) => platform.caseStudy)
+              .slice(0, 6)
+              .map((platform) => (
+                <Link key={platform.slug} href={`/platforms/${platform.slug}`} className="hover:text-paper">
+                  {platform.shortName}
+                </Link>
+              ))}
+            <Link href="/platforms" className="text-paper hover:underline">
+              All {platforms.length} systems →
+            </Link>
           </FooterColumn>
 
           <FooterColumn title="Company" className="lg:col-span-2">

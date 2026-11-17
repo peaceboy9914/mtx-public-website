@@ -5,16 +5,16 @@ import { CtaBand } from "@/components/ui/cta-band";
 import { IconArrowRight } from "@/components/ui/icons";
 import { Eyebrow, Section, SectionHeader } from "@/components/ui/section";
 import { ProjectCard } from "@/components/work/project-card";
-import { deliveryProcess, foundations, sectors } from "@/content/company";
-import { CardGrid, SystemCard } from "@/components/catalog/catalog";
+import { deliveryProcess, foundations } from "@/content/company";
 import { platforms, requirePlatform } from "@/content/platforms";
 import { services } from "@/content/services";
-import { companyStats, siteConfig } from "@/content/site";
+import { companyStats, googleBusiness, siteConfig } from "@/content/site";
 import { StatGrid } from "@/components/ui/stat-grid";
 import { requireWorkProject, workProjects } from "@/content/work";
 import { ClientLogos } from "@/components/work/client-logos";
 import { ClientQuotes } from "@/components/work/client-quotes";
 import { clients } from "@/content/clients";
+import { publishedPosts } from "@/content/insights";
 import { riseDelay } from "@/lib/motion";
 import { pageMetadata } from "@/lib/seo";
 
@@ -24,21 +24,33 @@ export const metadata = pageMetadata({
   path: "/",
 });
 
+/** Systems with a client case study first: these are the ones we can point to. */
 const featuredSystems = [
-  "financial-management-system",
   "hospital-management-system",
   "school-management-system",
-  "hr-payroll-system",
-  "loan-management-system",
+  "financial-management-system",
   "inventory-pos-system",
+  "shareholder-management-system",
+  "booking-ticketing-system",
+  "multi-vendor-marketplace",
 ];
 
-const featuredSlugs = ["grand-valley-hospital", "grandbirr-market", "nur-bus", "school-erp", "mrpo"];
+const featuredSlugs = ["mtx-care", "nur-palace", "school-erp"];
+const featuredQuoteSlugs = ["mtx-care", "nur-palace", "school-erp"];
+
+/** "Grand Valley Primary Hospital" for a case study, falling back to the project name. */
+function clientOf(slug: string) {
+  const project = requireWorkProject(slug);
+  const client = project.client?.name;
+  if (slug === "mtx-care") return "Grand Valley Primary Hospital";
+  return client && client !== "MTX product" && client !== "Private client" ? client : project.name;
+}
 
 export default function HomePage() {
   const hospital = requireWorkProject("grand-valley-hospital");
   const grandbirr = requireWorkProject("grandbirr-market");
   const featured = featuredSlugs.map(requireWorkProject);
+  const latestPosts = publishedPosts.slice(0, 3);
 
   return (
     <>
@@ -70,6 +82,18 @@ export default function HomePage() {
               </div>
 
               <StatGrid stats={companyStats} className="mt-12" />
+              <a
+                href={googleBusiness.profileUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-6 inline-flex items-center gap-2 rounded-full border border-ink/15 bg-white/70 px-4 py-2 text-[14px] transition-colors hover:border-ink/40"
+              >
+                <span className="font-semibold">{googleBusiness.rating.value}</span>
+                <span aria-hidden="true" className="text-[#f5b301]">
+                  ★★★★★
+                </span>
+                <span className="text-ink/65">{googleBusiness.rating.count} Google reviews</span>
+              </a>
             </div>
 
             <div className="rise relative lg:col-span-8" style={riseDelay(240)}>
@@ -90,123 +114,87 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Sectors */}
-      <section className="border-b border-ink/10 bg-paper">
-        <div className="shell flex flex-col gap-4 py-6 sm:flex-row sm:items-center sm:gap-10">
-          <span className="label flex-none text-ink/50">Sectors we build for</span>
-          <ul className="flex flex-wrap gap-x-6 gap-y-2 text-[15px] text-ink/75">
-            {sectors.map((sector) => (
-              <li key={sector}>{sector}</li>
-            ))}
-          </ul>
+      {/* Clients, compact */}
+      <section className="border-b border-ink/10 bg-white">
+        <div className="shell py-10">
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:gap-12">
+            <p className="label flex-none text-ink/50 lg:w-44">Trusted by {clients.length} organisations</p>
+            <ClientLogos compact />
+          </div>
         </div>
       </section>
 
-      {/* Clients */}
-      <Section tone="white" className="border-b border-ink/10">
-        <SectionHeader
-          eyebrow="Clients"
-          title={
-            <>
-              Trusted by <span className="accent">{clients.length} organisations</span> across Ethiopia.
-            </>
-          }
-          description="Hospitals, schools, transport and construction companies, restaurants, retailers and non-profits. Logos link to the work we did for them."
-        />
-        <ClientLogos />
-        <div className="mt-12">
-          <ClientQuotes />
-        </div>
-      </Section>
-
-      {/* Services */}
+      {/* Featured work */}
       <Section>
         <SectionHeader
           index="01"
-          eyebrow="Services"
-          title={
-            <>
-              The full software lifecycle, <span className="accent">under one roof.</span>
-            </>
-          }
-          description="Strategy, design, engineering, integration, hosting and support — delivered by MTX teams to one engineering standard: role-based access, full audit trails, bilingual interfaces and reporting your finance team can sign off on."
-          action={
-            <ButtonLink href="/services" variant="outline">
-              All services
-            </ButtonLink>
-          }
-        />
-        <ol className="border-t border-ink/15">
-          {services.map((service, index) => (
-            <li key={service.slug} className="reveal">
-              <Link
-                href={`/services/${service.slug}`}
-                className="group grid grid-cols-[3rem_1fr_auto] items-baseline gap-x-4 gap-y-2 border-b border-ink/15 py-7 transition-colors hover:bg-white/60 sm:grid-cols-[4rem_1fr_1.2fr_auto] sm:gap-x-8 sm:px-2"
-              >
-                <span className="label text-ink/45">{String(index + 1).padStart(2, "0")}</span>
-                <span className="text-[clamp(22px,2.6vw,32px)] font-semibold tracking-[-0.03em] transition-colors group-hover:text-brand">
-                  {service.name}
-                </span>
-                <span className="col-start-2 row-start-2 text-[15px] leading-relaxed text-ink/65 sm:col-start-3 sm:row-start-1">
-                  {service.summary}
-                </span>
-                <IconArrowRight className="col-start-3 row-start-1 size-5 self-center text-ink/40 transition-all group-hover:translate-x-1 group-hover:text-brand sm:col-start-4" />
-              </Link>
-            </li>
-          ))}
-        </ol>
-      </Section>
-
-      {/* Systems */}
-      <Section tone="paper-2" className="border-t border-ink/10">
-        <SectionHeader
-          index="02"
-          eyebrow="Systems"
-          title={
-            <>
-              {platforms.length} proven platforms, <span className="accent">ready to adapt.</span>
-            </>
-          }
-          description="Hospital, school, finance, payroll, lending, retail, logistics and workflow systems — each configurable to how your organisation works."
-          action={
-            <ButtonLink href="/platforms" variant="outline">
-              All {platforms.length} systems
-            </ButtonLink>
-          }
-        />
-        <CardGrid>
-          {featuredSystems.map(requirePlatform).map((platform) => (
-            <SystemCard key={platform.slug} platform={platform} />
-          ))}
-        </CardGrid>
-      </Section>
-
-      {/* Selected work */}
-      <Section tone="white" className="border-y border-ink/10">
-        <SectionHeader
-          index="03"
           eyebrow="Selected work"
           title={
             <>
-              Live products, <span className="accent">real users.</span>
+              Systems Ethiopian organisations <span className="accent">run on every day.</span>
             </>
           }
+          description="A hospital ERP, a restaurant system and a school platform, each in daily use by the client named on it."
           action={
             <ButtonLink href="/work" variant="outline">
-              View all {workProjects.length} projects
+              All {workProjects.length} projects
             </ButtonLink>
           }
         />
-        <div className="grid gap-x-8 gap-y-16 md:grid-cols-2">
-          {featured.slice(0, 2).map((project) => (
+        <div className="grid gap-x-8 gap-y-16 md:grid-cols-2 lg:grid-cols-3">
+          {featured.map((project) => (
             <ProjectCard key={project.slug} project={project} />
           ))}
         </div>
-        <div className="mt-16 grid gap-x-8 gap-y-16 md:grid-cols-2 lg:grid-cols-3">
-          {featured.slice(2).map((project) => (
-            <ProjectCard key={project.slug} project={project} />
-          ))}
+      </Section>
+
+      {/* What we build */}
+      <Section tone="paper-2" className="border-y border-ink/10">
+        <SectionHeader
+          index="02"
+          eyebrow="What we build"
+          title={
+            <>
+              Custom builds, <span className="accent">or a system we already run.</span>
+            </>
+          }
+          description="Start from a blank page or from a system already working for another client, adapted to how your organisation works."
+        />
+        <div className="grid gap-12 lg:grid-cols-2">
+          <LinkList
+            heading="Services"
+            items={services.slice(0, 7).map((service) => ({ href: `/services/${service.slug}`, label: service.name }))}
+            more={{ href: "/services", label: `All ${services.length} services` }}
+          />
+          <LinkList
+            heading="Systems"
+            items={featuredSystems.map(requirePlatform).map((platform) => ({
+              href: `/platforms/${platform.slug}`,
+              label: platform.shortName,
+              note: platform.caseStudy ? `in use at ${clientOf(platform.caseStudy)}` : undefined,
+            }))}
+            more={{ href: "/platforms", label: `All ${platforms.length} systems` }}
+          />
         </div>
+      </Section>
+
+      {/* Client quotes */}
+      <Section tone="white">
+        <SectionHeader
+          index="03"
+          eyebrow="Clients"
+          title={
+            <>
+              In our clients&apos; <span className="accent">own words.</span>
+            </>
+          }
+          action={
+            <ButtonLink href="/about#clients" variant="outline">
+              More from our clients
+            </ButtonLink>
+          }
+        />
+        <ClientQuotes slugs={featuredQuoteSlugs} columns={3} />
       </Section>
 
       {/* Foundations */}
@@ -219,7 +207,7 @@ export default function HomePage() {
               Software that fits <span className="accent text-brand-2">the place it runs.</span>
             </>
           }
-          description="We build for Ethiopian institutions specifically — so the things other vendors treat as change requests are in the first sprint."
+          description="We build for Ethiopian institutions specifically, so the things other vendors treat as change requests are in the first sprint."
         />
         <div className="grid gap-px border-y border-paper/15 bg-paper/15 sm:grid-cols-2 lg:grid-cols-4">
           {foundations.map((item, index) => (
@@ -261,7 +249,78 @@ export default function HomePage() {
         </ol>
       </Section>
 
+      {/* Insights */}
+      {latestPosts.length ? (
+        <Section tone="paper-2" className="border-t border-ink/10">
+          <SectionHeader
+            index="06"
+            eyebrow="Insights"
+            title={
+              <>
+                Notes from <span className="accent">live projects.</span>
+              </>
+            }
+            action={
+              <ButtonLink href="/insights" variant="outline">
+                All articles
+              </ButtonLink>
+            }
+          />
+          <ul className="grid gap-px overflow-hidden rounded-2xl border border-ink/10 bg-ink/10 md:grid-cols-3">
+            {latestPosts.map((post) => (
+              <li key={post.slug} className="bg-paper">
+                <Link href={`/insights/${post.slug}`} className="group flex h-full flex-col p-7">
+                  <span className="label text-ink/50">{post.tags[0]}</span>
+                  <span className="mt-3 text-[20px] leading-snug font-semibold tracking-[-0.02em] transition-colors group-hover:text-brand">
+                    {post.title}
+                  </span>
+                  <span className="mt-3 flex-1 text-[15px] leading-relaxed text-ink/65">{post.description}</span>
+                  <span className="mt-6 inline-flex items-center gap-2 text-[14px] font-medium">
+                    Read <IconArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </Section>
+      ) : null}
+
       <CtaBand secondary={{ label: "See services", href: "/services" }} />
     </>
+  );
+}
+
+function LinkList({
+  heading,
+  items,
+  more,
+}: {
+  heading: string;
+  items: { href: string; label: string; note?: string }[];
+  more: { href: string; label: string };
+}) {
+  return (
+    <div className="reveal">
+      <h3 className="label text-ink/50">{heading}</h3>
+      <ul className="mt-4 border-t border-ink/15">
+        {items.map((item) => (
+          <li key={item.href}>
+            <Link
+              href={item.href}
+              className="group flex items-baseline justify-between gap-4 border-b border-ink/15 py-4 transition-colors hover:text-brand"
+            >
+              <span className="text-[19px] font-semibold tracking-[-0.02em]">{item.label}</span>
+              <span className="flex items-center gap-3 text-[13px] text-ink/50">
+                {item.note ? <span className="hidden sm:inline">{item.note}</span> : null}
+                <IconArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+              </span>
+            </Link>
+          </li>
+        ))}
+      </ul>
+      <Link href={more.href} className="mt-5 inline-flex items-center gap-2 text-[14.5px] font-medium hover:text-brand">
+        {more.label} <IconArrowRight className="size-4" />
+      </Link>
+    </div>
   );
 }

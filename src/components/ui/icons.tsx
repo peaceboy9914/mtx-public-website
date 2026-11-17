@@ -70,6 +70,14 @@ export function IconClose({ className }: IconProps) {
   );
 }
 
+export function IconWhatsApp({ className }: IconProps) {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      <path d="M12.04 2.5a9.43 9.43 0 0 0-8.13 14.22L2.5 21.5l4.9-1.38A9.44 9.44 0 1 0 12.04 2.5Zm0 17.2c-1.46 0-2.9-.4-4.15-1.15l-.3-.18-2.9.82.83-2.83-.2-.3a7.73 7.73 0 1 1 6.72 3.64Zm4.24-5.79c-.23-.12-1.37-.68-1.58-.75-.21-.08-.37-.12-.52.11-.15.24-.6.76-.73.91-.14.15-.27.17-.5.06a6.3 6.3 0 0 1-3.13-2.74c-.24-.4.24-.38.68-1.26.07-.15.04-.28-.02-.4-.06-.11-.52-1.26-.72-1.73-.19-.45-.38-.39-.52-.4h-.45a.86.86 0 0 0-.62.3 2.6 2.6 0 0 0-.82 1.93c0 1.14.83 2.24.94 2.4.12.15 1.63 2.49 3.95 3.49 1.47.63 2.04.69 2.78.58.45-.07 1.37-.56 1.56-1.1.2-.54.2-1 .14-1.1-.06-.1-.21-.16-.44-.28Z" />
+    </svg>
+  );
+}
+
 export function IconFacebook({ className }: IconProps) {
   return (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
