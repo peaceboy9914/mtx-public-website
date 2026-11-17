@@ -2,12 +2,14 @@ import Link from "next/link";
 import { publishedQuotes } from "@/content/clients";
 
 /** Approved client quotes. Renders nothing until at least one quote is approved. */
-export function ClientQuotes() {
-  const quotes = publishedQuotes;
+export function ClientQuotes({ slugs, columns = 2 }: { slugs?: string[]; columns?: 2 | 3 } = {}) {
+  const quotes = slugs
+    ? slugs.map((slug) => publishedQuotes.find((quote) => quote.slug === slug)).filter((quote) => quote !== undefined)
+    : publishedQuotes;
   if (quotes.length === 0) return null;
 
   return (
-    <div className="grid gap-6 md:grid-cols-2">
+    <div className={columns === 3 ? "grid gap-6 md:grid-cols-2 lg:grid-cols-3" : "grid gap-6 md:grid-cols-2"}>
       {quotes.map((quote) => (
         <figure key={`${quote.name}-${quote.organization}`} className="reveal flex flex-col rounded-2xl border border-ink/10 bg-white p-7 sm:p-8">
           <blockquote className="flex-1 text-[18px] leading-relaxed text-ink/85">
