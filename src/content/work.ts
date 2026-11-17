@@ -61,6 +61,10 @@ export type WorkProject = {
   testimonial?: Testimonial;
   /** Additional screenshots shown below the main image. */
   gallery?: { src: string; alt: string; frame?: "browser" | "phone" }[];
+  /** Shown under the main screenshot, e.g. to say the screens use demo data. */
+  screensNote?: string;
+  /** Public link when the project isn't a website, e.g. an app-store listing. */
+  link?: { href: string; label: string };
   /** ISO date the case study was last reviewed; feeds sitemap lastModified later. */
   updated?: string;
 };
@@ -143,11 +147,59 @@ export const workProjects: WorkProject[] = [
       },
     ],
     stack: ["NestJS", "PostgreSQL", "Prisma", "React", "Vite", "TanStack Query", "i18next", "Docker", "Caddy", "CIEL · ICD-10 · LOINC", "Playwright"],
+    screensNote: "Screens show demo data from a demo hospital.",
     gallery: [
       { src: "/images/work/mtx-care-reports-om.webp", alt: "MTX-Care revenue report in Afaan Oromoo (demo data)" },
       { src: "/images/work/mtx-care-morbidity.webp", alt: "MTX-Care morbidity report: top diagnoses by ICD-10, age group and sex for an Ethiopian-calendar month (demo data)" },
     ],
     updated: "2026-11-16",
+  },
+  {
+    slug: "grand-valley-finance",
+    name: "Grand Valley group finance system",
+    sector: "Finance · Multi-company",
+    platform: "web",
+    image: {
+      src: "/images/work/finance-reports.webp",
+      alt: "Multi-company finance system: income versus expenses and category breakdown for one company (demo data, demo company names)",
+    },
+    cardSummary: "One finance system for a group of sister companies: income, expenses, budgets, purchases and inter-company credit.",
+    caseTitle: "Finance management for a group of sister companies",
+    caseSummary:
+      "A multi-company finance system used by the Grand Valley group: a hospital, a college, a school and a pharmacy. Each company keeps its own books, budgets and purchase requests, the group's administrators see every company in one place, and credit between the companies is requested, approved and repaid inside the system.",
+    tags: ["Multi-company", "Budgets in Afaan Oromoo", "Inter-company credit"],
+    client: {
+      name: "Grand Valley group",
+      about:
+        "A group of sister companies: Grand Valley Hospital, Grand Valley College, Iqra School and Grand Valley Pharmacy.",
+    },
+    year: "2025",
+    status: "Live",
+    services: ["Design", "Build", "Deployment"],
+    challenge: [
+      "Each company in the group handled its own money, but the owners needed one view across all of them, and money moving between sister companies needed a proper approval and repayment trail.",
+    ],
+    approach: [
+      "Every user belongs to one company and sees only its books; group super admins see all four. Expenses are booked against coded budget lines (for example 002A for permanent staff salaries) with the remaining balance shown as they're entered, and spending beyond a budget line is refused.",
+      "Budget categories and the finance manager's screens are in Afaan Oromoo, with English and Amharic available.",
+    ],
+    features: [
+      { title: "Income and expenses", body: "Per company, with categories, receipt attachments and recurring entries." },
+      { title: "Coded budgets", body: "Budget lines with reference codes, extra allocations and live remaining balances; overspending is blocked." },
+      { title: "Purchase requests", body: "Requests with supplier quotes and PDF purchase invoices." },
+      { title: "Inter-company credit", body: "One company requests credit from another; super admins approve or reject; repayments and documents are tracked to completion." },
+      { title: "Reports", body: "Income versus expenses, category breakdowns, budget reports and CSV export, per company or across the group." },
+      { title: "Control and audit", body: "Super admin, finance manager, accountant and auditor roles, real-time notifications and an audit log." },
+    ],
+    stack: ["Next.js", "Express", "TypeScript", "PostgreSQL", "TypeORM", "Socket.IO", "PDFKit", "Docker", "nginx"],
+    screensNote: "Screens show demo data; company names have been replaced.",
+    gallery: [
+      {
+        src: "/images/work/finance-expenses.webp",
+        alt: "Expense list booked against coded budget lines, with the remaining budget for each code (demo data)",
+      },
+    ],
+    updated: "2026-11-17",
   },
   {
     slug: "nur-palace",
@@ -219,6 +271,7 @@ export const workProjects: WorkProject[] = [
         body: "At the client's request: one app with customer, waiter and rider modes for delivery and pickup.",
       },
     ],
+    screensNote: "Screens show the system's demo menu and demo staff.",
     gallery: [
       { src: "/images/work/nur-palace-kds.webp", alt: "Nur Palace coffee bar station screen with two open orders (demo data)" },
       { src: "/images/work/nur-palace-floor.webp", alt: "Nur Palace POS floor view with table status by area (demo data)" },
@@ -241,6 +294,49 @@ export const workProjects: WorkProject[] = [
     caseSummary:
       "Passengers book trips across a growing route network, while investors buy shares through a guided purchase flow tied into the shareholder registry. Language switcher, partner portal and login are all part of the same build.",
     tags: ["Seat booking engine", "Share purchase", "Telebirr"],
+  },
+  {
+    slug: "nur-bus-shareholders",
+    name: "Nur Bus shareholder management",
+    sector: "Transport · Share company",
+    platform: "web",
+    image: {
+      src: "/images/work/nur-shares-certificates.webp",
+      alt: "Nur Bus shareholder portal: share certificates with verification status and a certificate preview (demo data)",
+    },
+    cardSummary: "Shareholder registry for a share company: purchase requests, generated certificates and a Telegram mini app.",
+    caseTitle: "Nur Bus — shareholder management system",
+    caseSummary:
+      "The shareholder registry behind Nur Bus Transport Company's share sale: share purchase requests, payments against the company's bank accounts, shareholder records, and share certificates generated as PDFs with a QR code for verification. Shareholders can also reach it through a Telegram mini app.",
+    tags: ["Share registry", "PDF certificates", "Telegram mini app"],
+    client: {
+      name: "Nur Bus Transport Company",
+      about: "A transport share company selling shares to the public alongside its bus booking service.",
+    },
+    year: "2026",
+    status: "Live",
+    services: ["Design", "Build", "Integrations"],
+    challenge: [
+      "Selling shares to the public means every request, payment and certificate has to be traceable, and shareholders need a simple way to see what they own.",
+    ],
+    approach: [
+      "Share purchase requests move through review into the registry, and each approved holding gets a numbered certificate rendered from a template, stamped, and stored as a PDF with a QR code that links back to the record.",
+      "Shareholders who live on their phones can open the portal as a Telegram mini app; the API checks Telegram's signed login data before trusting it.",
+    ],
+    features: [
+      { title: "Purchase requests", body: "Requests for shares, linked to the company's bank accounts and the payment transaction." },
+      { title: "Shareholder registry", body: "Shareholders, holdings and transactions for one or more companies." },
+      { title: "Certificates", body: "Numbered PDF certificates generated in a background queue from a template, with QR verification." },
+      { title: "Shareholder portal", body: "Holdings, certificates, dividends and announcements for each shareholder." },
+      { title: "Telegram mini app", body: "Sign-in through Telegram with signed login data verified on the server." },
+      { title: "Audit and analytics", body: "An audit log of changes and analytics for the administrators." },
+    ],
+    stack: ["NestJS", "PostgreSQL", "Prisma", "Bull queues", "Puppeteer", "Handlebars", "QR codes", "Cloudinary", "Telegram Mini Apps", "React", "Vite"],
+    screensNote: "Portal screens show demo data.",
+    gallery: [
+      { src: "/images/work/nur-shares-dashboard.webp", alt: "Nur Bus shareholder portal investor dashboard for a sample shareholder (demo data)" },
+    ],
+    updated: "2026-11-17",
   },
   {
     slug: "school-erp",
@@ -406,6 +502,37 @@ export const workProjects: WorkProject[] = [
     tags: ["React Native", "Multi-vendor", "Category browsing"],
   },
   {
+    slug: "laziz",
+    name: "Laziz",
+    sector: "Education · Mobile app",
+    platform: "mobile",
+    image: {
+      src: "/images/work/laziz-grades.webp",
+      alt: "Laziz app grade picker in Afaan Oromoo, grades 1 to 8",
+    },
+    cardSummary: "A learning app for Afaan Oromoo students and readers: books, grade 1–8 textbooks and quizzes. Live on Google Play.",
+    caseTitle: "Laziz — learn and read in Afaan Oromoo",
+    caseSummary:
+      "An educational app for Afaan Oromoo students and readers: a library of books, grade 1–8 textbooks and quizzes, with an admin area for publishing content. Built in Flutter and live on Google Play.",
+    tags: ["Flutter", "Afaan Oromoo", "Google Play"],
+    year: "2026",
+    status: "Live",
+    services: ["Design", "Build", "Store release"],
+    link: { href: "https://play.google.com/store/apps/details?id=com.laziziqra.laziz", label: "Google Play" },
+    approach: [
+      "Content is managed in Firebase, so new books, textbooks and quizzes are published from the app's admin area without a new release. Textbooks open as PDFs inside the app.",
+    ],
+    features: [
+      { title: "Books", body: "A library of Afaan Oromoo books, read in the app." },
+      { title: "Grade 1–8 textbooks", body: "Textbooks organised by grade." },
+      { title: "Quizzes", body: "Quizzes by grade with question counts, difficulty and a pass mark." },
+      { title: "Admin publishing", body: "Upload books, textbooks and quizzes from the admin area." },
+    ],
+    stack: ["Flutter", "Firebase Auth", "Cloud Firestore", "Firebase Storage", "Riverpod", "Google Mobile Ads"],
+    gallery: [{ src: "/images/work/laziz-quiz.webp", alt: "Laziz quiz details screen in Afaan Oromoo", frame: "phone" }],
+    updated: "2026-11-17",
+  },
+  {
     slug: "ibsa-quraanaa",
     name: "Ibsa Qur'aanaa",
     sector: "Consumer app",
@@ -423,6 +550,36 @@ export const workProjects: WorkProject[] = [
       { value: "50K+", label: "Downloads" },
       { value: "4.2★", label: "235 reviews" },
     ],
+  },
+  {
+    slug: "iqra-foundation",
+    name: "Iqra Islamic Research Foundation",
+    sector: "Faith & research",
+    platform: "web",
+    image: {
+      src: "/images/work/iqra.webp",
+      alt: "Iqra Foundation website home page with article search",
+    },
+    cardSummary: "A research website with articles in four languages, a resource library and an AI research assistant.",
+    caseTitle: "Iqra Foundation — Islamic research website",
+    caseSummary:
+      "A website for the Iqra Islamic Research Foundation: research articles in English, Arabic, Amharic and Afaan Oromoo, a library of downloadable resources, an article admin, and an AI research assistant that answers questions with references and points people to qualified scholars for rulings.",
+    tags: ["Next.js", "Four languages", "AI assistant"],
+    year: "2025",
+    status: "Live",
+    services: ["Design", "Build"],
+    features: [
+      { title: "Articles in four languages", body: "English, Arabic, Amharic and Afaan Oromoo, filtered by language and category." },
+      { title: "Resource library", body: "Downloadable papers and study material by category." },
+      {
+        title: "AI research assistant",
+        body: "Answers questions with Quran and Hadith references, acknowledges its limits and refers rulings to qualified scholars.",
+      },
+      { title: "Article admin", body: "Writing and managing articles behind an admin sign-in." },
+    ],
+    stack: ["Next.js", "React", "Tailwind CSS", "Vercel AI SDK", "OpenAI"],
+    gallery: [{ src: "/images/work/iqra-assistant.webp", alt: "Iqra Foundation AI research assistant with topics and suggested questions" }],
+    updated: "2026-11-17",
   },
   {
     slug: "qarooma-baha-oromiyaa",

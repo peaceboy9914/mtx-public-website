@@ -71,6 +71,8 @@ export function GET() {
       `Sector: ${project.sector}`,
       project.status && `Status: ${project.status}`,
       project.domain && `Live at: https://${project.domain}`,
+      project.link && `${project.link.label}: ${project.link.href}`,
+      project.screensNote && `Note: ${project.screensNote}`,
       project.year && `Year: ${project.year}`,
       project.duration && `Delivery: ${project.duration}`,
       "",

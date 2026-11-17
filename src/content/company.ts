@@ -13,8 +13,11 @@ export const trackRecord: { sector: string; work: string; projects: { name: stri
   },
   {
     sector: "Education",
-    work: "School management systems",
-    projects: [{ name: "SchoolERP", slug: "school-erp" }],
+    work: "School management systems and learning apps",
+    projects: [
+      { name: "SchoolERP", slug: "school-erp" },
+      { name: "Laziz", slug: "laziz" },
+    ],
   },
   {
     sector: "Hospitality",
@@ -22,9 +25,17 @@ export const trackRecord: { sector: string; work: string; projects: { name: stri
     projects: [{ name: "Nur Palace", slug: "nur-palace" }],
   },
   {
+    sector: "Finance",
+    work: "Multi-company finance management",
+    projects: [{ name: "Grand Valley group", slug: "grand-valley-finance" }],
+  },
+  {
     sector: "Transport",
-    work: "Booking and share-sale platforms",
-    projects: [{ name: "Nur Bus", slug: "nur-bus" }],
+    work: "Booking, share-sale and shareholder platforms",
+    projects: [
+      { name: "Nur Bus", slug: "nur-bus" },
+      { name: "Nur Bus shareholders", slug: "nur-bus-shareholders" },
+    ],
   },
   {
     sector: "Retail & e-commerce",
@@ -48,8 +59,11 @@ export const trackRecord: { sector: string; work: string; projects: { name: stri
   },
   {
     sector: "Faith & community",
-    work: "Mobile apps with offline audio",
-    projects: [{ name: "Ibsa Qur'aanaa", slug: "ibsa-quraanaa" }],
+    work: "Quran apps and research websites",
+    projects: [
+      { name: "Ibsa Qur'aanaa", slug: "ibsa-quraanaa" },
+      { name: "Iqra Foundation", slug: "iqra-foundation" },
+    ],
   },
   {
     sector: "Publishing",

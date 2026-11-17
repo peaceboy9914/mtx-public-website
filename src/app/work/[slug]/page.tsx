@@ -109,6 +109,18 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
                       <IconArrowUpRight className="size-3.5" />
                     </a>
                   </MetaRow>
+                ) : project.link ? (
+                  <MetaRow label="Available on">
+                    <a
+                      href={project.link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 underline decoration-ink/25 underline-offset-4 hover:decoration-ink"
+                    >
+                      {project.link.label}
+                      <IconArrowUpRight className="size-3.5" />
+                    </a>
+                  </MetaRow>
                 ) : null}
                 {project.status ? <MetaRow label="Status">{project.status}</MetaRow> : null}
                 {project.services?.length ? <MetaRow label="Our role">{project.services.join(", ")}</MetaRow> : null}
@@ -145,6 +157,9 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
               />
             </div>
           )}
+          {project.screensNote ? (
+            <p className="mt-6 text-center text-[13px] text-ink/55">{project.screensNote}</p>
+          ) : null}
         </div>
       </section>
 

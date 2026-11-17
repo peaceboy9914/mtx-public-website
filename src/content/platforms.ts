@@ -45,6 +45,7 @@ export const platforms: Platform[] = [
       "Signed audit trail on every posting",
     ],
     audience: ["Holding companies & business groups", "Share companies", "NGOs with multiple funded projects", "Finance departments replacing spreadsheets"],
+    caseStudy: "grand-valley-finance",
     relatedServices: ["erp-development", "fintech-software-development", "data-analytics"],
     faqs: [
       {
@@ -183,7 +184,7 @@ export const platforms: Platform[] = [
       "Regulatory & board reporting",
     ],
     audience: ["Share companies", "Banks & insurers in formation", "Transport & industrial share companies", "Investment groups"],
-    caseStudy: "nur-bus",
+    caseStudy: "nur-bus-shareholders",
     relatedServices: ["fintech-software-development", "web-application-development", "custom-software-development"],
     faqs: [
       {

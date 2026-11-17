@@ -40,7 +40,7 @@ export const founder = {
   /** Drafted from facts on this site; awaiting the founder's review. */
   bio: [
     `Mahdi Nurazaman founded MTX Digital Technologies PLC and has led it for ${companyFacts.yearsInBusiness} years, growing it into a ${companyFacts.teamSize}-person software team in Addis Ababa.`,
-    `Under his leadership MTX has delivered ${companyFacts.systemsDelivered} systems for Ethiopian organisations: a hospital ERP, hospital and school platforms, a bus booking and share-sale platform, a restaurant management system with its own fingerprint attendance device, a multi-vendor marketplace app, a legal services marketplace, an Afaan Oromoo Quran app with more than 50,000 downloads, and websites for NGOs, contractors and authors.`,
+    `Under his leadership MTX has delivered ${companyFacts.systemsDelivered} systems for Ethiopian organisations: a hospital ERP, a finance system for a group of sister companies, hospital and school platforms, a bus booking platform with its shareholder registry, a restaurant management system with its own fingerprint attendance device, a multi-vendor marketplace app, a legal services marketplace, an Afaan Oromoo Quran app with more than 50,000 downloads, an Afaan Oromoo learning app, and websites for NGOs, contractors and authors.`,
   ],
 };
 
