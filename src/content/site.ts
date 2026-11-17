@@ -49,13 +49,35 @@ export const socialLinks = {
   linkedin: "https://www.linkedin.com/company/mtx-digital-technologies",
 };
 
-/** Google Maps Platform "Locator Plus" embed — hosted by Google, wired in verbatim. */
-export const mapEmbedSrc = "https://storage.googleapis.com/maps-solutions-xp7mz3vu5w/locator-plus/xvi4/locator-plus.html";
+/** The verified Google Business Profile. The place ID is the stable key every Maps link below is built from. */
+export const googleBusiness = {
+  placeId: "ChIJEZMdD2OFSxYRfT7oUNA9Dyc",
+  coords: { lat: 8.993874, lng: 38.7662892 },
+  profileUrl: "https://www.google.com/maps/search/?api=1&query=MTX+Digital+Technologies+PLC&query_place_id=ChIJEZMdD2OFSxYRfT7oUNA9Dyc",
+  reviewUrl: "https://g.page/r/CX0-6FDQPQ8nEAE/review",
+  /** Copied from the profile on the date below; update both when the profile changes. */
+  rating: { value: "5.0", count: 18, asOf: "2026-11-17" },
+};
 
-/** "Get directions" links resolve to the registered address via a Google Maps search. */
-export const directionsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+/** Opening hours, exactly as on the Business Profile. Times are Addis Ababa local time. */
+export const openingHours = [
+  { days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], opens: "08:30", closes: "19:00" },
+  { days: ["Sunday"], opens: "08:30", closes: "14:00" },
+];
+export const openingHoursLabel = [
+  { label: "Monday – Saturday", hours: "08:30 – 19:00" },
+  { label: "Sunday", hours: "08:30 – 14:00" },
+];
+
+/** Map of the business listing itself (no API key needed). */
+export const mapEmbedSrc = `https://maps.google.com/maps?q=${encodeURIComponent(
   `${siteConfig.legalName}, ${formattedAddress}`
-)}`;
+)}&ll=${googleBusiness.coords.lat},${googleBusiness.coords.lng}&z=17&output=embed`;
+
+/** "Get directions" opens Google Maps routing straight to the verified listing. */
+export const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+  siteConfig.legalName
+)}&destination_place_id=${googleBusiness.placeId}`;
 
 export type NavLink = { label: string; href: string };
 

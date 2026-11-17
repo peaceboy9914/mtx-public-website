@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { platforms } from "@/content/platforms";
 import { services, type Faq } from "@/content/services";
-import { address, companyFacts, founder, siteConfig, socialLinks } from "@/content/site";
+import { address, companyFacts, founder, googleBusiness, openingHours, siteConfig, socialLinks } from "@/content/site";
 
 /** Stable node ids so every page's JSON-LD points at the same organization entity. */
 const ORG_ID = `${siteConfig.url}/#organization`;
@@ -109,7 +109,15 @@ export function organizationJsonLd() {
     },
     founder: { "@type": "Person", "@id": PERSON_ID, name: founder.name, url: founder.linkedin },
     numberOfEmployees: { "@type": "QuantitativeValue", value: companyFacts.teamSize },
-    sameAs: [socialLinks.linkedin],
+    sameAs: [socialLinks.linkedin, googleBusiness.profileUrl],
+    hasMap: googleBusiness.profileUrl,
+    geo: { "@type": "GeoCoordinates", latitude: googleBusiness.coords.lat, longitude: googleBusiness.coords.lng },
+    openingHoursSpecification: openingHours.map((slot) => ({
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: slot.days.map((day) => `https://schema.org/${day}`),
+      opens: slot.opens,
+      closes: slot.closes,
+    })),
     knowsAbout: [
       "Software development in Ethiopia",
       ...services.map((service) => service.name),

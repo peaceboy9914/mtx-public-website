@@ -8,7 +8,9 @@ import {
   directionsUrl,
   formattedAddress,
   founder,
+  googleBusiness,
   mapEmbedSrc,
+  openingHoursLabel,
   siteConfig,
   socialLinks,
 } from "@/content/site";
@@ -88,9 +90,44 @@ export default function ContactPage() {
               <Eyebrow>Find us</Eyebrow>
               <h2 className="mt-4 text-[clamp(26px,3vw,38px)] font-semibold tracking-[-0.03em]">{formattedAddress}</h2>
             </div>
-            <a href={directionsUrl} target="_blank" rel="noopener noreferrer" className={buttonClass("outline")}>
-              <IconMapPin className="size-4" /> Get directions
-            </a>
+            <div className="flex flex-wrap gap-3">
+              <a href={directionsUrl} target="_blank" rel="noopener noreferrer" className={buttonClass("outline")}>
+                <IconMapPin className="size-4" /> Get directions
+              </a>
+              <a href={googleBusiness.reviewUrl} target="_blank" rel="noopener noreferrer" className={buttonClass("outline")}>
+                Review us on Google
+              </a>
+            </div>
+          </div>
+          <div className="reveal mt-10 grid gap-8 border-y border-ink/15 py-8 sm:grid-cols-2">
+            <div>
+              <div className="label text-ink/50">Opening hours</div>
+              <dl className="mt-3 space-y-1.5 text-[15.5px]">
+                {openingHoursLabel.map((row) => (
+                  <div key={row.label} className="flex max-w-xs justify-between gap-6">
+                    <dt className="text-ink/70">{row.label}</dt>
+                    <dd className="font-medium">{row.hours}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+            <div>
+              <div className="label text-ink/50">On Google</div>
+              <a
+                href={googleBusiness.profileUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group mt-3 inline-flex items-baseline gap-2 text-[15.5px]"
+              >
+                <span className="text-[28px] font-semibold tracking-[-0.03em]">{googleBusiness.rating.value}</span>
+                <span aria-hidden="true" className="text-[#f5b301]">
+                  ★★★★★
+                </span>
+                <span className="text-ink/65 underline decoration-ink/25 underline-offset-4 group-hover:decoration-ink">
+                  from {googleBusiness.rating.count} Google reviews
+                </span>
+              </a>
+            </div>
           </div>
           <div className="reveal mt-10 h-[440px] overflow-hidden rounded-2xl border border-ink/12 bg-paper-2">
             <iframe
