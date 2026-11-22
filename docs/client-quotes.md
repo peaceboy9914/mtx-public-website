@@ -66,7 +66,7 @@ Case study: https://mtxdigitaltechnologies.com/work/mgc
 - Approved by (name, title): 
 - Date approved: 
 
-### Migrant Rights Protection Organization
+### Migrant Right Protection Organization
 Case study: https://mtxdigitaltechnologies.com/work/mrpo
 
 > "Migrants can now register and reach us online, and partners and donors can see what we do. MTX was patient with our needs and easy to work with."

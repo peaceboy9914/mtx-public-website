@@ -453,7 +453,7 @@ export const workProjects: WorkProject[] = [
   {
     slug: "mgc",
     name: "MGC — Miftah General Contractor",
-    domain: "mgc-landing-page-eta.vercel.app",
+    domain: "mgcethiopia.com",
     sector: "Construction",
     platform: "web",
     image: {
