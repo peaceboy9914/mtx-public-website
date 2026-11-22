@@ -11,7 +11,7 @@ export const clients: Client[] = [
   { name: "GrandBirr Market", logo: "/images/clients/grandbirr.webp", slug: "grandbirr-market" },
   { name: "MGC — Miftah General Contractor", logo: "/images/clients/mgc.webp", slug: "mgc" },
   { name: "Iqra Islamic Research Foundation", logo: "/images/clients/iqra.webp", slug: "iqra-foundation" },
-  { name: "Migrant Rights Protection Organization", logo: "/images/clients/mrpo.webp", slug: "mrpo" },
+  { name: "Migrant Right Protection Organization", logo: "/images/clients/mrpo.webp", slug: "mrpo" },
   { name: "Grand Valley Medicine and Medical Devices Importer", logo: "/images/clients/grand-valley-importer.webp" },
   { name: "Terbiya International School", logo: "/images/clients/terbiya.webp", slug: "school-erp" },
   { name: "NISI — Nexus Inter-Service Impact", logo: "/images/clients/nisi.webp" },
@@ -90,7 +90,7 @@ export const clientQuotes: ClientQuote[] = [
     approved: true,
   },
   {
-    organization: "Migrant Rights Protection Organization",
+    organization: "Migrant Right Protection Organization",
     slug: "mrpo",
     quote:
       "Migrants can now register and reach us online, and partners and donors can see what we do. MTX was patient with our needs and easy to work with.",

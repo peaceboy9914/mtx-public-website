@@ -381,7 +381,7 @@ export const industries: Industry[] = [
     faqs: [
       {
         q: "Which NGOs have you worked with?",
-        a: "The Migrant Rights Protection Organization (MRPO) and the Iqra Islamic Research Foundation.",
+        a: "The Migrant Right Protection Organization (MRPO) and the Iqra Islamic Research Foundation.",
       },
       {
         q: "Can the site be in Amharic and Afaan Oromoo?",
